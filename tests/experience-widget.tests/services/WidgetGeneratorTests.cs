@@ -27,8 +27,8 @@ namespace ExperienceWidgetCli.Tests
                 // Assert
                 Assert.True(Directory.Exists(widgetPath), "A pasta do widget não foi criada.");
                 Assert.True(File.Exists(Path.Combine(widgetPath, "manifest.json")), "manifest.json não existe.");
-                Assert.True(File.Exists(Path.Combine(widgetPath, "widget.tsx")), "widget.tsx não existe.");
-                Assert.True(File.Exists(Path.Combine(widgetPath, "setting.tsx")), "setting.tsx não existe.");
+                Assert.True(File.Exists(Path.Combine(widgetPath, "runtime/widget.tsx")), "widget.tsx não existe.");
+                Assert.True(File.Exists(Path.Combine(widgetPath, "setting/setting.tsx")), "setting.tsx não existe.");
             }
             finally
             {
