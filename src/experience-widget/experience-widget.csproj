@@ -14,12 +14,5 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Interfaces\ITemplateCopier.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Include="Interfaces\ITemplateCopier.cs" />
-  </ItemGroup>
 
 </Project>
