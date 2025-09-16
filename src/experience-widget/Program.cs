@@ -5,6 +5,13 @@ class Program
 {
     static void Main(string[] args)
     {
+        var isTest = true;
+        
+        if (isTest)
+        {
+            args = new string[] { "create", "MyWidget" };
+        }
+
         if (args.Length < 2 || args[0].ToLower() != "create")
         {
             Console.WriteLine("experience-widget create <name-of-widget>");
