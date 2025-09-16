@@ -14,13 +14,15 @@ namespace ExperienceWidgetCli.Tests
         {
             // Arrange
             var widgetName = "TestWidget";
+            var templateName = "empty";
+
             var generator = new WidgetGenerator(_templatesPath);
             var widgetPath = Path.Combine(Directory.GetCurrentDirectory(), widgetName);
 
             try
             {
                 // Act
-                generator.Generate(widgetName);
+                generator.Generate(widgetName, templateName);
 
                 // Assert
                 Assert.True(Directory.Exists(widgetPath), "A pasta do widget não foi criada.");
