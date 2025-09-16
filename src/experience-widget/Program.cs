@@ -22,6 +22,13 @@ class Program
         var templatesPath = Path.Combine(AppContext.BaseDirectory, "templates");
 
         var generator = new WidgetGenerator(templatesPath);
-        generator.Generate(widgetName);
+
+        var templateName = "empty";
+
+        if (args.Length == 3)
+            templateName = args[2];
+        
+
+        generator.Generate(widgetName, templateName);
     }
 }
