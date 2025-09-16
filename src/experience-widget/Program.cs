@@ -7,7 +7,7 @@ class Program
     {
         if (args.Length < 2 || args[0].ToLower() != "create")
         {
-            Console.WriteLine("Uso: experience-widget create <nome-do-widget>");
+            Console.WriteLine("experience-widget create <name-of-widget>");
             return;
         }
 
