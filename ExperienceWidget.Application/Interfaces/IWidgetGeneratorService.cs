@@ -3,7 +3,7 @@
     /// <summary>
     /// Interface para gerar widgets do ArcGIS Experience Builder.
     /// </summary>
-    public interface IWidgetGenerator
+    public interface IWidgetGeneratorService
     {
         /// <summary>
         /// Gera um widget vazio a partir do nome informado.

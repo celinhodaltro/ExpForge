@@ -9,13 +9,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="templates\**\*">
+    <Content Include="Templates\**\*">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="McMaster.Extensions.CommandLineUtils" Version="4.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\ExperienceWidget.Application\ExperienceWidget.Application.csproj" />
   </ItemGroup>
 
 

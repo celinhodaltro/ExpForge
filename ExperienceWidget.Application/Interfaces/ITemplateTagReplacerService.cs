@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace experience_widget.Interfaces
 {
-    public interface ITemplateTagReplacer
+    public interface ITemplateTagReplacerService
     {
        void ReplaceTagsInFile(string sourceFile, string destinationFile);
        string ReplaceTags(string content);

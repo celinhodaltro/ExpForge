@@ -5,11 +5,11 @@ using System.IO;
 
 namespace ExperienceWidgetCli.Services
 {
-    public class WidgetGenerator : IWidgetGenerator
+    public class WidgetGeneratorService : IWidgetGenerator
     {
         private readonly string _templatesPath;
 
-        public WidgetGenerator(string templatesPath)
+        public WidgetGeneratorService(string templatesPath)
         {
             _templatesPath = templatesPath;
         }
@@ -56,7 +56,7 @@ namespace ExperienceWidgetCli.Services
             };
 
             // Copia os arquivos do template
-            var templateCopier = new TemplateCopier(tags);
+            var templateCopier = new TemplateCopierService(tags);
             templateCopier.Copy(templatePath, widgetPath);
 
             Console.WriteLine($"Widget '{widgetName}' criado em {widgetPath}");

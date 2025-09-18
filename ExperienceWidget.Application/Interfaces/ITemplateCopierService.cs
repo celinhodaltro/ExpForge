@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace experience_widget.Interfaces
 {
-    interface ITemplateCopier
+    interface ITemplateCopierService
     {
         /// <summary>
         /// Copia todos os arquivos e pastas de sourcePath para destinationPath,

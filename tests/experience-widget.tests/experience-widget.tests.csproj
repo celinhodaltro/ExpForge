@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\experience-widget\experience-widget.csproj" />
+    <ProjectReference Include="..\..\src\experience-widget\ExperienceWidget.CLI.csproj" />
   </ItemGroup>
 
   <ItemGroup>
