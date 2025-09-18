@@ -15,7 +15,10 @@ namespace ExperienceWidgetCli.Tests
 
         public WidgetGeneratorTests()
         {
-            _templatesPath = Path.Combine(AppContext.BaseDirectory, "../../src/templates");
+            _templatesPath = Path.GetFullPath(
+                Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "src", "experience-widget", "templates")
+            );
+
             _tempRoot = Path.Combine(Path.GetTempPath(), "ExperienceWidgetCliTests_" + Guid.NewGuid());
             Directory.CreateDirectory(_tempRoot);
         }
@@ -27,10 +30,10 @@ namespace ExperienceWidgetCli.Tests
             var generator = new WidgetGenerator(_templatesPath);
 
             // Act
-            generator.Generate(_widgetName, "empty");
+            generator.Generate(_widgetName, "empty", _tempRoot);
 
             // Assert
-            Assert.True(Directory.Exists(_widgetPath), "Widget folder was not created.");
+            Assert.True(Directory.Exists(_widgetPath), $"Widget folder was not created. {_widgetPath}");
 
             var expectedFiles = new[]
             {
