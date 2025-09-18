@@ -1,5 +1,4 @@
 ﻿import React from 'react';
-import './widget.css';
 
 const {{WIDGET_NAME}} = () => {
     return <div>{{WIDGET_NAME}} - widget vazio</div>;
