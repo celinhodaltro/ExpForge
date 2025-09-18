@@ -1,41 +1,60 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using Xunit;
 using ExperienceWidgetCli.Services;
 
 namespace ExperienceWidgetCli.Tests
 {
-    public class WidgetGeneratorTests
+    public class WidgetGeneratorTests : IDisposable
     {
-        private readonly string _templatesPath = Path.Combine(AppContext.BaseDirectory, "../../src/templates");
+        private readonly string _templatesPath;
+        private readonly string _tempRoot;
+        private readonly string _widgetName = "TestWidget";
+        private string _widgetPath => Path.Combine(_tempRoot, _widgetName);
+
+        public WidgetGeneratorTests()
+        {
+            _templatesPath = Path.Combine(AppContext.BaseDirectory, "../../src/templates");
+            _tempRoot = Path.Combine(Path.GetTempPath(), "ExperienceWidgetCliTests_" + Guid.NewGuid());
+            Directory.CreateDirectory(_tempRoot);
+        }
 
         [Fact]
-        public void CreateWidget_ShouldGenerateFiles_AndCleanup()
+        public void CreateWidget_ShouldGenerateExpectedStructure()
         {
             // Arrange
-            var widgetName = "TestWidget";
-            var templateName = "empty";
-
             var generator = new WidgetGenerator(_templatesPath);
-            var widgetPath = Path.Combine(Directory.GetCurrentDirectory(), widgetName);
 
-            try
-            {
-                // Act
-                generator.Generate(widgetName, templateName);
+            // Act
+            generator.Generate(_widgetName, "empty");
 
-                // Assert
-                Assert.True(Directory.Exists(widgetPath), "A pasta do widget não foi criada.");
-                Assert.True(File.Exists(Path.Combine(widgetPath, "manifest.json")), "manifest.json não existe.");
-                Assert.True(File.Exists(Path.Combine(widgetPath, "runtime/widget.tsx")), "widget.tsx não existe.");
-                Assert.True(File.Exists(Path.Combine(widgetPath, "setting/setting.tsx")), "setting.tsx não existe.");
-            }
-            finally
+            // Assert
+            Assert.True(Directory.Exists(_widgetPath), "Widget folder was not created.");
+
+            var expectedFiles = new[]
             {
-                // Cleanup
-                if (Directory.Exists(widgetPath))
-                    Directory.Delete(widgetPath, true);
+                "manifest.json",
+                "runtime/widget.tsx",
+                "setting/setting.tsx"
+            };
+
+            foreach (var relativeFile in expectedFiles)
+            {
+                var fullPath = Path.Combine(_widgetPath, relativeFile.Replace('/', Path.DirectorySeparatorChar));
+                Assert.True(File.Exists(fullPath), $"Expected file not found: {relativeFile}");
             }
+
+            // Extra: ensure no ".template" file leaked
+            var leakedTemplates = Directory.GetFiles(_widgetPath, "*.template", SearchOption.AllDirectories);
+            Assert.Empty(leakedTemplates);
+        }
+
+        public void Dispose()
+        {
+            // Cleanup
+            if (Directory.Exists(_tempRoot))
+                Directory.Delete(_tempRoot, true);
         }
     }
 }
