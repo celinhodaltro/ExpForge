@@ -3,13 +3,13 @@ using System;
 
 namespace CLI
 {
-    [Command(Name = "experience-builder", Description = "CLI Experience Builder")]
+    [Command(Name = "experience-widget", Description = "CLI Experience Widget Builder")]
     [Subcommand(typeof(CreateCommand))]
     class MainCommannd
     {
         private void OnExecute()
         {
-            Console.WriteLine("Use um comando: create");
+            Console.WriteLine("Use --help command");
         }
     }
 }
