@@ -27,7 +27,7 @@ namespace ExperienceWidgetCli.Tests
         public void CreateWidget_ShouldGenerateExpectedStructure()
         {
             // Arrange
-            var generator = new WidgetGenerator(_templatesPath);
+            var generator = new WidgetGeneratorService(_templatesPath);
 
             // Act
             generator.Generate(_widgetName, "empty", _tempRoot);
