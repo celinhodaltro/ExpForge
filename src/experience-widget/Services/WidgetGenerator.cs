@@ -45,10 +45,17 @@ namespace ExperienceWidgetCli.Services
 
             if (Directory.Exists(widgetPath))
                 Directory.Delete(widgetPath, true);
-            
+
+
+            var tags = new Dictionary<string, string>
+            {
+                { "WIDGET_NAME", widgetName },
+                { "AUTHOR", "Your Name" },
+                { "DATE", DateTime.UtcNow.ToString("yyyy-MM-dd") }
+            };
 
             // Copia os arquivos do template
-            var templateCopier = new TemplateCopier();
+            var templateCopier = new TemplateCopier(tags);
             templateCopier.Copy(templatePath, widgetPath);
 
             Console.WriteLine($"Widget '{widgetName}' criado em {widgetPath}");

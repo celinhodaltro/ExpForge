@@ -3,5 +3,5 @@
   "label": "{{WIDGET_NAME}}",
   "platform": "EXB",
   "version": "1.0.0",
-  "author": "Seu Nome"
+  "author": "{{Your_Name}}"
 }

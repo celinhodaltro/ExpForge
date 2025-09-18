@@ -1,22 +1,28 @@
 ﻿using System;
 using System.IO;
+using System.Collections.Generic;
 
 namespace ExperienceWidgetCli.Services
 {
     public class TemplateCopier
     {
+        private readonly TemplateTagReplacer _replacer;
+
+        public TemplateCopier(Dictionary<string, string> tags)
+        {
+            _replacer = new TemplateTagReplacer(tags);
+        }
+
         /// <summary>
         /// Copia todos os arquivos e pastas de sourcePath para destinationPath,
-        /// mantendo a estrutura de pastas e removendo ".template" do nome dos arquivos.
+        /// mantendo a estrutura de pastas, substituindo tags e removendo ".template" do nome dos arquivos.
         /// </summary>
         /// <param name="sourcePath">Caminho da pasta de templates</param>
         /// <param name="destinationPath">Caminho da pasta de destino</param>
         public void Copy(string sourcePath, string destinationPath)
         {
             if (!Directory.Exists(sourcePath))
-            {
                 throw new DirectoryNotFoundException($"A pasta de origem '{sourcePath}' não existe.");
-            }
 
             // Cria a pasta de destino se não existir
             Directory.CreateDirectory(destinationPath);
@@ -27,15 +33,14 @@ namespace ExperienceWidgetCli.Services
                 var fileName = Path.GetFileName(file).Replace(".template", "");
                 var destFile = Path.Combine(destinationPath, fileName);
 
-                File.Copy(file, destFile, overwrite: true);
+                _replacer.ReplaceTagsInFile(file, destFile);
             }
 
-            // Copia recursivamente subpastas
             foreach (var dir in Directory.GetDirectories(sourcePath))
             {
                 var subDirName = Path.GetFileName(dir);
                 var destSubDir = Path.Combine(destinationPath, subDirName);
-                Copy(dir, destSubDir); // chamada recursiva
+                Copy(dir, destSubDir);
             }
         }
     }
