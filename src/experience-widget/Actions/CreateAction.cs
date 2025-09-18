@@ -6,8 +6,10 @@ using System;
 using System.IO;
 using System.Threading.Tasks;
 
+namespace ExperienceWidget.CLI.Actions;
+
 [Command(Name = "create", Description = "Create Widget")]
-class CreateAction
+public class CreateAction
 {
     private readonly IMediator _mediator;
     private readonly WidgetGeneratorService _generator;
