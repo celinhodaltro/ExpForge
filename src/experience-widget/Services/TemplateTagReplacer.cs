@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using experience_widget.Interfaces;
+
 
 namespace ExperienceWidgetCli.Services
 {
-    public class TemplateTagReplacer
+    public class TemplateTagReplacer : ITemplateTagReplacer
     {
         private readonly Dictionary<string, string> _tags;
 
