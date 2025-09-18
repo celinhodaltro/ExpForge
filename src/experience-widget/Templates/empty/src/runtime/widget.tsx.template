@@ -6,7 +6,7 @@ interface State {
   jimuMapView: JimuMapView | null
 }
 
-export default class {{WIDGET_NAME}} extends React.PureComponent<AllWidgetProps<any>, State> {
+export default class Widget extends React.PureComponent<AllWidgetProps<any>, State> {
   constructor(props) {
     super(props)
     this.state = {
