@@ -1,7 +1,1 @@
-﻿import React from 'react';
-
-const {{WIDGET_NAME}} = () => {
-    return <div>{{WIDGET_NAME}} - widget vazio</div>;
-}
-
-export default {{WIDGET_NAME}};
+﻿
