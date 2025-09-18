@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{CE0C1778
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperienceWidget.CLI", "src\experience-widget\ExperienceWidget.CLI.csproj", "{4BD822DA-2C2A-262E-00EE-76279A1C54AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "experience-widget.tests", "tests\experience-widget.tests\experience-widget.tests.csproj", "{D98F9AB4-C143-16AC-D3F9-4A690E45459B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperienceWidget.Tests", "tests\experience-widget.tests\ExperienceWidget.Tests.csproj", "{D98F9AB4-C143-16AC-D3F9-4A690E45459B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperienceWidget.Application", "ExperienceWidget.Application\ExperienceWidget.Application.csproj", "{66CF0370-6619-4DBE-B109-4A6AE97208FA}"
 EndProject
