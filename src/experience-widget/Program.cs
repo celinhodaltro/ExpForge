@@ -1,10 +1,44 @@
-﻿using CLI;
+﻿using ExperienceWidget.Application.Commands;
+using ExperienceWidgetCli.Services;
 using McMaster.Extensions.CommandLineUtils;
+using MediatR;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using System;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 
 class Program
 {
     static int Main(string[] args)
     {
-        return CommandLineApplication.Execute<MainAction>(args);
+        var services = new ServiceCollection();
+        ConfigureServices(services);
+
+        var serviceProvider = services.BuildServiceProvider();
+
+        var app = new CommandLineApplication<CreateAction>();
+        app.Conventions
+           .UseDefaultConventions()
+           .UseConstructorInjection(serviceProvider);
+
+        return app.Execute(args);
+    }
+
+    static void ConfigureServices(IServiceCollection services)
+    {
+        services.AddLogging(cfg => cfg.AddConsole());
+
+        var applicationAssembly = typeof(ExperienceWidget.Application.Commands.CreateWidgetCommand).Assembly;
+
+        services.AddMediatR(cfg =>
+        {
+            cfg.RegisterServicesFromAssembly(applicationAssembly);
+        });
+
+        var templatesPath = Path.Combine(AppContext.BaseDirectory, "templates");
+
+        services.AddSingleton<WidgetGeneratorService>(sp => new WidgetGeneratorService(templatesPath));
     }
 }
