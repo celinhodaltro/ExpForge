@@ -28,8 +28,5 @@ class CreateAction
     {
         var createWidgetCommand = new CreateWidgetCommand(Name, Template);
         await _mediator.Send(createWidgetCommand);
-
-        var templatesPath = Path.Combine(AppContext.BaseDirectory, "templates");
-        _generator.Generate(Name, Template);
     }
 }
