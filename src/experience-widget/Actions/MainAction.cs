@@ -4,7 +4,7 @@ using System;
 namespace ExperienceWidget.CLI.Actions;
 
 [Command(Name = "experience-widget", Description = "CLI Experience Widget Builder")]
-[Subcommand(typeof(CreateAction))]
+[Subcommand(typeof(CreateAction), typeof(HelpAction))]
 public class MainAction
 {
     private void OnExecute()

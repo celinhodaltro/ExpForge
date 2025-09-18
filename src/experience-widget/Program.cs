@@ -1,4 +1,5 @@
 ﻿using ExperienceWidget.Application.Commands;
+using ExperienceWidget.CLI.Actions;
 using ExperienceWidgetCli.Services;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
@@ -18,7 +19,7 @@ class Program
 
         var serviceProvider = services.BuildServiceProvider();
 
-        var app = new CommandLineApplication<CreateAction>();
+        var app = new CommandLineApplication<MainAction>();
         app.Conventions
            .UseDefaultConventions()
            .UseConstructorInjection(serviceProvider);

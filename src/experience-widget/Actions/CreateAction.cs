@@ -2,8 +2,6 @@
 using ExperienceWidgetCli.Services;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
-using System;
-using System.IO;
 using System.Threading.Tasks;
 
 namespace ExperienceWidget.CLI.Actions;
