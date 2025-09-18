@@ -44,9 +44,8 @@ namespace ExperienceWidgetCli.Services
             var widgetPath = Path.Combine(outputRoot, widgetName);
 
             if (Directory.Exists(widgetPath))
-            {
                 Directory.Delete(widgetPath, true);
-            }
+            
 
             // Copia os arquivos do template
             var templateCopier = new TemplateCopier();
