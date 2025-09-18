@@ -5,6 +5,6 @@ class Program
 {
     static int Main(string[] args)
     {
-        return CommandLineApplication.Execute<MainCommannd>(args);
+        return CommandLineApplication.Execute<MainAction>(args);
     }
 }

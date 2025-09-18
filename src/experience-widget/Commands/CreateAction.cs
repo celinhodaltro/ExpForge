@@ -4,7 +4,7 @@ using System;
 using System.IO;
 
 [Command(Name = "create", Description = "Cria um widget")]
-class CreateCommand
+class CreateAction
 {
     [Argument(0, Description = "Widget name")]
     public string Name { get; set; }

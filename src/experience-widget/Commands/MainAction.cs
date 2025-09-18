@@ -4,8 +4,8 @@ using System;
 namespace CLI
 {
     [Command(Name = "experience-widget", Description = "CLI Experience Widget Builder")]
-    [Subcommand(typeof(CreateCommand))]
-    class MainCommannd
+    [Subcommand(typeof(CreateAction))]
+    class MainAction
     {
         private void OnExecute()
         {
