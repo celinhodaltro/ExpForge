@@ -5,7 +5,7 @@ using System.IO;
 
 namespace ExperienceWidgetCli.Services
 {
-    public class WidgetGeneratorService : IWidgetGenerator
+    public class WidgetGeneratorService : IWidgetGeneratorService
     {
         private readonly string _templatesPath;
 

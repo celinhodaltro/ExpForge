@@ -5,7 +5,7 @@ using System.IO;
 
 namespace ExperienceWidgetCli.Services
 {
-    public class TemplateTagReplacerService : ITemplateTagReplacer
+    public class TemplateTagReplacerService : ITemplateTagReplacerService
     {
         private readonly Dictionary<string, string> _tags;
 
