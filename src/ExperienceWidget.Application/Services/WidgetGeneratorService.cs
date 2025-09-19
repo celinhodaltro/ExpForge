@@ -1,15 +1,16 @@
 ﻿
+using ExperienceWidget.CLI.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
 namespace ExperienceWidgetCli.Services
 {
-    public class WidgetGenerator : IWidgetGenerator
+    public class WidgetGeneratorService : IWidgetGeneratorService
     {
         private readonly string _templatesPath;
 
-        public WidgetGenerator(string templatesPath)
+        public WidgetGeneratorService(string templatesPath)
         {
             _templatesPath = templatesPath;
         }
@@ -18,26 +19,25 @@ namespace ExperienceWidgetCli.Services
         {
             if (string.IsNullOrWhiteSpace(widgetName))
             {
-                Console.WriteLine("Erro: É necessário informar um nome para o widget.");
+                TerminalMessageService.WriteLine("Erro: É necessário informar um nome para o widget.", MessageStatus.Error);
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(templateName))
             {
-                Console.WriteLine("Erro: É necessário informar um nome de template.");
-                return;
+                templateName = "empty";
             }
 
             if (!Directory.Exists(_templatesPath))
             {
-                Console.WriteLine($"Erro: O caminho dos templates '{_templatesPath}' não existe.");
+                TerminalMessageService.WriteLine($"Erro: O caminho dos templates '{_templatesPath}' não existe.", MessageStatus.Error);
                 return;
             }
 
             var templatePath = Path.Combine(_templatesPath, templateName);
             if (!Directory.Exists(templatePath))
             {
-                Console.WriteLine($"Erro: O template '{templateName}' não existe em {_templatesPath}.");
+                TerminalMessageService.WriteLine($"Erro: O template '{templateName}' não existe em {_templatesPath}.", MessageStatus.Error);
                 return;
             }
 
@@ -51,16 +51,15 @@ namespace ExperienceWidgetCli.Services
             var tags = new Dictionary<string, string>
             {
                 { "WIDGET_NAME", widgetName },
-                { "AUTHOR", "Your Name" },
+                { "AUTHOR", "Your Organization/Name" },
                 { "DATE", DateTime.UtcNow.ToString("yyyy-MM-dd") }
             };
 
-            // Copia os arquivos do template
-            var templateCopier = new TemplateCopier(tags);
+            var templateCopier = new TemplateCopierService(tags);
             templateCopier.Copy(templatePath, widgetPath);
-
-            Console.WriteLine($"Widget '{widgetName}' criado em {widgetPath}");
         }
 
     }
+
+
 }

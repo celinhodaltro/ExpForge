@@ -5,11 +5,11 @@ using System.IO;
 
 namespace ExperienceWidgetCli.Services
 {
-    public class TemplateTagReplacer : ITemplateTagReplacer
+    public class TemplateTagReplacerService : ITemplateTagReplacerService
     {
         private readonly Dictionary<string, string> _tags;
 
-        public TemplateTagReplacer(Dictionary<string, string> tags)
+        public TemplateTagReplacerService(Dictionary<string, string> tags)
         {
             _tags = tags ?? throw new ArgumentNullException(nameof(tags));
         }

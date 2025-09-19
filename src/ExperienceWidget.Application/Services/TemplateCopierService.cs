@@ -4,13 +4,13 @@ using System.Collections.Generic;
 
 namespace ExperienceWidgetCli.Services
 {
-    public class TemplateCopier
+    public class TemplateCopierService
     {
-        private readonly TemplateTagReplacer _replacer;
+        private readonly TemplateTagReplacerService _replacer;
 
-        public TemplateCopier(Dictionary<string, string> tags)
+        public TemplateCopierService(Dictionary<string, string> tags)
         {
-            _replacer = new TemplateTagReplacer(tags);
+            _replacer = new TemplateTagReplacerService(tags);
         }
 
         /// <summary>
