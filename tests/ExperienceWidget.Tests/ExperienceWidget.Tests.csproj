@@ -16,9 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\experience-widget\ExperienceWidget.CLI.csproj" />
     <ProjectReference Include="..\..\src\ExperienceWidget.Application\ExperienceWidget.Application.csproj" />
+    <ProjectReference Include="..\..\src\ExperienceWidget.CLI\ExperienceWidget.CLI.csproj" />
   </ItemGroup>
+
+
+
 
   <ItemGroup>
     <Using Include="Xunit" />
