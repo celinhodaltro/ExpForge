@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExperienceWidget.CLI.Actions;
 
-[Command(Name = "create", Description = "Create Widget")]
+[Command(Name = "Create", Description = "Create Widget")]
 public class CreateAction
 {
     private readonly IMediator _mediator;

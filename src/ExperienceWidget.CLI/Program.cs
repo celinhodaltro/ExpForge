@@ -29,7 +29,11 @@ class Program
 
     static void ConfigureServices(IServiceCollection services)
     {
-        services.AddLogging(cfg => cfg.AddConsole());
+        services.AddLogging(cfg =>
+        {
+            cfg.AddConsole();
+            cfg.AddFilter("LuckyPennySoftware.MediatR.License", LogLevel.None);
+        });
 
         var applicationAssembly = typeof(ExperienceWidget.Application.Commands.CreateWidgetCommand).Assembly;
 
