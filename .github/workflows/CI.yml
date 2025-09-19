@@ -9,26 +9,40 @@ on:
       - master
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v3
-      with:
-        dotnet-version: '9.0.x'   # match your target framework
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0.x'
 
-    - name: Restore dependencies
-      run: dotnet restore
+      - name: Restore dependencies
+        run: dotnet restore
 
-    - name: Build
-      run: dotnet build --configuration Release --no-restore
+      - name: Build solution
+        run: dotnet build --configuration Release --no-restore
 
-    - name: Run tests
-      run: dotnet test --no-restore --verbosity normal
+      - name: Pack CLI tool
+        run: dotnet pack src/ExperienceWidget.CLI/ExperienceWidget.CLI.csproj -c Release --no-build
 
-    - name: Pack CLI tool
-      run: dotnet pack src/ExperienceWidget.CLI/ExperienceWidget.CLI.csproj -c Release --no-build
+  test:
+    runs-on: ubuntu-latest
+    needs: build   # espera o build terminar
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore
+
+      - name: Run tests
+        run: dotnet test --no-restore --verbosity normal
