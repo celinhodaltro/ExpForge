@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using ExperienceWidget.CLI.Services;
+using FluentValidation;
 using MediatR;
 
 namespace ExperienceWidget.Application.Behaviors
@@ -26,11 +27,13 @@ namespace ExperienceWidget.Application.Behaviors
                     .Select(v => v.Validate(context))
                     .SelectMany(r => r.Errors)
                     .Where(f => f != null)
+                    .Select(f => f.ErrorMessage)
                     .ToList();
 
                 if (failures.Count != 0)
                 {
-                    Console.WriteLine($"Validation errors:\n {failures}");
+                    TerminalMessageService.WriteLine("Validation Erros:");
+                    TerminalMessageService.WriteLines(failures, MessageStatus.Error);
                 }
             }
 

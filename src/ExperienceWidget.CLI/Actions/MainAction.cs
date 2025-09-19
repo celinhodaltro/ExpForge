@@ -1,4 +1,5 @@
 ﻿using ExperienceWidget.Application.Services;
+using ExperienceWidget.CLI.Services;
 using McMaster.Extensions.CommandLineUtils;
 using System;
 
@@ -13,7 +14,7 @@ public class MainAction
 
     private int OnExecute()
     {
-        Console.WriteLine("Use --help to see the available commands");
+        TerminalMessageService.WriteLine("Use --help to see the available commands", MessageStatus.Warning);
         return 0;
     }
 }

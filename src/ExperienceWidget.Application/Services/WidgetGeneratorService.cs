@@ -1,4 +1,5 @@
 ﻿
+using ExperienceWidget.CLI.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,7 +19,7 @@ namespace ExperienceWidgetCli.Services
         {
             if (string.IsNullOrWhiteSpace(widgetName))
             {
-                Console.WriteLine("Erro: É necessário informar um nome para o widget.");
+                TerminalMessageService.WriteLine("Erro: É necessário informar um nome para o widget.", MessageStatus.Error);
                 return;
             }
 
@@ -29,14 +30,14 @@ namespace ExperienceWidgetCli.Services
 
             if (!Directory.Exists(_templatesPath))
             {
-                Console.WriteLine($"Erro: O caminho dos templates '{_templatesPath}' não existe.");
+                TerminalMessageService.WriteLine($"Erro: O caminho dos templates '{_templatesPath}' não existe.", MessageStatus.Error);
                 return;
             }
 
             var templatePath = Path.Combine(_templatesPath, templateName);
             if (!Directory.Exists(templatePath))
             {
-                Console.WriteLine($"Erro: O template '{templateName}' não existe em {_templatesPath}.");
+                TerminalMessageService.WriteLine($"Erro: O template '{templateName}' não existe em {_templatesPath}.", MessageStatus.Error);
                 return;
             }
 
@@ -56,8 +57,6 @@ namespace ExperienceWidgetCli.Services
 
             var templateCopier = new TemplateCopierService(tags);
             templateCopier.Copy(templatePath, widgetPath);
-
-            Console.WriteLine($"Widget '{widgetName}' criado em {widgetPath}");
         }
 
     }

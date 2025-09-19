@@ -1,4 +1,5 @@
 ﻿using ExperienceWidget.Application.Commands;
+using ExperienceWidget.CLI.Services;
 using ExperienceWidgetCli.Services;
 using MediatR;
 using System;
@@ -18,6 +19,7 @@ namespace ExperienceWidget.Application.Handlers
             var generator = new WidgetGeneratorService(templatesPath);
             generator.Generate(request.WidgetName, request.TemplateName);
 
+            TerminalMessageService.WriteLine($"Widget '{request.WidgetName}' created successfully!", MessageStatus.Success);
             return Task.FromResult(true);
         }
     }
