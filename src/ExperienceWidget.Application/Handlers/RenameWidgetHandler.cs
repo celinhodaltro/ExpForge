@@ -15,9 +15,8 @@ namespace ExperienceWidget.Application.Handlers
     {
         public Task<bool> Handle(RenameWidgetCommand request, CancellationToken cancellationToken)
         {
-            var templatesPath = Path.Combine(AppContext.BaseDirectory, "templates");
             var renameService = new WidgetRenameService();
-            renameService.Rename(templatesPath, request.NewWidgetName);
+            renameService.Rename(request.WidgetPath, request.NewWidgetName);
 
             TerminalMessageService.WriteLine($"Widget '{request.NewWidgetName}' renamed successfully!", MessageStatus.Success);
             return Task.FromResult(true);

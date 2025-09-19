@@ -20,27 +20,15 @@ public class RenameAction
         _generator = generator;
     }
 
-    [Argument(0, Description = "Widget name")]
-    public string Name { get; set; }
+    [Argument(0, Description = "Widget name", ShowInHelpText = true)]
+    public string NewWidgetName { get; set; }
 
-    [Argument(1, Description = "New widget folder path (optional, default: same folder)")]
-    public string? NewWidgetPath { get; set; }
+    [Argument(1, Description = "New widget folder path (optional, default: same folder)",ShowInHelpText = true)]
+    public string WidgetPath { get; set; }
 
     private async Task OnExecuteAsync()
     {
-        var currentWidgetPath = Path.Combine(Directory.GetCurrentDirectory(), Name);
-
-        var targetWidgetPath = string.IsNullOrWhiteSpace(NewWidgetPath)
-            ? Path.Combine(Directory.GetParent(currentWidgetPath)!.FullName, NewWidgetPath ?? Name)
-            : Path.GetFullPath(NewWidgetPath);
-
-        if(!Directory.Exists(currentWidgetPath))
-        {
-            TerminalMessageService.WriteLine($"Erro: O widget '{currentWidgetPath}' não foi encontrado.", MessageStatus.Error);
-            return;
-        }
-
-        var renameWidgetCommand = new RenameWidgetCommand(currentWidgetPath, targetWidgetPath);
+        var renameWidgetCommand = new RenameWidgetCommand(WidgetPath, NewWidgetName);
         await _mediator.Send(renameWidgetCommand);
 
     }

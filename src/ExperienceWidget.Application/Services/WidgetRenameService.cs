@@ -8,6 +8,8 @@ namespace ExperienceWidgetCli.Services
     {
         public void Rename(string currentWidgetPath, string newWidgetName)
         {
+            currentWidgetPath = Path.Combine(Directory.GetCurrentDirectory(), currentWidgetPath);
+
             if (!Directory.Exists(currentWidgetPath))
             {
                 TerminalMessageService.WriteLine($"Erro: O widget '{currentWidgetPath}' não existe.", MessageStatus.Error);
@@ -53,6 +55,7 @@ namespace ExperienceWidgetCli.Services
             // Renomear a pasta
             try
             {
+                TerminalMessageService.WriteLine($"Renomeando pasta de '{currentWidgetPath}' para '{newWidgetName}'");
                 var parentDir = Path.GetDirectoryName(currentWidgetPath)!;
                 var newPath = Path.Combine(parentDir, newWidgetName);
 
@@ -63,7 +66,6 @@ namespace ExperienceWidgetCli.Services
                 }
 
                 Directory.Move(currentWidgetPath, newPath);
-                TerminalMessageService.WriteLine($"Widget renomeado para '{newWidgetName}' com sucesso!", MessageStatus.Success);
             }
             catch (Exception ex)
             {
