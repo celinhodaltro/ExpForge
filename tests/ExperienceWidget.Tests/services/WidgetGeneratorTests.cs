@@ -15,10 +15,7 @@ namespace ExperienceWidgetCli.Tests
 
         public WidgetGeneratorTests()
         {
-            _templatesPath = Path.GetFullPath(
-                Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "src", "ExperienceWidget.CLI", "templates")
-            );
-
+            _templatesPath = Path.Combine(AppContext.BaseDirectory, "Templates");
             _tempRoot = Path.Combine(Path.GetTempPath(), "ExperienceWidgetCliTests_" + Guid.NewGuid());
             Directory.CreateDirectory(_tempRoot);
         }

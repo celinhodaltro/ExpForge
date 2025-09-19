@@ -16,6 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="..\ExperienceWidget.CLI\Templates\**\*">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\src\ExperienceWidget.Application\ExperienceWidget.Application.csproj" />
     <ProjectReference Include="..\..\src\ExperienceWidget.CLI\ExperienceWidget.CLI.csproj" />
   </ItemGroup>
