@@ -8,14 +8,10 @@ using System.Threading.Tasks;
 
 namespace ExperienceWidget.Application.Validators
 {
-    public class CreateProductCommandValidator : AbstractValidator<CreateWidgetCommand>
+    public class CreateWidgetValidator : AbstractValidator<CreateWidgetCommand>
     {
-        public CreateProductCommandValidator()
+        public CreateWidgetValidator()
         {
-            RuleFor(x => x.TemplateName)
-                .NotEmpty().WithMessage("Name is required")
-                .MaximumLength(100).WithMessage("Name must not exceed 100 characters");
-
             RuleFor(x => x.WidgetName)
                 .NotEmpty().WithMessage("Name is required")
                 .MaximumLength(100).WithMessage("Name must not exceed 100 characters");

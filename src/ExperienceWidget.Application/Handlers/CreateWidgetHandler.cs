@@ -16,11 +16,15 @@ namespace ExperienceWidget.Application.Handlers
         public Task<bool> Handle(CreateWidgetCommand request, CancellationToken cancellationToken)
         {
             var templatesPath = Path.Combine(AppContext.BaseDirectory, "templates");
-            var generator = new WidgetGeneratorService(templatesPath);
-            generator.Generate(request.WidgetName, request.TemplateName);
 
-            TerminalMessageService.WriteLine($"Widget '{request.WidgetName}' created successfully!", MessageStatus.Success);
-            return Task.FromResult(true);
+            var generator = new WidgetGeneratorService(templatesPath);
+            if (generator.Generate(request.WidgetName, request.TemplateName))
+            {
+                TerminalMessageService.WriteLine($"Widget '{request.WidgetName}' created successfully!", MessageStatus.Success);
+                return Task.FromResult(true);
+            }
+
+            return Task.FromResult(false);
         }
     }
 }

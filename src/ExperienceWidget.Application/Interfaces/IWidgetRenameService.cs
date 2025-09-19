@@ -2,7 +2,7 @@
 {
     public interface IWidgetRenameService
     {
-        void Rename(string currentWidgetPath, string newWidgetName);
+        bool Rename(string currentWidgetPath, string newWidgetName);
     }
 
 }

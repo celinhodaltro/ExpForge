@@ -15,14 +15,8 @@ namespace ExperienceWidgetCli.Services
             _templatesPath = templatesPath;
         }
 
-        public void Generate(string widgetName, string templateName, string? outputRoot = null)
+        public bool Generate(string widgetName, string templateName, string? outputRoot = null)
         {
-            if (string.IsNullOrWhiteSpace(widgetName))
-            {
-                TerminalMessageService.WriteLine("Erro: É necessário informar um nome para o widget.", MessageStatus.Error);
-                return;
-            }
-
             if (string.IsNullOrWhiteSpace(templateName))
             {
                 templateName = "empty";
@@ -30,23 +24,27 @@ namespace ExperienceWidgetCli.Services
 
             if (!Directory.Exists(_templatesPath))
             {
-                TerminalMessageService.WriteLine($"Erro: O caminho dos templates '{_templatesPath}' não existe.", MessageStatus.Error);
-                return;
+                TerminalMessageService.WriteLine($"Error: The templates path '{_templatesPath}' does not exist.", MessageStatus.Error);
+                return false;
             }
 
             var templatePath = Path.Combine(_templatesPath, templateName);
             if (!Directory.Exists(templatePath))
             {
-                TerminalMessageService.WriteLine($"Erro: O template '{templateName}' não existe em {_templatesPath}.", MessageStatus.Error);
-                return;
+                TerminalMessageService.WriteLine($"Error: The template '{templateName}' does not exist in {_templatesPath}.", MessageStatus.Error);
+                return false;
             }
+
+
 
             outputRoot ??= Directory.GetCurrentDirectory();
             var widgetPath = Path.Combine(outputRoot, widgetName);
 
             if (Directory.Exists(widgetPath))
-                Directory.Delete(widgetPath, true);
-
+            {
+                TerminalMessageService.WriteLine($"Error: Widget '{widgetName}' already exists at '{widgetPath}'.", MessageStatus.Error);
+                return false;
+            }
 
             var tags = new Dictionary<string, string>
             {
@@ -57,6 +55,8 @@ namespace ExperienceWidgetCli.Services
 
             var templateCopier = new TemplateCopierService(tags);
             templateCopier.Copy(templatePath, widgetPath);
+
+            return true;
         }
 
     }
