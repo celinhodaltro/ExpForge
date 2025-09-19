@@ -24,8 +24,7 @@ namespace ExperienceWidgetCli.Services
 
             if (string.IsNullOrWhiteSpace(templateName))
             {
-                Console.WriteLine("Erro: É necessário informar um nome de template.");
-                return;
+                templateName = "empty";
             }
 
             if (!Directory.Exists(_templatesPath))
@@ -51,11 +50,10 @@ namespace ExperienceWidgetCli.Services
             var tags = new Dictionary<string, string>
             {
                 { "WIDGET_NAME", widgetName },
-                { "AUTHOR", "Your Name" },
+                { "AUTHOR", "Your Organization/Name" },
                 { "DATE", DateTime.UtcNow.ToString("yyyy-MM-dd") }
             };
 
-            // Copia os arquivos do template
             var templateCopier = new TemplateCopierService(tags);
             templateCopier.Copy(templatePath, widgetPath);
 
@@ -63,4 +61,6 @@ namespace ExperienceWidgetCli.Services
         }
 
     }
+
+
 }

@@ -13,7 +13,7 @@ public class MainAction
 
     private int OnExecute()
     {
-        Console.WriteLine("Use --help para ver os comandos disponíveis");
+        Console.WriteLine("Use --help to see the available commands");
         return 0;
     }
 }

@@ -1,14 +1,14 @@
-﻿using ExperienceWidget.Application.Commands;
+﻿using ExperienceWidget.Application.Behaviors;
+using ExperienceWidget.Application.Commands;
 using ExperienceWidget.CLI.Actions;
 using ExperienceWidgetCli.Services;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using FluentValidation;
 using System;
 using System.IO;
-using System.Linq;
-using System.Reflection;
 
 class Program
 {
@@ -36,6 +36,11 @@ class Program
         });
 
         var applicationAssembly = typeof(ExperienceWidget.Application.Commands.CreateWidgetCommand).Assembly;
+        services.AddValidatorsFromAssembly(typeof(CreateWidgetCommand).Assembly);
+
+        // pipeline behavior
+        services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
 
         services.AddMediatR(cfg =>
         {
