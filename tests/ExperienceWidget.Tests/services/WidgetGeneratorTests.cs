@@ -16,7 +16,7 @@ namespace ExperienceWidgetCli.Tests
         public WidgetGeneratorTests()
         {
             _templatesPath = Path.GetFullPath(
-                Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "src", "experience-widget", "templates")
+                Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "src", "ExperienceWidget.CLI", "templates")
             );
 
             _tempRoot = Path.Combine(Path.GetTempPath(), "ExperienceWidgetCliTests_" + Guid.NewGuid());
@@ -24,7 +24,7 @@ namespace ExperienceWidgetCli.Tests
         }
 
         [Fact]
-        public void CreateWidget_ShouldGenerateExpectedStructure()
+        public void Generate_WhenCalledWithEmptyTemplate_CreatesExpectedWidgetStructure()
         {
             // Arrange
             var generator = new WidgetGeneratorService(_templatesPath);
@@ -38,8 +38,8 @@ namespace ExperienceWidgetCli.Tests
             var expectedFiles = new[]
             {
                 "manifest.json",
-                "runtime/widget.tsx",
-                "setting/setting.tsx"
+                "src/runtime/widget.tsx",
+                "src/setting/setting.tsx"
             };
 
             foreach (var relativeFile in expectedFiles)
