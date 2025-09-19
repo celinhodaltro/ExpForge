@@ -35,8 +35,6 @@ namespace ExperienceWidgetCli.Services
                 return false;
             }
 
-
-
             outputRoot ??= Directory.GetCurrentDirectory();
             var widgetPath = Path.Combine(outputRoot, widgetName);
 
