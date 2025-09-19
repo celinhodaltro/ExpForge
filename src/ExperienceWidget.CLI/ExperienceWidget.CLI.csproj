@@ -5,7 +5,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>experience-widget</ToolCommandName>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>João Marcelo</Authors>
   </PropertyGroup>
 
