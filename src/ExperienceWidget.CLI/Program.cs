@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using FluentValidation;
 using System;
 using System.IO;
+using ExperienceWidget.CLI.Services;
 
 class Program
 {
@@ -24,7 +25,15 @@ class Program
            .UseDefaultConventions()
            .UseConstructorInjection(serviceProvider);
 
-        return app.Execute(args);
+        try
+        {
+            return app.Execute(args);
+        }
+        catch (UnrecognizedCommandParsingException ex)
+        {
+            TerminalMessageService.WriteLine($"Error: Unrecognized command or argument:", MessageStatus.Error);
+            return 1;
+        }
     }
 
     static void ConfigureServices(IServiceCollection services)
