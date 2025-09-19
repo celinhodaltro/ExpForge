@@ -32,7 +32,7 @@ namespace ExperienceWidget.Application.Behaviors
 
                 if (failures.Count != 0)
                 {
-                    TerminalMessageService.WriteLine("Validation Erros:");
+                    TerminalMessageService.WriteLine("Validation Errors:");
                     TerminalMessageService.WriteLines(failures, MessageStatus.Error);
                 }
             }

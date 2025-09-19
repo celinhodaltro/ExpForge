@@ -6,70 +6,52 @@ namespace ExperienceWidgetCli.Services
 {
     public class WidgetRenameService : IWidgetRenameService
     {
-        public void Rename(string currentWidgetPath, string newWidgetName)
+        public bool Rename(string currentWidgetPath, string newWidgetName)
         {
             currentWidgetPath = Path.Combine(Directory.GetCurrentDirectory(), currentWidgetPath);
-
-            if (!Directory.Exists(currentWidgetPath))
-            {
-                TerminalMessageService.WriteLine($"Erro: O widget '{currentWidgetPath}' não existe.", MessageStatus.Error);
-                return;
-            }
-
-            if (string.IsNullOrWhiteSpace(newWidgetName))
-            {
-                TerminalMessageService.WriteLine($"Erro: É necessário informar um novo nome para o widget.", MessageStatus.Error);
-                return;
-            }
-
-            // Caminho do manifest.json
             var manifestPath = Path.Combine(currentWidgetPath, "manifest.json");
-            if (!File.Exists(manifestPath))
-            {
-                TerminalMessageService.WriteLine($"Aviso: Não foi encontrado 'manifest.json' em '{currentWidgetPath}'.", MessageStatus.Warning);
-            }
-            else
+
+            if (File.Exists(manifestPath))
             {
                 try
                 {
-                    string json = File.ReadAllText(manifestPath);
-                    using var doc = JsonDocument.Parse(json);
-                    var root = doc.RootElement.Clone();
-
-                    var jsonObj = JsonSerializer.Deserialize<JsonElement>(json);
-                    var jsonDict = JsonSerializer.Deserialize<Dictionary<string, object>>(json)!;
-
-                    // Alterar o nome do widget no manifest
+                    var jsonDict = JsonSerializer.Deserialize<Dictionary<string, object>>(
+                        File.ReadAllText(manifestPath)
+                    )!;
                     jsonDict["name"] = newWidgetName;
-
-                    var updatedJson = JsonSerializer.Serialize(jsonDict, new JsonSerializerOptions { WriteIndented = true });
-                    File.WriteAllText(manifestPath, updatedJson);
+                    File.WriteAllText(
+                        manifestPath,
+                        JsonSerializer.Serialize(jsonDict, new JsonSerializerOptions { WriteIndented = true })
+                    );
                 }
                 catch (Exception ex)
                 {
-                    TerminalMessageService.WriteLine($"Erro ao atualizar manifest.json: {ex.Message}", MessageStatus.Error);
-                    return;
+                    TerminalMessageService.WriteLine($"Error updating manifest.json: {ex.Message}", MessageStatus.Error);
+                    return false;
                 }
             }
+            else
+            {
+                TerminalMessageService.WriteLine($"Warning: 'manifest.json' not found in '{currentWidgetPath}'.", MessageStatus.Warning);
+            }
 
-            // Renomear a pasta
             try
             {
-                TerminalMessageService.WriteLine($"Renomeando pasta de '{currentWidgetPath}' para '{newWidgetName}'");
                 var parentDir = Path.GetDirectoryName(currentWidgetPath)!;
                 var newPath = Path.Combine(parentDir, newWidgetName);
 
                 if (Directory.Exists(newPath))
                 {
-                    TerminalMessageService.WriteLine($"Erro: Já existe uma pasta com o nome '{newWidgetName}'.", MessageStatus.Error);
-                    return;
+                    TerminalMessageService.WriteLine($"Error: A folder named '{newWidgetName}' already exists.", MessageStatus.Error);
+                    return false;
                 }
-
                 Directory.Move(currentWidgetPath, newPath);
+                return true;
             }
             catch (Exception ex)
             {
-                TerminalMessageService.WriteLine($"Erro ao renomear a pasta do widget: {ex.Message}", MessageStatus.Error);
+                TerminalMessageService.WriteLine($"Error renaming widget folder: {ex.Message}", MessageStatus.Error);
+                return false;
             }
         }
     }

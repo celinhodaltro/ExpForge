@@ -16,10 +16,14 @@ namespace ExperienceWidget.Application.Handlers
         public Task<bool> Handle(RenameWidgetCommand request, CancellationToken cancellationToken)
         {
             var renameService = new WidgetRenameService();
-            renameService.Rename(request.WidgetPath, request.NewWidgetName);
 
-            TerminalMessageService.WriteLine($"Widget '{request.NewWidgetName}' renamed successfully!", MessageStatus.Success);
-            return Task.FromResult(true);
+            if (renameService.Rename(request.WidgetPath, request.NewWidgetName))
+            {
+                TerminalMessageService.WriteLine($"Widget '{request.NewWidgetName}' renamed successfully!", MessageStatus.Success);
+                return Task.FromResult(true);
+            }
+
+            return Task.FromResult(false);
         }
     }
 }

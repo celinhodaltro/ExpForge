@@ -1,0 +1,19 @@
+{
+  "name": "experience-widget",
+  "version": "1.0.8",
+  "bin": {
+    "experience-widget": "./src/launcher.js"
+  },
+  "files": [
+    "src/",
+    "templates/"
+  ],
+  "scripts": {
+    "postinstall": "npx chmod +x ./bin/linux-x64/experience-widget ./bin/osx-*/experience-widget || echo 'Windows, skipping chmod'"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ]
+}
