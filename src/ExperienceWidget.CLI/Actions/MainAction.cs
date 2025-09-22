@@ -19,6 +19,6 @@ public class MainAction
     public string GetVersion()
     {
         var version = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "...";
-        return $"Experience-Widget Version: ({version})";
+        return $"exo-forge Version: ({version})";
     }
 }

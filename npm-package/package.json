@@ -1,8 +1,8 @@
-{
+﻿{
   "name": "expforge",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "bin": {
-    "experience-widget": "./dist/launcher.js"
+    "expforge": "./dist/launcher.js"
   },
   "files": [
     "dist/",

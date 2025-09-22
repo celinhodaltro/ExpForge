@@ -22,5 +22,11 @@ dotnet publish -c Release -p:GenerateNpm=true
 
 Você tambem pode baixar diretamente no [npm](https://www.npmjs.com/package/expforge):
 
+
+
+📥 Instalação via NPM
+
+Você também pode baixar diretamente no npm
+:
 ```bash
 npm install -g expforge
