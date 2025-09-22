@@ -363,3 +363,4 @@ MigrationBackup/
 FodyWeavers.xsd
 /npm-package/dist/linux-x64
 /npm-package/dist/osx-x64
+/npm-package/dist/win-x64
