@@ -3,7 +3,7 @@
 Uma CLI em **.NET 9.0**, construída seguindo os princípios de **Clean Architecture**, criada para auxiliar desenvolvedores de **widgets para Experience Builder**.  
 Este projeto é **open source** e tem como objetivo simplificar a criação e manutenção de widgets, reduzindo trabalho manual e padronizando processos.
 
-O link do repositório do github é : [https://github.com/celinhodaltro/experience-widget](experience-widget)
+O link do repositório do github é : [experience-widget](https://github.com/celinhodaltro/experience-widget)
 
 ---
 
@@ -15,5 +15,3 @@ Atualmente, a CLI conta com dois comandos principais:
 - **`rename`** → Renomeia uma widget existente e ajusta automaticamente o `manifest.json`.
 
 ---
-
-## 📦 Publicação
