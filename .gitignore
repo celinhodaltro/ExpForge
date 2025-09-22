@@ -362,3 +362,4 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /npm-package/dist/linux-x64
+/npm-package/dist/osx-x64
