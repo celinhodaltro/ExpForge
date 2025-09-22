@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace ExperienceWidget.CLI.Actions;
 
-[Command(Name = "experience-widget", Description = "CLI Experience Widget Builder")]
+[Command(Name = "expforge", Description = "CLI Experience Widget Builder")]
 [VersionOptionFromMember("--version", MemberName = nameof(GetVersion))]
 [Subcommand(typeof(NewAction), typeof(RenameAction))]
 public class MainAction

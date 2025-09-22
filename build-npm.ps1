@@ -33,7 +33,9 @@ Copy-Item "$NpmRoot\templates" "$Dist\templates" -Recurse -Force
 $packageJsonPath = "$NpmRoot\package.json"
 $jsonText = Get-Content $packageJsonPath -Raw
 $jsonText = $jsonText -replace '"version":\s*".*"', "`"version`": `"$version`""
-Set-Content $packageJsonPath $jsonText
+
+# Salva sem adicionar espaço/linha no final
+$jsonText | Out-File -FilePath $packageJsonPath -Encoding utf8 -NoNewline
 
 # Runtimes alvo
 $runtimes = @("win-x64","linux-x64","osx-x64")

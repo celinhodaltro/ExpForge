@@ -15,7 +15,6 @@ Atualmente, a CLI conta com dois comandos principais:
 ---
 
 ## 📦 Publicação
-
 Para gerar os binários e preparar o pacote NPM:
 
 ```bash
