@@ -1,20 +1,21 @@
 ﻿using ExperienceWidget.Application.Behaviors;
 using ExperienceWidget.Application.Commands;
 using ExperienceWidget.CLI.Actions;
+using ExperienceWidget.CLI.Services;
 using ExperienceWidgetCli.Services;
+using FluentValidation;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using FluentValidation;
 using System;
 using System.IO;
-using ExperienceWidget.CLI.Services;
 
 class Program
 {
     static int Main(string[] args)
     {
+
         var services = new ServiceCollection();
         ConfigureServices(services);
 

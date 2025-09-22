@@ -13,10 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperienceWidget.CLI", "src
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperienceWidget.Tests", "tests\ExperienceWidget.Tests\ExperienceWidget.Tests.csproj", "{B8B2435D-94C3-058D-ED1F-920B4F20E409}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{544B06DE-E264-4ABB-99C5-A33923C5FB9C}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExperienceWidget.BuildArtifacts", "build\ExperienceWidget.BuildArtifacts\ExperienceWidget.BuildArtifacts.csproj", "{FE07BF31-E33A-4455-86E6-C5FE9DF28100}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +31,6 @@ Global
 		{B8B2435D-94C3-058D-ED1F-920B4F20E409}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8B2435D-94C3-058D-ED1F-920B4F20E409}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8B2435D-94C3-058D-ED1F-920B4F20E409}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FE07BF31-E33A-4455-86E6-C5FE9DF28100}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FE07BF31-E33A-4455-86E6-C5FE9DF28100}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FE07BF31-E33A-4455-86E6-C5FE9DF28100}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FE07BF31-E33A-4455-86E6-C5FE9DF28100}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -47,7 +39,6 @@ Global
 		{0901D4CF-DB80-A894-9F6A-5EFA1E136211} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{735105F9-C090-83CA-C3F3-F4B4AE03ED84} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{B8B2435D-94C3-058D-ED1F-920B4F20E409} = {CE0C1778-727D-4A5C-B893-971312C5BAF2}
-		{FE07BF31-E33A-4455-86E6-C5FE9DF28100} = {544B06DE-E264-4ABB-99C5-A33923C5FB9C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {04ED5D81-A28D-4E8B-A2CB-45ACB439DB9A}

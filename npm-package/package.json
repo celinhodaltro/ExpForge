@@ -1,11 +1,11 @@
 {
   "name": "experience-widget",
-  "version": "1.0.8",
+  "version": "1.0.1",
   "bin": {
     "experience-widget": "./src/launcher.js"
   },
   "files": [
-    "src/",
+    "dist/",
     "templates/"
   ],
   "scripts": {
