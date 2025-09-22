@@ -6,21 +6,29 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>experience-widget</ToolCommandName>
 
-    <!-- Version -->
-    <Version>1.0.0.1</Version>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <FileVersion>1.0.0.1</FileVersion>
-    <InformationalVersion>1.0.0.1</InformationalVersion>
+    <!-- Versão inicial, será incrementada pelo script -->
+    <Version>1.0.0</Version>
+    <AssemblyVersion>1.0.0</AssemblyVersion>
+    <FileVersion>1.0.0</FileVersion>
+    <InformationalVersion>1.0.0</InformationalVersion>
     <Authors>João Marcelo Daltro Marques</Authors>
-    
+
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="npm-package\**" />
+    <EmbeddedResource Remove="npm-package\**" />
+    <None Remove="npm-package\**" />
+  </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Templates\**\*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
+    <ProjectReference Include="..\ExperienceWidget.Application\ExperienceWidget.Application.csproj" />
   </ItemGroup>
+
+  <Target Name="PostPublishBuildNpm" AfterTargets="Publish">
+    <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(MSBuildThisFileDirectory)..\..\build-npm.ps1&quot;" />
+  </Target>
+
 
   <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
@@ -29,11 +37,5 @@
     <PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.9" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.9" />
   </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\ExperienceWidget.Application\ExperienceWidget.Application.csproj" />
-  </ItemGroup>
-
-
 
 </Project>
