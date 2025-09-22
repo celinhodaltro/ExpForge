@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace ExperienceWidget.CLI.Actions;
 
-[Command(Name = "Create", Description = "Create Widget")]
-public class CreateAction
+[Command(Name = "New", Description = "Create Widget")]
+public class NewAction
 {
     private readonly IMediator _mediator;
     private readonly WidgetGeneratorService _generator;
 
-    public CreateAction(IMediator mediator, WidgetGeneratorService generator)
+    public NewAction(IMediator mediator, WidgetGeneratorService generator)
     {
         _mediator = mediator;
         _generator = generator;

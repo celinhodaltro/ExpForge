@@ -7,7 +7,7 @@ namespace ExperienceWidget.CLI.Actions;
 
 [Command(Name = "experience-widget", Description = "CLI Experience Widget Builder")]
 [VersionOptionFromMember("--version", MemberName = nameof(GetVersion))]
-[Subcommand(typeof(CreateAction), typeof(RenameAction))]
+[Subcommand(typeof(NewAction), typeof(RenameAction))]
 public class MainAction
 {
     private int OnExecute()
