@@ -5,7 +5,7 @@
     "experience-widget": "./src/launcher.js"
   },
   "files": [
-    "src/",
+    "dist/",
     "templates/"
   ],
   "scripts": {
