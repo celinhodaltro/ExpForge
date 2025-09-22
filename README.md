@@ -1,17 +1,22 @@
-# Experience Widget CLI
+ï»¿# Experience Widget CLI
 
-## Descrição
-
-O **Experience Widget CLI** é uma ferramenta de linha de comando criada em .NET 9 para gerar e gerenciar **widgets de experiência** em projetos web e front-end.  
-Ela permite:
-
-- Criar templates de widgets personalizados.
-- Publicar pacotes prontos para uso em diferentes plataformas (`win-x64`, `linux-x64`, `osx-x64`).
-- Sincronizar versões automaticamente entre o CLI e o `package.json`.
-
-O objetivo principal é facilitar a construção e distribuição de **componentes reutilizáveis** em projetos de experiência do usuário.
+Uma CLI em **.NET 9.0**, construÃ­da seguindo os princÃ­pios de **Clean Architecture**, criada para auxiliar desenvolvedores de **widgets para Experience Builder**.  
+Este projeto Ã© **open source** e tem como objetivo simplificar a criaÃ§Ã£o e manutenÃ§Ã£o de widgets, reduzindo trabalho manual e padronizando processos.
 
 ---
 
-## Estrutura do Projeto
+## ðŸš€ Funcionalidades atuais
 
+Atualmente, a CLI conta com dois comandos principais:
+
+- **`new`** â†’ Cria uma nova widget pronta para ser usada.  
+- **`rename`** â†’ Renomeia uma widget existente e ajusta automaticamente o `manifest.json`.
+
+---
+
+## ðŸ“¦ PublicaÃ§Ã£o
+
+Para gerar os binÃ¡rios e preparar o pacote NPM:
+
+```bash
+dotnet publish -c Release -p:GenerateNpm=true
