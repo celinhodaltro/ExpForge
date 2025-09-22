@@ -25,8 +25,8 @@
     <ProjectReference Include="..\ExperienceWidget.Application\ExperienceWidget.Application.csproj" />
   </ItemGroup>
 
-  <Target Name="PostPublishBuildNpm" AfterTargets="Publish">
-    <Exec Command="powershell -ExecutionPolicy Bypass -File &quot;$(MSBuildThisFileDirectory)..\..\build-npm.ps1&quot;" />
+  <Target Name="PostPublishBuildNpm" AfterTargets="Publish" Condition="'$(GenerateNpm)' == 'true'">
+    <Exec Command="powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command &quot;&amp; '$(MSBuildThisFileDirectory)..\..\build-npm.ps1'&quot;" />
   </Target>
 
 

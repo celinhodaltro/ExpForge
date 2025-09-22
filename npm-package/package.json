@@ -1,6 +1,6 @@
 {
   "name": "experience-widget",
-  "version": "1.0.8",
+  "version": "1.0.0",
   "bin": {
     "experience-widget": "./src/launcher.js"
   },
@@ -17,3 +17,5 @@
     "win32"
   ]
 }
+
+
