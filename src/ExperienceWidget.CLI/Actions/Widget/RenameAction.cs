@@ -26,7 +26,7 @@ public class RenameAction
     [Argument(1, Description = "New widget folder path (optional, default: same folder)",ShowInHelpText = true)]
     public string WidgetPath { get; set; }
 
-    private async Task OnExecuteAsync()
+    public async Task OnExecuteAsync()
     {
         var renameWidgetCommand = new RenameWidgetCommand(WidgetPath, NewWidgetName);
         await _mediator.Send(renameWidgetCommand);

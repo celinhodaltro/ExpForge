@@ -6,32 +6,26 @@ using System.IO;
 
 namespace ExperienceWidgetCli.Services
 {
-    public class CreateWidgetService : IWidgetGeneratorService
+    public class CreateWidgetService : ICreateWidgetService
     {
-        private readonly string _templatesPath;
-
-        public CreateWidgetService(string templatesPath)
-        {
-            _templatesPath = templatesPath;
-        }
-
-        public bool Generate(string widgetName, string templateName, string? outputRoot = null)
+        public bool Generate(string widgetName, string templatePath, string templateName, string? outputRoot = null)
         {
             if (string.IsNullOrWhiteSpace(templateName))
             {
                 templateName = "empty";
             }
 
-            if (!Directory.Exists(_templatesPath))
+            if (!Directory.Exists(templatePath))
             {
-                TerminalMessageService.WriteLine($"Error: The templates path '{_templatesPath}' does not exist.", MessageStatus.Error);
+                TerminalMessageService.WriteLine($"Error: The templates path '{templatePath}' does not exist.", MessageStatus.Error);
                 return false;
             }
 
-            var templatePath = Path.Combine(_templatesPath, templateName);
-            if (!Directory.Exists(templatePath))
+            var templateSelectedPath = Path.Combine(templatePath, templateName);
+
+            if (!Directory.Exists(templateSelectedPath))
             {
-                TerminalMessageService.WriteLine($"Error: The template '{templateName}' does not exist in {_templatesPath}.", MessageStatus.Error);
+                TerminalMessageService.WriteLine($"Error: The template '{templateName}' does not exist in {templatePath}.", MessageStatus.Error);
                 return false;
             }
 
@@ -52,7 +46,7 @@ namespace ExperienceWidgetCli.Services
             };
 
             var templateCopier = new TemplateCopierService(tags);
-            templateCopier.Copy(templatePath, widgetPath);
+            templateCopier.Copy(templateSelectedPath, widgetPath);
 
             return true;
         }
