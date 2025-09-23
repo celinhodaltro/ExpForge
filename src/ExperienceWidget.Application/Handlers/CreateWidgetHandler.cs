@@ -28,7 +28,7 @@ namespace ExperienceWidget.Application.Handlers
                 templatesPath = devPath;   
             else
                 throw new DirectoryNotFoundException("Templates folder not found!");
-            var generator = new WidgetGeneratorService(templatesPath);
+            var generator = new CreateWidgetService(templatesPath);
             if (generator.Generate(request.WidgetName, request.TemplateName))
             {
                 TerminalMessageService.WriteLine($"Widget '{request.WidgetName}' created successfully!", MessageStatus.Success);
