@@ -13,23 +13,19 @@ namespace ExperienceWidget.Application.Handlers
 {
     public class CreateWidgetHandler : IRequestHandler<CreateWidgetCommand, bool>
     {
+
+        public CreateWidgetHandler(ICreateWidgetService service)
+        {
+            _service = service;
+        }
+
+        public readonly ICreateWidgetService _service;
+
         public Task<bool> Handle(CreateWidgetCommand request, CancellationToken cancellationToken)
         {
             string templatesPath;
 
-            var publishPath = Path.Combine(AppContext.BaseDirectory, "..", "templates");
-
-            var solutionRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", ".."));
-            var devPath = Path.Combine(solutionRoot, "npm-package", "templates");
-
-            if (Directory.Exists(publishPath))
-                templatesPath = publishPath;   
-            else if (Directory.Exists(devPath))
-                templatesPath = devPath;   
-            else
-                throw new DirectoryNotFoundException("Templates folder not found!");
-            var generator = new CreateWidgetService(templatesPath);
-            if (generator.Generate(request.WidgetName, request.TemplateName))
+            if (_service.Generate(request.WidgetName, request.TemplatePath, request.TemplateName))
             {
                 TerminalMessageService.WriteLine($"Widget '{request.WidgetName}' created successfully!", MessageStatus.Success);
                 return Task.FromResult(true);

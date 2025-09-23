@@ -1,7 +1,9 @@
 ﻿using ExperienceWidget.Application.Behaviors;
 using ExperienceWidget.Application.Commands;
+using ExperienceWidget.Application.Interfaces;
 using ExperienceWidget.CLI.Actions;
 using ExperienceWidget.CLI.Services;
+using ExperienceWidget.Infrastructure.Providers;
 using ExperienceWidgetCli.Services;
 using FluentValidation;
 using McMaster.Extensions.CommandLineUtils;
@@ -51,6 +53,8 @@ class Program
         // pipeline behavior
         services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 
+        services.AddScoped<ITemplatePathProvider, TemplatePathProvider>();
+
 
         services.AddMediatR(cfg =>
         {
@@ -59,6 +63,6 @@ class Program
 
         var templatesPath = Path.Combine(AppContext.BaseDirectory, "templates");
 
-        services.AddSingleton<CreateWidgetService>(sp => new CreateWidgetService(templatesPath));
+        services.AddSingleton<CreateWidgetService>();
     }
 }

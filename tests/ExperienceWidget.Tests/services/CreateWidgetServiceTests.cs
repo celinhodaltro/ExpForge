@@ -3,6 +3,8 @@ using System.IO;
 using System.Linq;
 using Xunit;
 using ExperienceWidgetCli.Services;
+using ExperienceWidget.Infrastructure.Providers;
+using ExperienceWidget.Application.Interfaces;
 
 namespace ExperienceWidgetCli.Tests
 {
@@ -15,8 +17,11 @@ namespace ExperienceWidgetCli.Tests
 
         public CreateWidgetServiceTests()
         {
-            var solutionRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", ".."));
-            _templatesPath = Path.Combine(solutionRoot, "npm-package", "templates");
+            // Use TemplatePathProvider from Infrastructure
+            ITemplatePathProvider templatePathProvider = new TemplatePathProvider();
+            _templatesPath = templatePathProvider.GetTemplatesPath();
+
+            // Temp folder for widget generation
             _tempRoot = Path.Combine(Path.GetTempPath(), "ExperienceWidgetCliTests_" + Guid.NewGuid());
             Directory.CreateDirectory(_tempRoot);
         }
@@ -25,13 +30,13 @@ namespace ExperienceWidgetCli.Tests
         public void Generate_WhenCalledWithEmptyTemplate_CreatesExpectedWidgetStructure()
         {
             // Arrange
-            var generator = new CreateWidgetService(_templatesPath);
+            var generator = new CreateWidgetService();
 
             // Act
-            generator.Generate(_widgetName, "empty", _tempRoot);
+            generator.Generate(_widgetName, templatePath: _templatesPath, templateName: "empty", outputRoot: _tempRoot);
 
             // Assert
-            Assert.True(Directory.Exists(_widgetPath), $"Widget folder was not created. {_widgetPath}");
+            Assert.True(Directory.Exists(_widgetPath), $"Widget folder was not created: {_widgetPath}");
 
             var expectedFiles = new[]
             {
@@ -46,14 +51,14 @@ namespace ExperienceWidgetCli.Tests
                 Assert.True(File.Exists(fullPath), $"Expected file not found: {relativeFile}");
             }
 
-            // Extra: ensure no ".template" file leaked
+            // Ensure no ".template" files leaked
             var leakedTemplates = Directory.GetFiles(_widgetPath, "*.template", SearchOption.AllDirectories);
             Assert.Empty(leakedTemplates);
         }
 
         public void Dispose()
         {
-            // Cleanup
+            // Cleanup temp folder
             if (Directory.Exists(_tempRoot))
                 Directory.Delete(_tempRoot, true);
         }

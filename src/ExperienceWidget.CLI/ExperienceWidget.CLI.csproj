@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExperienceWidget.Application\ExperienceWidget.Application.csproj" />
+    <ProjectReference Include="..\ExperienceWidget.Infrastructure\ExperienceWidget.Infrastructure.csproj" />
   </ItemGroup>
 
   <Target Name="PostPublishBuildNpm" AfterTargets="Publish" Condition="'$(GenerateNpm)' == 'true'">
