@@ -6,11 +6,11 @@ using System.IO;
 
 namespace ExperienceWidgetCli.Services
 {
-    public class WidgetGeneratorService : IWidgetGeneratorService
+    public class CreateWidgetService : IWidgetGeneratorService
     {
         private readonly string _templatesPath;
 
-        public WidgetGeneratorService(string templatesPath)
+        public CreateWidgetService(string templatesPath)
         {
             _templatesPath = templatesPath;
         }

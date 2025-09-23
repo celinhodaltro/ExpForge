@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace ExperienceWidgetCli.Services
 {
-    public class WidgetRenameService : IWidgetRenameService
+    public class RenameWidgetService : IWidgetRenameService
     {
         public bool Rename(string currentWidgetPath, string newWidgetName)
         {

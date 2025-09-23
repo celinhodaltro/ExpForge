@@ -59,6 +59,6 @@ class Program
 
         var templatesPath = Path.Combine(AppContext.BaseDirectory, "templates");
 
-        services.AddSingleton<WidgetGeneratorService>(sp => new WidgetGeneratorService(templatesPath));
+        services.AddSingleton<CreateWidgetService>(sp => new CreateWidgetService(templatesPath));
     }
 }
