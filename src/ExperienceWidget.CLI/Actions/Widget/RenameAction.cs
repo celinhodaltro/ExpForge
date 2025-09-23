@@ -6,7 +6,7 @@ using MediatR;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace ExperienceWidget.CLI.Actions;
+namespace ExperienceWidget.CLI.Actions.Widget;
 
 [Command(Name = "Rename", Description = "Rename Widget")]
 public class RenameAction

@@ -1,4 +1,5 @@
-﻿using ExperienceWidget.CLI.Services;
+﻿using ExperienceWidget.CLI.Actions.Widget;
+using ExperienceWidget.CLI.Services;
 using McMaster.Extensions.CommandLineUtils;
 using System;
 using System.Reflection;

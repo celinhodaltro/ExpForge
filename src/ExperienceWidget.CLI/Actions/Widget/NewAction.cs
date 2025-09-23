@@ -4,7 +4,7 @@ using McMaster.Extensions.CommandLineUtils;
 using MediatR;
 using System.Threading.Tasks;
 
-namespace ExperienceWidget.CLI.Actions;
+namespace ExperienceWidget.CLI.Actions.Widget;
 
 [Command(Name = "New", Description = "Create Widget")]
 public class NewAction
