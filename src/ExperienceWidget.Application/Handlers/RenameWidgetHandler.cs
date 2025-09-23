@@ -15,7 +15,7 @@ namespace ExperienceWidget.Application.Handlers
     {
         public Task<bool> Handle(RenameWidgetCommand request, CancellationToken cancellationToken)
         {
-            var renameService = new WidgetRenameService();
+            var renameService = new RenameWidgetService();
 
             if (renameService.Rename(request.WidgetPath, request.NewWidgetName))
             {

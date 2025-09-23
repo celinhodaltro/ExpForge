@@ -12,9 +12,9 @@ namespace ExperienceWidget.CLI.Actions;
 public class RenameAction
 {
     private readonly IMediator _mediator;
-    private readonly WidgetGeneratorService _generator;
+    private readonly CreateWidgetService _generator;
 
-    public RenameAction(IMediator mediator, WidgetGeneratorService generator)
+    public RenameAction(IMediator mediator, CreateWidgetService generator)
     {
         _mediator = mediator;
         _generator = generator;

@@ -10,9 +10,9 @@ namespace ExperienceWidget.CLI.Actions;
 public class NewAction
 {
     private readonly IMediator _mediator;
-    private readonly WidgetGeneratorService _generator;
+    private readonly CreateWidgetService _generator;
 
-    public NewAction(IMediator mediator, WidgetGeneratorService generator)
+    public NewAction(IMediator mediator, CreateWidgetService generator)
     {
         _mediator = mediator;
         _generator = generator;

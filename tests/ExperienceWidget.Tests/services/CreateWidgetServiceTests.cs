@@ -6,14 +6,14 @@ using ExperienceWidgetCli.Services;
 
 namespace ExperienceWidgetCli.Tests
 {
-    public class WidgetGeneratorTests : IDisposable
+    public class CreateWidgetServiceTests : IDisposable
     {
         private readonly string _templatesPath;
         private readonly string _tempRoot;
         private readonly string _widgetName = "TestWidget";
         private string _widgetPath => Path.Combine(_tempRoot, _widgetName);
 
-        public WidgetGeneratorTests()
+        public CreateWidgetServiceTests()
         {
             var solutionRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", ".."));
             _templatesPath = Path.Combine(solutionRoot, "npm-package", "templates");
@@ -25,7 +25,7 @@ namespace ExperienceWidgetCli.Tests
         public void Generate_WhenCalledWithEmptyTemplate_CreatesExpectedWidgetStructure()
         {
             // Arrange
-            var generator = new WidgetGeneratorService(_templatesPath);
+            var generator = new CreateWidgetService(_templatesPath);
 
             // Act
             generator.Generate(_widgetName, "empty", _tempRoot);
