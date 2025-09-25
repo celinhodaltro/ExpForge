@@ -1,4 +1,4 @@
-﻿using experience_widget.Interfaces;
+﻿using ExpForge.Application.Services.IServices;
 
 namespace ExpForgeCli.Services
 {

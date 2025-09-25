@@ -1,4 +1,4 @@
-﻿using ExpForge.Application.Interfaces;
+﻿using ExpForge.Application.Services.IServices;
 
 namespace ExpForge.Infrastructure.Providers
 {

@@ -1,4 +1,4 @@
-﻿namespace ExpForgeCli.Services
+﻿namespace ExpForge.Application.Services.IServices
 {
     /// <summary>
     /// Interface para gerar widgets do ArcGIS Experience Builder.
