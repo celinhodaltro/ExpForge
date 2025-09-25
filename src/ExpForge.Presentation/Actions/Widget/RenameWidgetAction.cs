@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 namespace ExpForge.CLI.Actions.Widget;
 
 [Command(Name = "Rename", Description = "Rename Widget")]
-public class RenameAction
+public class RenameWidgetAction
 {
     private readonly IMediator _mediator;
 
-    public RenameAction(IMediator mediator)
+    public RenameWidgetAction(IMediator mediator)
     {
         _mediator = mediator;
     }

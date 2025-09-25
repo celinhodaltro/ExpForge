@@ -7,10 +7,10 @@ namespace ExpForge.CLI.Actions;
 
 [Command(Name = "expforge", Description = "CLI Experience Widget Builder")]
 [VersionOptionFromMember("--version", MemberName = nameof(GetVersion))]
-[Subcommand(typeof(NewAction), typeof(RenameAction))]
+[Subcommand(typeof(NewWidgetAction), typeof(RenameWidgetAction))]
 public class MainAction
 {
-    private int OnExecute()
+    public int OnExecute()
     {
         TerminalMessageService.WriteLine("Use --help to see the available commands", MessageStatus.Warning);
         return 0;

@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace ExpForge.CLI.Actions.Widget;
 
-[Command(Name = "New", Description = "Create Widget")]
-public class NewAction
+[Command(Name = "New-Widget", Description = "Create Widget")]
+public class NewWidgetAction
 {
     private readonly IMediator _mediator;
     private readonly ITemplatePathProvider _templatePathProvider;
 
-    public NewAction(IMediator mediator, ITemplatePathProvider templatePathProvider)
+    public NewWidgetAction(IMediator mediator, ITemplatePathProvider templatePathProvider)
     {
         _mediator = mediator;
         _templatePathProvider = templatePathProvider;
@@ -31,8 +31,8 @@ public class NewAction
 
     public async Task OnExecuteAsync(CommandLineApplication app)
     {
-        TemplatePath = GetTemplatesDirectory(app);
-        if (string.IsNullOrEmpty(TemplatePath)) return;
+        TemplatePath = app.GetTemplatePath(() => _templatePathProvider.GetTemplatesPath());
+        if (TemplatePath == null) return;
 
         WidgetName = GetWidgetName(app);
         if (string.IsNullOrEmpty(WidgetName)) return;
@@ -43,18 +43,7 @@ public class NewAction
         await _mediator.Send(new CreateWidgetCommand(widgetName: WidgetName, templateName: TemplateName, templatePath: TemplatePath));
     }
 
-    private string GetTemplatesDirectory(CommandLineApplication app)
-    {
-        TemplatePath = _templatePathProvider.GetTemplatesPath();
-        if (string.IsNullOrEmpty(TemplatePath) || !Directory.Exists(TemplatePath))
-        {
-            app.Error.WriteLine("❌ 'templates' folder not found.");
-            return null;
-        }
 
-        return TemplatePath;
-
-    }
 
     private string GetWidgetName(CommandLineApplication app)
     {
