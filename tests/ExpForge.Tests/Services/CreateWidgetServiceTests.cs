@@ -14,7 +14,7 @@ namespace ExpForge.Tests
         public CreateWidgetServiceTests()
         {
             // Use TemplatePathProvider from Infrastructure
-            ITemplatePathProvider templatePathProvider = new TemplatePathProvider();
+            TemplatePathProvider templatePathProvider = new TemplatePathProvider();
             _templatesPath = templatePathProvider.GetTemplatesPath();
 
             // Temp folder for widget generation
