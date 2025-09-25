@@ -10,7 +10,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.IO;
 
-namespace ExpForge.CLI.Extensions;
+namespace ExpForge.Presentation.Extensions;
 
 public static class ServiceCollectionExtensions
 {

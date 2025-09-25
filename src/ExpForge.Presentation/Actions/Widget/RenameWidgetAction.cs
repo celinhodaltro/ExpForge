@@ -1,11 +1,12 @@
 ﻿using ExpForge.Application.Commands;
+using ExpForge.Application.Commands.Widget;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace ExpForge.CLI.Actions.Widget;
+namespace ExpForge.Presentation.Actions.Widget;
 
 [Command(Name = "Rename", Description = "Rename Widget")]
 public class RenameWidgetAction
