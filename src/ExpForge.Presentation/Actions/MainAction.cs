@@ -1,7 +1,6 @@
 ﻿using ExpForge.CLI.Actions.Widget;
 using ExpForge.CLI.Services;
 using McMaster.Extensions.CommandLineUtils;
-using System;
 using System.Reflection;
 
 namespace ExpForge.CLI.Actions;

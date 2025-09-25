@@ -1,6 +1,4 @@
 ﻿using ExpForge.Application.Commands;
-using ExpForge.CLI.Services;
-using ExpForgeCli.Services;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
 using System;
