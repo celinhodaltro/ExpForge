@@ -1,9 +1,11 @@
 ﻿using ExpForge.CLI.Actions.Widget;
 using ExpForge.CLI.Services;
+using ExpForge.Presentation.Actions.Components;
+using ExpForge.Presentation.Actions.Widget;
 using McMaster.Extensions.CommandLineUtils;
 using System.Reflection;
 
-namespace ExpForge.CLI.Actions;
+namespace ExpForge.Presentation.Actions;
 
 [Command(Name = "expforge", Description = "CLI Experience Widget Builder")]
 [VersionOptionFromMember("--version", MemberName = nameof(GetVersion))]

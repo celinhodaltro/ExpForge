@@ -1,12 +1,13 @@
-﻿using ExpForge.Application.Services.IServices;
+﻿using ExpForge.Application.Services.Enums;
+using ExpForge.Application.Services.IServices;
 
-namespace ExpForgeCli.Services
+namespace ExpForge.Application.Services
 {
     public class TemplateTagReplacerService : ITemplateTagReplacerService
     {
-        private readonly Dictionary<string, string> _tags;
+        private readonly Dictionary<TemplateTag, string> _tags;
 
-        public TemplateTagReplacerService(Dictionary<string, string> tags)
+        public TemplateTagReplacerService(Dictionary<TemplateTag, string> tags)
         {
             _tags = tags ?? throw new ArgumentNullException(nameof(tags));
         }

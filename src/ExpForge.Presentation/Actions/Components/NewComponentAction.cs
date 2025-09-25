@@ -4,7 +4,7 @@ using MediatR;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace ExpForge.CLI.Actions.Widget;
+namespace ExpForge.Presentation.Actions.Components;
 
 [Command(Name = "New-Component", Description = "Create Component")]
 public class NewComponentAction

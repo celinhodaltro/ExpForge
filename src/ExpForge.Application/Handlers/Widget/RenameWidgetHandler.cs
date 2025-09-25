@@ -1,9 +1,9 @@
-﻿using ExpForge.Application.Commands;
+﻿using ExpForge.Application.Commands.Widget;
 using ExpForge.CLI.Services;
 using ExpForgeCli.Services;
 using MediatR;
 
-namespace ExpForge.Application.Handlers
+namespace ExpForge.Application.Handlers.Widget
 {
     public class RenameWidgetHandler : IRequestHandler<RenameWidgetCommand, bool>
     {

@@ -1,4 +1,4 @@
-﻿using ExpForge.Application.Commands;
+﻿using ExpForge.Application.Commands.Widget;
 using ExpForge.Application.Services.IServices;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ExpForge.CLI.Actions.Widget;
+namespace ExpForge.Presentation.Actions.Widget;
 
 [Command(Name = "New-Widget", Description = "Create Widget")]
 public class NewWidgetAction
@@ -40,7 +40,7 @@ public class NewWidgetAction
         TemplateName = GetTemplate(app);
         if (string.IsNullOrEmpty(TemplateName)) return;
 
-        await _mediator.Send(new CreateWidgetCommand(widgetName: WidgetName, templateName: TemplateName, templatePath: TemplatePath));
+        await _mediator.Send(new NewWidgetCommand(widgetName: WidgetName, templateName: TemplateName, templatePath: TemplatePath));
     }
 
 
@@ -85,7 +85,7 @@ public class NewWidgetAction
         return PromptTemplateSelection(templates, app);
     }
 
-    private string PromptTemplateSelection(IList<string> templates, CommandLineApplication app)
+    private string PromptTemplateSelection(List<string> templates, CommandLineApplication app)
     {
         app.Out.WriteLine("Choose a template:");
         for (int i = 0; i < templates.Count; i++)

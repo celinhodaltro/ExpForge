@@ -1,8 +1,8 @@
 ﻿using ExpForge.Application.Behaviors;
-using ExpForge.Application.Commands;
+using ExpForge.Application.Commands.Widget;
+using ExpForge.Application.Services;
 using ExpForge.Application.Services.IServices;
 using ExpForge.Infrastructure.Providers;
-using ExpForgeCli.Services;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -16,7 +16,7 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        var applicationAssembly = typeof(CreateWidgetCommand).Assembly;
+        var applicationAssembly = typeof(NewWidgetCommand).Assembly;
 
         services.AddValidatorsFromAssembly(applicationAssembly);
 
@@ -25,7 +25,7 @@ public static class ServiceCollectionExtensions
 
         // Providers e services
         services.AddScoped<ITemplatePathProvider, TemplatePathProvider>();
-        services.AddScoped<ICreateWidgetService, CreateWidgetService>();
+        services.AddScoped<ITemplateGeneratorService, TemplateGeneratorService>();
 
         // MediatR
         services.AddMediatR(cfg =>
