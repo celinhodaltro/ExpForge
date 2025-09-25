@@ -2,7 +2,7 @@
   "profiles": {
     "ExpForge.CLI": {
       "commandName": "Project",
-      "commandLineArgs": "New-Widget"
+      "commandLineArgs": "New-Component\r\n"
     }
   }
 }
