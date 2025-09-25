@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ExperienceWidget.Application\ExperienceWidget.Application.csproj" />
-    <ProjectReference Include="..\ExperienceWidget.Infrastructure\ExperienceWidget.Infrastructure.csproj" />
+    <ProjectReference Include="..\ExpForge.Application\ExpForge.Application.csproj" />
+    <ProjectReference Include="..\ExpForge.Infrastructure\ExpForge.Infrastructure.csproj" />
   </ItemGroup>
 
   <Target Name="PostPublishBuildNpm" AfterTargets="Publish" Condition="'$(GenerateNpm)' == 'true'">

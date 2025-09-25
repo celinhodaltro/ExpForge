@@ -15,15 +15,10 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Content Include="..\ExperienceWidget.CLI\Templates\**\*">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\ExperienceWidget.Application\ExperienceWidget.Application.csproj" />
-    <ProjectReference Include="..\..\src\ExperienceWidget.CLI\ExperienceWidget.CLI.csproj" />
+    <ProjectReference Include="..\..\src\ExpForge.Application\ExpForge.Application.csproj" />
+    <ProjectReference Include="..\..\src\ExpForge.CLI\ExpForge.Presentation.csproj" />
   </ItemGroup>
 
 
