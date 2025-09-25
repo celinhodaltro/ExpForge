@@ -17,7 +17,6 @@ namespace ExpForge.Application.Handlers
 
         public Task<bool> Handle(CreateWidgetCommand request, CancellationToken cancellationToken)
         {
-            string templatesPath;
 
             if (_service.Generate(request.WidgetName, request.TemplatePath, request.TemplateName))
             {
