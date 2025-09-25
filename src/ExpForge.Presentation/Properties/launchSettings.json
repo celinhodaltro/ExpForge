@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "ExpForge.CLI": {
+      "commandName": "Project",
+      "commandLineArgs": "New"
+    }
+  }
+}
