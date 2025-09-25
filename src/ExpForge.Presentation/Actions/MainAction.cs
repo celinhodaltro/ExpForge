@@ -8,6 +8,7 @@ namespace ExpForge.CLI.Actions;
 [Command(Name = "expforge", Description = "CLI Experience Widget Builder")]
 [VersionOptionFromMember("--version", MemberName = nameof(GetVersion))]
 [Subcommand(typeof(NewWidgetAction), typeof(RenameWidgetAction))]
+[Subcommand(typeof(NewComponentAction))]
 public class MainAction
 {
     public int OnExecute()
