@@ -1,0 +1,9 @@
+import { render, screen } from "@testing-library/react";
+import ComponentName from "./ComponentName";
+
+describe("ComponentName", () => {
+  it("should render component", () => {
+    render(<ComponentName />);
+    expect(screen.getByText("ComponentName")).toBeInTheDocument();
+  });
+});

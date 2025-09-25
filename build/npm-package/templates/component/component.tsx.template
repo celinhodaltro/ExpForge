@@ -1,0 +1,16 @@
+import React from "react";
+import styles from "./ComponentName.module.css";
+
+interface ComponentNameProps {
+  // Adicione props aqui se precisar
+}
+
+const ComponentName: React.FC<ComponentNameProps> = ({}) => {
+  return (
+    <div className={styles.container}>
+      <h1>ComponentName</h1>
+    </div>
+  );
+};
+
+export default ComponentName;
