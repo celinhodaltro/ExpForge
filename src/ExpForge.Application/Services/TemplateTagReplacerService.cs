@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace ExperienceWidgetCli.Services
+namespace ExpForgeCli.Services
 {
     public class TemplateTagReplacerService : ITemplateTagReplacerService
     {

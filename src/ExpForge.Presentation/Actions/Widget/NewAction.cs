@@ -1,5 +1,5 @@
-﻿using ExperienceWidget.Application.Commands;
-using ExperienceWidget.Application.Interfaces;
+﻿using ExpForge.Application.Commands;
+using ExpForge.Application.Interfaces;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ExperienceWidget.CLI.Actions.Widget;
+namespace ExpForge.CLI.Actions.Widget;
 
 [Command(Name = "New", Description = "Create Widget")]
 public class NewAction

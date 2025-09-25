@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "ExperienceWidget.CLI": {
+    "ExpForge.CLI": {
       "commandName": "Project",
       "commandLineArgs": "New"
     }

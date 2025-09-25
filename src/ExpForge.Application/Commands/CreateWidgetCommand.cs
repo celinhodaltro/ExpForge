@@ -1,7 +1,7 @@
 ﻿using MediatR;
 
 
-namespace ExperienceWidget.Application.Commands
+namespace ExpForge.Application.Commands
 {
     public class CreateWidgetCommand : IRequest<bool>
     {

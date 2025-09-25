@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\ExpForge.Application\ExpForge.Application.csproj" />
-    <ProjectReference Include="..\..\src\ExpForge.CLI\ExpForge.Presentation.csproj" />
+    <ProjectReference Include="..\..\src\ExpForge.Presentation\ExpForge.Presentation.csproj" />
   </ItemGroup>
 
 

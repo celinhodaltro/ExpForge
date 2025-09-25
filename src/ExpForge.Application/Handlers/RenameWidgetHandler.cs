@@ -1,6 +1,6 @@
-﻿using ExperienceWidget.Application.Commands;
-using ExperienceWidget.CLI.Services;
-using ExperienceWidgetCli.Services;
+﻿using ExpForge.Application.Commands;
+using ExpForge.CLI.Services;
+using ExpForgeCli.Services;
 using MediatR;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace ExperienceWidget.Application.Handlers
+namespace ExpForge.Application.Handlers
 {
     public class RenameWidgetHandler : IRequestHandler<RenameWidgetCommand, bool>
     {

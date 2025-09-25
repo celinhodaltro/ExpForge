@@ -1,8 +1,8 @@
-﻿using ExperienceWidget.Application.Interfaces;
-using ExperienceWidget.CLI.Services;
+﻿using ExpForge.Application.Interfaces;
+using ExpForge.CLI.Services;
 using System.Text.Json;
 
-namespace ExperienceWidgetCli.Services
+namespace ExpForgeCli.Services
 {
     public class RenameWidgetService : IRenameWidgetService
     {

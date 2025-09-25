@@ -1,10 +1,10 @@
-﻿using ExperienceWidget.Application.Behaviors;
-using ExperienceWidget.Application.Commands;
-using ExperienceWidget.Application.Interfaces;
-using ExperienceWidget.CLI.Actions;
-using ExperienceWidget.CLI.Services;
-using ExperienceWidget.Infrastructure.Providers;
-using ExperienceWidgetCli.Services;
+﻿using ExpForge.Application.Behaviors;
+using ExpForge.Application.Commands;
+using ExpForge.Application.Interfaces;
+using ExpForge.CLI.Actions;
+using ExpForge.CLI.Services;
+using ExpForge.Infrastructure.Providers;
+using ExpForgeCli.Services;
 using FluentValidation;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
@@ -47,7 +47,7 @@ class Program
             cfg.AddFilter("LuckyPennySoftware.MediatR.License", LogLevel.None);
         });
 
-        var applicationAssembly = typeof(ExperienceWidget.Application.Commands.CreateWidgetCommand).Assembly;
+        var applicationAssembly = typeof(ExpForge.Application.Commands.CreateWidgetCommand).Assembly;
         services.AddValidatorsFromAssembly(typeof(CreateWidgetCommand).Assembly);
 
         // pipeline behavior

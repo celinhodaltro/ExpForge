@@ -1,13 +1,13 @@
-﻿using ExperienceWidget.Application.Commands;
-using ExperienceWidget.CLI.Services;
-using ExperienceWidgetCli.Services;
+﻿using ExpForge.Application.Commands;
+using ExpForge.CLI.Services;
+using ExpForgeCli.Services;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace ExperienceWidget.CLI.Actions.Widget;
+namespace ExpForge.CLI.Actions.Widget;
 
 [Command(Name = "Rename", Description = "Rename Widget")]
 public class RenameAction

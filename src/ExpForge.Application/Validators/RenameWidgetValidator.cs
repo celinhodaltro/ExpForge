@@ -1,4 +1,4 @@
-﻿using ExperienceWidget.Application.Commands;
+﻿using ExpForge.Application.Commands;
 using FluentValidation;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExperienceWidget.Application.Validators
+namespace ExpForge.Application.Validators
 {
     public class RenameWidgetValidator : AbstractValidator<RenameWidgetCommand>
     {

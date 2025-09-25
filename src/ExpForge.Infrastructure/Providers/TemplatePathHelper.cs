@@ -1,8 +1,8 @@
-﻿using ExperienceWidget.Application.Interfaces;
+﻿using ExpForge.Application.Interfaces;
 using System;
 using System.IO;
 
-namespace ExperienceWidget.Infrastructure.Providers
+namespace ExpForge.Infrastructure.Providers
 {
     public class TemplatePathProvider : ITemplatePathProvider
     {

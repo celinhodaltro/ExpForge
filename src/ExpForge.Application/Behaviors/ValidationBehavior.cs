@@ -1,8 +1,8 @@
-﻿using ExperienceWidget.CLI.Services;
+﻿using ExpForge.CLI.Services;
 using FluentValidation;
 using MediatR;
 
-namespace ExperienceWidget.Application.Behaviors
+namespace ExpForge.Application.Behaviors
 {
     public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
         where TRequest : IRequest<TResponse>

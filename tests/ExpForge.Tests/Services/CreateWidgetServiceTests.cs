@@ -1,12 +1,8 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using Xunit;
-using ExperienceWidgetCli.Services;
-using ExperienceWidget.Infrastructure.Providers;
-using ExperienceWidget.Application.Interfaces;
+﻿using ExpForgeCli.Services;
+using ExpForge.Infrastructure.Providers;
+using ExpForge.Application.Interfaces;
 
-namespace ExperienceWidgetCli.Tests
+namespace ExpForge.Tests
 {
     public class CreateWidgetServiceTests : IDisposable
     {
@@ -22,7 +18,7 @@ namespace ExperienceWidgetCli.Tests
             _templatesPath = templatePathProvider.GetTemplatesPath();
 
             // Temp folder for widget generation
-            _tempRoot = Path.Combine(Path.GetTempPath(), "ExperienceWidgetCliTests_" + Guid.NewGuid());
+            _tempRoot = Path.Combine(Path.GetTempPath(), "ExpForgeCliTests_" + Guid.NewGuid());
             Directory.CreateDirectory(_tempRoot);
         }
 

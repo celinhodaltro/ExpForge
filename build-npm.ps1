@@ -1,6 +1,6 @@
 # Caminhos
 $Root = Split-Path -Parent $MyInvocation.MyCommand.Path
-$Project = "$Root\src\ExperienceWidget.CLI\ExperienceWidget.CLI.csproj"
+$Project = "$Root\src\ExpForge.CLI\ExpForge.CLI.csproj"
 $NpmRoot = "$Root\npm-package"
 $Dist = "$NpmRoot\dist"
 

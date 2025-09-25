@@ -1,10 +1,10 @@
 ﻿
-using ExperienceWidget.CLI.Services;
+using ExpForge.CLI.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace ExperienceWidgetCli.Services
+namespace ExpForgeCli.Services
 {
     public class CreateWidgetService : ICreateWidgetService
     {

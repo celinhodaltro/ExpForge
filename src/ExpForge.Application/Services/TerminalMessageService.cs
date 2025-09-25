@@ -1,5 +1,5 @@
 ﻿
-namespace ExperienceWidget.CLI.Services
+namespace ExpForge.CLI.Services
 {
     public enum MessageStatus
     {

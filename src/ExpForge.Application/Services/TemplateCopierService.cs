@@ -2,7 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 
-namespace ExperienceWidgetCli.Services
+namespace ExpForgeCli.Services
 {
     public class TemplateCopierService
     {

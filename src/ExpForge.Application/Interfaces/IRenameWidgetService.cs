@@ -1,4 +1,4 @@
-﻿namespace ExperienceWidget.Application.Interfaces
+﻿namespace ExpForge.Application.Interfaces
 {
     public interface IRenameWidgetService
     {
