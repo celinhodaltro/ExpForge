@@ -27,7 +27,7 @@ jobs:
         run: dotnet build --configuration Release --no-restore
 
       - name: Pack CLI tool
-        run: dotnet pack src/ExperienceWidget.CLI/ExperienceWidget.CLI.csproj -c Release --no-build
+        run: dotnet pack src/ExpForge.Presentation/ExpForge.Presentation.csproj -c Release --no-build
 
   test:
     runs-on: ubuntu-latest

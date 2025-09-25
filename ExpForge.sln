@@ -16,6 +16,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{380A7511-A354-6D7A-0CC0-8FA1F1BA7B6C}"
 	ProjectSection(SolutionItems) = preProject
 		build-npm.ps1 = build-npm.ps1
+		.github\workflows\CI.yml = .github\workflows\CI.yml
 		README.md = README.md
 	EndProjectSection
 EndProject
