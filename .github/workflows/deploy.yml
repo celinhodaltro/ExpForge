@@ -30,10 +30,6 @@ jobs:
           always-auth: true
           token: ${{ secrets.NPM_TOKEN }}
 
-      - name: Install dependencies
-        working-directory: ./build/npm-package
-        run: npm install || echo "No dependencies to install"
-
       - name: Build package
         working-directory: ./build/npm-package
         run: npm run build --if-present
