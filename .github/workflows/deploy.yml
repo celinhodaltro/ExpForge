@@ -26,15 +26,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          registry-url: 'https://registry.npmjs.org'
-          scope: '@${{ github.repository_owner }}'
+          registry-url: 'https://registry.npmjs.org' # Apenas npmjs.org aqui
 
-      - name: Configure npm for GitHub Packages
-        run: |
-          echo "@${{ github.repository_owner }}:registry=https://npm.pkg.github.com" >> ~/.npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
-
-      - name: Configure npm for npmjs
+      - name: Configure npm authentication
         run: |
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
 
@@ -45,6 +39,11 @@ jobs:
       - name: Publish to npm
         working-directory: ./build/npm-package
         run: npm publish --access public
+
+      - name: Configure npm for GitHub Packages
+        run: |
+          echo "@${{ github.repository_owner }}:registry=https://npm.pkg.github.com" >> ~/.npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
 
       - name: Publish to GitHub Packages
         working-directory: ./build/npm-package
