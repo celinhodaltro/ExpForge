@@ -1,7 +1,7 @@
 ﻿using MediatR;
 
 
-namespace ExpForge.Application.Commands
+namespace ExpForge.Application.Commands.Widget
 {
     public class RenameWidgetCommand : IRequest<bool>
     {

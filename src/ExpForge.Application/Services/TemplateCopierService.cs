@@ -1,10 +1,12 @@
-﻿namespace ExpForgeCli.Services
+﻿using ExpForge.Application.Services.Enums;
+
+namespace ExpForge.Application.Services
 {
     public class TemplateCopierService
     {
         private readonly TemplateTagReplacerService _replacer;
 
-        public TemplateCopierService(Dictionary<string, string> tags)
+        public TemplateCopierService(Dictionary<TemplateTag, string> tags)
         {
             _replacer = new TemplateTagReplacerService(tags);
         }

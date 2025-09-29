@@ -1,18 +1,19 @@
 ﻿using ExpForge.Application.Commands;
+using ExpForge.Application.Commands.Widget;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace ExpForge.CLI.Actions.Widget;
+namespace ExpForge.Presentation.Actions.Widget;
 
 [Command(Name = "Rename", Description = "Rename Widget")]
-public class RenameAction
+public class RenameWidgetAction
 {
     private readonly IMediator _mediator;
 
-    public RenameAction(IMediator mediator)
+    public RenameWidgetAction(IMediator mediator)
     {
         _mediator = mediator;
     }
@@ -23,9 +24,9 @@ public class RenameAction
     [Argument(1, Description = "Widget folder path (optional, will prompt if not provided)")]
     public string WidgetPath { get; set; }
 
-    public async Task OnExecuteAsync()
+    public async Task OnExecuteAsync(CommandLineApplication app)
     {
-        NewWidgetName = GetWidgetName();
+        NewWidgetName = GetWidgetName(app);
         if (string.IsNullOrWhiteSpace(NewWidgetName)) return;
 
         WidgetPath = GetWidgetPath();
@@ -35,19 +36,23 @@ public class RenameAction
         await _mediator.Send(renameWidgetCommand);
     }
 
-    private string GetWidgetName()
+    private string GetWidgetName(CommandLineApplication app)
     {
-        if (!string.IsNullOrWhiteSpace(NewWidgetName))
-            return NewWidgetName;
+        return app.GetValueOrPrompt(
+            currentValue: NewWidgetName,
+            promptMessage: "Enter the widget name:",
+            validateOrResolve: () =>
+            {
+                if (string.IsNullOrEmpty(WidgetPath) || !Directory.Exists(WidgetPath))
+                {
+                    app.Error.WriteLine("❌ 'templates' folder not found.");
+                    return null;
+                }
 
-        var input = Prompt.GetString("Enter the new widget name:");
-        if (string.IsNullOrWhiteSpace(input))
-        {
-            Console.Error.WriteLine("❌ Widget name cannot be empty.");
-            return null;
-        }
-
-        return input;
+                return !string.IsNullOrWhiteSpace(NewWidgetName) ? NewWidgetName : null;
+            },
+            errorMessageIfEmpty: "❌ Widget name cannot be empty."
+        );
     }
 
     private string GetWidgetPath()

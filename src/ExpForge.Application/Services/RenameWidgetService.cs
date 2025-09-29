@@ -1,4 +1,4 @@
-﻿using ExpForge.Application.Interfaces;
+﻿using ExpForge.Application.Services.IServices;
 using ExpForge.CLI.Services;
 using System.Text.Json;
 

@@ -1,4 +1,4 @@
-﻿using ExpForge.Application.Interfaces;
+﻿using ExpForge.Application.Services.IServices;
 
 namespace ExpForge.Infrastructure.Providers
 {
@@ -11,7 +11,7 @@ namespace ExpForge.Infrastructure.Providers
             var solutionRoot = Path.GetFullPath(
                 Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..")
             );
-            var devPath = Path.Combine(solutionRoot, "npm-package", "templates");
+            var devPath = Path.Combine(solutionRoot, "build", "npm-package", "templates");
 
             if (Directory.Exists(publishPath))
                 return publishPath;

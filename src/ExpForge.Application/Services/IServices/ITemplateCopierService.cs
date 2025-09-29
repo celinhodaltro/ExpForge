@@ -1,4 +1,4 @@
-﻿namespace experience_widget.Interfaces
+﻿namespace ExpForge.Application.Services.IServices
 {
     interface ITemplateCopierService
     {

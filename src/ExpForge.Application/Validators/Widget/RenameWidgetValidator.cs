@@ -1,7 +1,7 @@
-﻿using ExpForge.Application.Commands;
+﻿using ExpForge.Application.Commands.Widget;
 using FluentValidation;
 
-namespace ExpForge.Application.Validators
+namespace ExpForge.Application.Validators.Widget
 {
     public class RenameWidgetValidator : AbstractValidator<RenameWidgetCommand>
     {
@@ -22,7 +22,7 @@ namespace ExpForge.Application.Validators
                 .Must(path =>
                 {
                     var currentPath = Path.Combine(Directory.GetCurrentDirectory(), path);
-                    System.IO.Directory.Exists(currentPath);
+                    Directory.Exists(currentPath);
                     return true;
                 })
                 .WithMessage("The specified widget path does not exist.");
