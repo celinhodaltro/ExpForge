@@ -7,11 +7,11 @@ on:
 
 jobs:
   ci:
-    uses: ./.github/workflows/CI.yml
+    uses: ./.github/workflows/CI/CI.yml
 
   cd:
     needs: ci
-    uses: ./.github/workflows/CD.yml
+    uses: ./.github/workflows/CD/CD.yml
     with:
       version: ${{ github.sha }}
     secrets:
