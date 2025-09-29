@@ -36,13 +36,17 @@ jobs:
           echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
 
       - name: Install dependencies
+        working-directory: ./build/npm-package
         run: npm ci
 
       - name: Build package
+        working-directory: ./build/npm-package
         run: npm run build --if-present
 
       - name: Publish to npm
+        working-directory: ./build/npm-package
         run: npm publish --access public
 
       - name: Publish to GitHub Packages
+        working-directory: ./build/npm-package
         run: npm publish --registry=https://npm.pkg.github.com
