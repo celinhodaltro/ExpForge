@@ -22,15 +22,14 @@ jobs:
           name: npm-package
           path: ./build/npm-package
 
-      - name: Setup Node.js
+      - name: Setup Node.js and authenticate NPM
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          registry-url: 'https://registry.npmjs.org' # Apenas npmjs.org aqui
-
-      - name: Configure npm authentication
-        run: |
-          echo "//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}" >> ~/.npmrc
+          registry-url: 'https://registry.npmjs.org'
+          always-auth: true
+          cache: 'npm'
+          token: ${{ secrets.NPM_TOKEN }}
 
       - name: Build package
         working-directory: ./build/npm-package
