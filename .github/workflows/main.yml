@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+  workflow_dispatch:  # Adiciona gatilho manual
 
 jobs:
   build-and-test:
@@ -25,9 +26,19 @@ jobs:
 
       - name: Test
         run: dotnet test tests/ExpForge.Tests/ExpForge.Tests.csproj --configuration Debug
+      
+      - name: Publish NPM package artifacts
+        run: dotnet publish -c Release -p:GenerateNpm=true
 
-
+      - name: Upload NPM package artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: npm-package
+          path: ./build/npm-package
+ 
+ 
   deploy:
+    if: github.event_name == 'workflow_dispatch'  # Executa deploy apenas manualmente
     needs: build-and-test
     uses: ./.github/workflows/deploy.yml
     with:
