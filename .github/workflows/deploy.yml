@@ -1,5 +1,4 @@
-name: CD Pipeline
-
+name: deploy
 on:
   workflow_call:
     inputs:

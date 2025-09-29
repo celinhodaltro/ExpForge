@@ -6,7 +6,7 @@ on:
       - master
 
 jobs:
-  ci:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -26,9 +26,9 @@ jobs:
       - name: Test
         run: dotnet test --no-build --verbosity normal
 
-  cd:
-    needs: ci
-    uses: ./.github/workflows/CD.yml
+  deploy:
+    needs: build-and-test
+    uses: ./.github/workflows/deploy.yml
     with:
       version: ${{ github.sha }}
     secrets:
