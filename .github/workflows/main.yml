@@ -7,13 +7,13 @@ on:
 
 jobs:
   ci:
-    uses: ./.github/workflows/ci/ci.yml
+    uses: ./.github/workflows/CI.yml
 
   cd:
     needs: ci
-    uses: ./.github/workflows/cd/cd.yml
+    uses: ./.github/workflows/CD.yml
     with:
-      version: ${{ github.ref_name }}
+      version: ${{ github.sha }}
     secrets:
       NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
       GH_TOKEN: ${{ secrets.GH_TOKEN }}
