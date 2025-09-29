@@ -1,4 +1,5 @@
-﻿using ExpForge.Application.Services.IServices;
+﻿using ExpForge.Application.Commands.Component;
+using ExpForge.Application.Services.IServices;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
 using System.IO;
@@ -30,24 +31,30 @@ public class NewComponentAction
         ComponentName = GetComponentName(app);
         if (string.IsNullOrEmpty(ComponentName)) return;
 
+        await _mediator.Send(new NewComponentCommand(componentName: ComponentName, templatePath: TemplatePath));
+
     }
 
     private string GetComponentName(CommandLineApplication app)
     {
         return app.GetValueOrPrompt(
-            currentValue: TemplatePath,
+            currentValue: ComponentName,
             promptMessage: "Enter the component name:",
             validateOrResolve: () =>
             {
-                TemplatePath = _templatePathProvider.GetTemplatesPath();
-                if (string.IsNullOrEmpty(TemplatePath) || !Directory.Exists(TemplatePath))
+                if (string.IsNullOrEmpty(TemplatePath))
                 {
                     app.Error.WriteLine("❌ 'templates' folder not found.");
                     return null;
                 }
-                return TemplatePath;
+
+                if (!string.IsNullOrWhiteSpace(ComponentName))
+                    return ComponentName;
+
+                return null;
             });
     }
+
 
 
 }

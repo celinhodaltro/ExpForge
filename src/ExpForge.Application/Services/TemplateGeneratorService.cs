@@ -61,11 +61,6 @@ namespace ExpForge.Application.Services
             var templateCopier = new TemplateCopierService(tags);
             templateCopier.Copy(templateSelectedPath, outputPath);
 
-            TerminalMessageService.WriteLine(
-                $"{type} '{name}' generated successfully at '{outputPath}'.",
-                MessageStatus.Success
-            );
-
             return true;
         }
 

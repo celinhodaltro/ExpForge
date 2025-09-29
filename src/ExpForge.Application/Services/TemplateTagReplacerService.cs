@@ -28,18 +28,25 @@ namespace ExpForge.Application.Services
         }
 
         /// <summary>
-        /// Substitui tags dentro de um arquivo e salva no destino.
+        /// Substitui tags dentro de um arquivo e no nome do arquivo, salvando no destino.
         /// </summary>
         public void ReplaceTagsInFile(string sourceFile, string destinationFile)
         {
             var content = File.ReadAllText(sourceFile);
             content = ReplaceTags(content);
 
-            var destDir = Path.GetDirectoryName(destinationFile);
-            if (!string.IsNullOrEmpty(destDir) && !Directory.Exists(destDir))
-                Directory.CreateDirectory(destDir);
+            // Aplica tags também no nome do arquivo
+            var directory = Path.GetDirectoryName(destinationFile) ?? "";
+            var fileName = Path.GetFileName(destinationFile);
+            fileName = ReplaceTags(fileName); // substitui tags no nome
 
-            File.WriteAllText(destinationFile, content);
+            var finalPath = Path.Combine(directory, fileName);
+
+            if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
+                Directory.CreateDirectory(directory);
+
+            File.WriteAllText(finalPath, content);
         }
+
     }
 }

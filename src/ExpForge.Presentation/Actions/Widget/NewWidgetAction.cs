@@ -40,49 +40,59 @@ public class NewWidgetAction
         TemplateName = GetTemplate(app);
         if (string.IsNullOrEmpty(TemplateName)) return;
 
-        await _mediator.Send(new NewWidgetCommand(widgetName: WidgetName, templateName: TemplateName, templatePath: TemplatePath));
+        await _mediator.Send(new NewWidgetCommand(
+            widgetName: WidgetName,
+            templateName: TemplateName,
+            templatePath: TemplatePath
+        ));
     }
-
-
 
     private string GetWidgetName(CommandLineApplication app)
     {
-        if (!string.IsNullOrWhiteSpace(WidgetName))
-            return WidgetName;
+        return app.GetValueOrPrompt(
+            currentValue: WidgetName,
+            promptMessage: "Enter the widget name:",
+            validateOrResolve: () =>
+            {
+                if (string.IsNullOrEmpty(TemplatePath) || !Directory.Exists(TemplatePath))
+                {
+                    app.Error.WriteLine("❌ 'templates' folder not found.");
+                    return null;
+                }
 
-        var input = Prompt.GetString("Enter the widget name:");
-        if (string.IsNullOrWhiteSpace(input))
-        {
-            app.Error.WriteLine("❌ Widget name cannot be empty.");
-            return null;
-        }
-
-        return input;
+                return !string.IsNullOrWhiteSpace(WidgetName) ? WidgetName : null;
+            },
+            errorMessageIfEmpty: "❌ Widget name cannot be empty."
+        );
     }
-
 
     private string GetTemplate(CommandLineApplication app)
     {
-        if (!string.IsNullOrWhiteSpace(TemplateName))
-            return TemplateName;
+        return app.GetValueOrPrompt(
+            currentValue: TemplateName,
+            promptMessage: "Enter the template name:",
+            validateOrResolve: () =>
+            {
+                if (!Directory.Exists(TemplatePath))
+                {
+                    app.Error.WriteLine("❌ 'templates' folder not found.");
+                    return null;
+                }
 
-        if (!Directory.Exists(TemplatePath))
-        {
-            app.Error.WriteLine("❌ 'templates' folder not found.");
-            return null;
-        }
+                var templates = Directory.GetDirectories(TemplatePath)
+                                         .Select(Path.GetFileName)
+                                         .ToList();
 
-        var templates = Directory.GetDirectories(TemplatePath)
-                                 .Select(Path.GetFileName)
-                                 .ToList();
+                if (templates.Count == 0)
+                {
+                    app.Error.WriteLine("❌ No templates available.");
+                    return null;
+                }
 
-        if (templates.Count == 0)
-        {
-            app.Error.WriteLine("❌ No templates available.");
-            return null;
-        }
-
-        return PromptTemplateSelection(templates, app);
+                return PromptTemplateSelection(templates, app);
+            },
+            errorMessageIfEmpty: "❌ Template name cannot be empty."
+        );
     }
 
     private string PromptTemplateSelection(List<string> templates, CommandLineApplication app)
