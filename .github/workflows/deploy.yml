@@ -23,6 +23,7 @@ jobs:
           path: ./build/npm-package
 
       - name: Setup Node.js and authenticate NPM
+        working-directory: ./build/npm-package
         uses: actions/setup-node@v4
         with:
           node-version: '20'
