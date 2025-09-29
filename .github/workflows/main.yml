@@ -1,10 +1,12 @@
 name: Release Pipeline
 
 on:
+  pull_request:
+    branches:
+      - master
   push:
     branches:
       - master
-  workflow_dispatch:  # Adiciona gatilho manual
 
 jobs:
   build-and-test:
@@ -17,7 +19,7 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
-          
+
       - name: Install PowerShell
         run: sudo apt-get update && sudo apt-get install -y powershell
 
@@ -29,19 +31,20 @@ jobs:
 
       - name: Test
         run: dotnet test tests/ExpForge.Tests/ExpForge.Tests.csproj --configuration Debug
-      
+
       - name: Publish NPM package artifacts
+        if: github.event_name == 'push'
         run: dotnet publish -c Release -p:GenerateNpm=true
 
       - name: Upload NPM package artifacts
+        if: github.event_name == 'push'
         uses: actions/upload-artifact@v4
         with:
           name: npm-package
           path: ./build/npm-package
- 
- 
+
   deploy:
-    if: github.event_name == 'workflow_dispatch'  # Executa deploy apenas manualmente
+    if: github.event_name == 'push'
     needs: build-and-test
     uses: ./.github/workflows/deploy.yml
     with:
