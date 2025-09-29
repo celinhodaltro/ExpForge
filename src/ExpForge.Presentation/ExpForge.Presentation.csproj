@@ -20,9 +20,15 @@
     <ProjectReference Include="..\ExpForge.Application\ExpForge.Application.csproj" />
     <ProjectReference Include="..\ExpForge.Infrastructure\ExpForge.Infrastructure.csproj" />
   </ItemGroup>
-
+  
   <Target Name="PostPublishBuildNpm" AfterTargets="Publish" Condition="'$(GenerateNpm)' == 'true'">
-    <Exec Command="powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command &quot;&amp; '$(MSBuildThisFileDirectory)..\..\build\build-npm.ps1'&quot;" />
+    <!-- Windows -->
+    <Exec Condition="'$(OS)' == 'Windows_NT'"
+          Command="powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command &quot;&amp; '$(MSBuildThisFileDirectory)..\..\build\build-npm.ps1'&quot;" />
+
+    <!-- Linux / macOS -->
+    <Exec Condition="'$(OS)' != 'Windows_NT'"
+          Command="pwsh -NoProfile -NonInteractive -File $(MSBuildThisFileDirectory)/../../build/build-npm.ps1" />
   </Target>
 
 
