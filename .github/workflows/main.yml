@@ -11,7 +11,7 @@ jobs:
 
   cd:
     needs: ci
-    uses: ./.github/workflowsCD.yml
+    uses: ./.github/workflows/CD.yml
     with:
       version: ${{ github.sha }}
     secrets:
