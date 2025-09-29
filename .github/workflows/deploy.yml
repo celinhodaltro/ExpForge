@@ -22,9 +22,10 @@ jobs:
           name: npm-package
           path: ./build/npm-package
 
-      - name: Install package
-        working-directory: ./build/npm-package
-        run: npm install
+      - name: Fix permissions on Linux/macOS
+        run: |
+          chmod +x ./build/npm-package/bin/linux-x64/expforge || true
+          chmod +x ./build/npm-package/bin/osx-*/expforge || true
 
       - name: Setup Node.js and authenticate NPM
         uses: actions/setup-node@v4
@@ -32,8 +33,11 @@ jobs:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
           always-auth: true
-          cache: 'npm'
           token: ${{ secrets.NPM_TOKEN }}
+
+      - name: Install dependencies
+        working-directory: ./build/npm-package
+        run: npm install || echo "No dependencies to install"
 
       - name: Build package
         working-directory: ./build/npm-package
