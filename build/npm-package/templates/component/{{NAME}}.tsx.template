@@ -1,0 +1,16 @@
+import React from "react";
+import styles from "./{{NAME}}.module.css";
+
+interface {{NAME}}Props {
+
+}
+
+const {{NAME}}: React.FC<{{NAME}}Props> = ({}) => {
+  return (
+    <div className={styles.container}>
+      <h1>{{NAME}}</h1>
+    </div>
+  );
+};
+
+export default {{NAME}};
