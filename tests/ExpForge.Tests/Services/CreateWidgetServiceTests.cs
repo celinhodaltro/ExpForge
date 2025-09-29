@@ -1,6 +1,7 @@
 ﻿using ExpForgeCli.Services;
 using ExpForge.Infrastructure.Providers;
-using ExpForge.Application.Interfaces;
+using ExpForge.Application.Services;
+using ExpForge.Application.Services.Enums;
 
 namespace ExpForge.Tests
 {
@@ -26,10 +27,10 @@ namespace ExpForge.Tests
         public void Generate_WhenCalledWithEmptyTemplate_CreatesExpectedWidgetStructure()
         {
             // Arrange
-            var generator = new CreateWidgetService();
+            var generator = new TemplateGeneratorService();
 
             // Act
-            generator.Generate(_widgetName, templatePath: _templatesPath, templateName: "empty", outputRoot: _tempRoot);
+            generator.Generate(_widgetName, templatePath: _templatesPath, templateName: "empty", outputRoot: _tempRoot, type: TemplateType.Widget);
 
             // Assert
             Assert.True(Directory.Exists(_widgetPath), $"Widget folder was not created: {_widgetPath}");
