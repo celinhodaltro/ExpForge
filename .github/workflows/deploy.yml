@@ -22,11 +22,6 @@ jobs:
           name: npm-package
           path: ./build/npm-package
 
-      - name: Fix permissions on Linux/macOS
-        run: |
-          chmod +x ./build/npm-package/bin/linux-x64/expforge || true
-          chmod +x ./build/npm-package/bin/osx-*/expforge || true
-
       - name: Setup Node.js and authenticate NPM
         uses: actions/setup-node@v4
         with:
