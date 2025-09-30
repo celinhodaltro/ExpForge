@@ -7,14 +7,13 @@ let exePath;
 
 switch (os.platform()) {
   case 'win32':
-    exePath = path.join(__dirname, 'win-x64', 'ExperienceWidget.CLI.exe');
+        exePath = path.join(__dirname, 'win-x64', 'ExpForge.Presentation.exe');
     break;
   case 'linux':
-    exePath = path.join(__dirname, 'linux-x64', 'ExperienceWidget.CLI');
+        exePath = path.join(__dirname, 'linux-x64', 'ExpForge.Presentation');
     break;
   case 'darwin':
-    // Detecta arquitetura: Apple Silicon ou Intel
-    exePath = path.join(__dirname, os.arch() === 'arm64' ? 'osx-arm64' : 'osx-x64', 'ExperienceWidget.CLI');
+        exePath = path.join(__dirname, os.arch() === 'arm64' ? 'osx-arm64' : 'osx-x64', 'ExpForge.Presentation');
     break;
   default:
     console.error(`Unsupported platform: ${os.platform()}`);
