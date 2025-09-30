@@ -29,23 +29,45 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
           always-auth: true
 
+      - name: Check version difference
+        id: version-check
+        working-directory: ./build/npm-package
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "Current package.json version: $CURRENT_VERSION"
+
+          PUBLISHED_VERSION=$(npm view expforge version || echo "0.0.0")
+          echo "Latest published version: $PUBLISHED_VERSION"
+
+          if [ "$CURRENT_VERSION" = "$PUBLISHED_VERSION" ]; then
+            echo "Same version already published. Skipping publish."
+            echo "publish=false" >> $GITHUB_ENV
+          else
+            echo "New version detected. Proceeding with publish."
+            echo "publish=true" >> $GITHUB_ENV
+          fi
+
       - name: Build package
+        if: env.publish == 'true'
         working-directory: ./build/npm-package
         run: npm run build --if-present
 
       - name: Publish to npm
+        if: env.publish == 'true'
         working-directory: ./build/npm-package
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Rename package.json to GitHub Packages
+        if: env.publish == 'true'
         working-directory: ./build/npm-package
         run: |
           jq '.name = "@celinhodaltro/expforge"' package.json > package.tmp.json
           mv package.tmp.json package.json
 
       - name: Configure npm for GitHub Packages
+        if: env.publish == 'true'
         working-directory: ./build/npm-package
         run: |
           echo "@celinhodaltro:registry=https://npm.pkg.github.com" > .npmrc
@@ -54,12 +76,14 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Publish to GitHub Packages
+        if: env.publish == 'true'
         working-directory: ./build/npm-package
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Create GitHub Release
+        if: env.publish == 'true'
         uses: actions/create-release@v1
         with:
           tag_name: v${{ inputs.version }}
