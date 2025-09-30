@@ -49,6 +49,8 @@ jobs:
         run: |
           echo "@${{ github.repository_owner }}:registry=https://npm.pkg.github.com" >> ~/.npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Publish to GitHub Packages
         working-directory: ./build/npm-package
