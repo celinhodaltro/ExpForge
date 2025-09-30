@@ -28,7 +28,6 @@ jobs:
           node-version: '20'
           registry-url: 'https://registry.npmjs.org'
           always-auth: true
-          token: ${{ secrets.NPM_TOKEN }}
 
       - name: Build package
         working-directory: ./build/npm-package
@@ -37,6 +36,8 @@ jobs:
       - name: Publish to npm
         working-directory: ./build/npm-package
         run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Configure npm for GitHub Packages
         run: |
@@ -46,3 +47,5 @@ jobs:
       - name: Publish to GitHub Packages
         working-directory: ./build/npm-package
         run: npm publish --registry=https://npm.pkg.github.com
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN }}
