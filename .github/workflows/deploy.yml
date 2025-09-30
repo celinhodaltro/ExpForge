@@ -46,14 +46,15 @@ jobs:
           mv package.tmp.json package.json
 
       - name: Configure npm for GitHub Packages
+        working-directory: ./build/npm-package
         run: |
-          echo "@${{ github.repository_owner }}:registry=https://npm.pkg.github.com" >> ~/.npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> ~/.npmrc
+          echo "@celinhodaltro:registry=https://npm.pkg.github.com" > .npmrc
+          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> .npmrc
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Publish to GitHub Packages
         working-directory: ./build/npm-package
-        run: npm publish --registry=https://npm.pkg.github.com
+        run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN }}
