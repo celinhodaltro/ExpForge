@@ -31,7 +31,7 @@ expforge --help
 ### Exemplo de Saída:
 
 ```
-exo-forge Version: (1.0.10.0)
+expforge (version): (1.0.10.0)
 CLI Experience Widget Builder
 Usage: expforge [command] [options]
 Options:
