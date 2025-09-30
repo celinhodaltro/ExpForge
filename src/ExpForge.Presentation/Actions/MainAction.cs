@@ -21,6 +21,6 @@ public class MainAction
     public string GetVersion()
     {
         var version = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "...";
-        return $"exo-forge Version: ({version})";
+        return $"expforge (version): {version}";
     }
 }
