@@ -2,8 +2,7 @@
 
 ## Supported Versions
 
-Atualmente, apenas a versão mais recente recebe atualizações de segurança.  
-Caso encontre vulnerabilidades em versões anteriores, recomendamos atualizar para a versão suportada.
+Currently, only the latest version receives security updates. If you discover vulnerabilities in previous versions, we recommend updating to the supported version.
 
 | Version | Supported          |
 | ------- | ------------------ |
@@ -11,13 +10,11 @@ Caso encontre vulnerabilidades em versões anteriores, recomendamos atualizar pa
 
 ## Reporting a Vulnerability
 
-Se você identificar uma vulnerabilidade de segurança neste projeto, siga as instruções abaixo:
+If you identify a security vulnerability in this project, please follow the instructions below:
 
-- **Onde reportar:** Abra uma issue privada no GitHub (se possivel) ou envie um e-mail para: **[celinhodaltro@gmail.com]**  
-- **Tempo de resposta esperado:** Normalmente respondemos em até **7 dias úteis**.  
+* **Where to report:** Open a private issue on GitHub (if possible) or send an email to: **[[celinhodaltro@gmail.com](mailto:celinhodaltro@gmail.com)]**
+* **Expected response time:** We usually respond within **7 business days**.
 
+**Important:** Do not publicly disclose information about the vulnerability before we have had time to review it and release a fix.
 
-
- **Importante:** Não publique informações sobre a vulnerabilidade de forma pública antes de termos tempo para analisá-la e lançar uma correção. 
-
-Agradecemos a colaboração de todos que ajudam a manter o projeto seguro!  
+We appreciate the collaboration of everyone helping to keep the project secure!
