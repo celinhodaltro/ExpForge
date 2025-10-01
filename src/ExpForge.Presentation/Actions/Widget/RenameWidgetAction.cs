@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ExpForge.Presentation.Actions.Widget;
 
-[Command(Name = "Rename", Description = "Rename Widget")]
+[Command(Name = "Rename-Widget", Description = "Rename Widget")]
 public class RenameWidgetAction
 {
     private readonly IMediator _mediator;
