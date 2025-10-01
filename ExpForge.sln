@@ -14,19 +14,15 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpForge.Tests", "tests\ExpForge.Tests\ExpForge.Tests.csproj", "{B8B2435D-94C3-058D-ED1F-920B4F20E409}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{380A7511-A354-6D7A-0CC0-8FA1F1BA7B6C}"
-	ProjectSection(SolutionItems) = preProject
-		build\build-npm.ps1 = build\build-npm.ps1
-		README.md = README.md
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpForge.Infrastructure", "src\ExpForge.Infrastructure\ExpForge.Infrastructure.csproj", "{BAB970E0-7D7A-4182-B3D7-2E0D3852716D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "npm-package", "npm-package", "{A373B641-2ADB-4D65-BBDC-BE4CAD14DF51}"
+	ProjectSection(SolutionItems) = preProject
+		build\npm-package\README.md = build\npm-package\README.md
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dist", "dist", "{CFF43D08-E68B-491E-A106-0913A6365AAF}"
-	ProjectSection(SolutionItems) = preProject
-		build\npm-package\dist\launcher.js = build\npm-package\dist\launcher.js
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

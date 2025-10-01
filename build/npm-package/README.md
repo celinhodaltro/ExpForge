@@ -1,18 +1,18 @@
 # ExpForge CLI
 
-Uma CLI em **.NET 9.0**, construída seguindo os princípios de **Clean Architecture**, criada para auxiliar desenvolvedores de **widgets para Experience Builder**. Este projeto é **open source** e tem como objetivo simplificar a criação e manutenção de widgets, reduzindo trabalho manual e padronizando processos.
+A **.NET 9.0** CLI, built following **Clean Architecture** principles, designed to assist developers in creating **Experience Builder widgets**. This project is **open source** and aims to simplify widget creation and maintenance, reducing manual work and standardizing processes.
 
 ---
 
-## 🚀 Funcionalidades
+## 🚀 Features
 
-O ExpForge CLI oferece comandos para otimizar o desenvolvimento de widgets, permitindo a criação e renomeação de componentes de forma eficiente.
+ExpForge CLI provides commands to optimize widget development, allowing efficient creation and renaming of components.
 
 ---
 
-## 📥 Instalação
+## 📥 Installation
 
-O ExpForge CLI pode ser instalado globalmente via npm, tornando-o acessível a partir de qualquer diretório no seu terminal.
+ExpForge CLI can be installed globally via npm, making it accessible from any terminal directory:
 
 ```bash
 npm install -g expforge
@@ -20,15 +20,15 @@ npm install -g expforge
 
 ---
 
-## 💡 Como Usar
+## 💡 How to Use
 
-Após a instalação, você pode invocar o CLI usando o comando `expforge`. Para ver a lista de comandos disponíveis e opções gerais, utilize:
+After installation, invoke the CLI using the `expforge` command. To see the list of available commands and general options, run:
 
 ```bash
 expforge --help
 ```
 
-### Exemplo de Saída:
+### Example Output:
 
 ```
 expforge (version): (1.0.10.0)
@@ -46,33 +46,31 @@ Run 'expforge [command] -?|-h|--help' for more information about a command.
 
 ---
 
-## 📋 Comandos Disponíveis
+## 📋 Available Commands
 
 ### `New-Component`
 
-Cria um novo componente para sua widget.
+Creates a new component for your widget.
 
-**Uso:**
+**Usage:**
 
 ```bash
 expforge New-Component [options] <ComponentName>
 ```
 
-**Argumentos:**
+**Arguments:**
 
-| Argumento     | Descrição                                  | Obrigatório |
-| :------------ | :----------------------------------------- | :---------- |
-| `ComponentName` | Nome do componente (será solicitado se não for fornecido) | Não         |
+| Argument        | Description                                      | Required |
+| :-------------- | :----------------------------------------------- | :------- |
+| `ComponentName` | Name of the component (prompted if not provided) | No       |
 
-**Opções:**
+**Options:**
 
-| Opção        | Descrição              |
-| :----------- | :--------------------- |
-| `-?|-h|--help` | Mostra informações de ajuda. |
+| Option | Description |         |                        |
+| :----- | :---------- | ------- | ---------------------- |
+| `-?    | -h          | --help` | Shows help information |
 
-**Exemplo:**
-
-Para criar um novo componente chamado `MyNewComponent`:
+**Example:**
 
 ```bash
 expforge New-Component MyNewComponent
@@ -80,30 +78,28 @@ expforge New-Component MyNewComponent
 
 ### `New-Widget`
 
-Cria uma nova widget pronta para ser usada, baseada em um template.
+Creates a new widget ready to use, based on a template.
 
-**Uso:**
+**Usage:**
 
 ```bash
 expforge New-Widget [options] <WidgetName> <TemplateName>
 ```
 
-**Argumentos:**
+**Arguments:**
 
-| Argumento     | Descrição                                  | Obrigatório |
-| :------------ | :----------------------------------------- | :---------- |
-| `WidgetName`    | Nome da widget (será solicitado se não for fornecido) | Não         |
-| `TemplateName`  | Nome do template (será solicitado se não for fornecido) | Não         |
+| Argument       | Description                                   | Required |
+| :------------- | :-------------------------------------------- | :------- |
+| `WidgetName`   | Name of the widget (prompted if not provided) | No       |
+| `TemplateName` | Template name (prompted if not provided)      | No       |
 
-**Opções:**
+**Options:**
 
-| Opção        | Descrição              |
-| :----------- | :--------------------- |
-| `-?|-h|--help` | Mostra informações de ajuda. |
+| Option | Description |         |                        |
+| :----- | :---------- | ------- | ---------------------- |
+| `-?    | -h          | --help` | Shows help information |
 
-**Exemplo:**
-
-Para criar uma nova widget chamada `MyAwesomeWidget` usando o template `BasicTemplate`:
+**Example:**
 
 ```bash
 expforge New-Widget MyAwesomeWidget BasicTemplate
@@ -111,30 +107,28 @@ expforge New-Widget MyAwesomeWidget BasicTemplate
 
 ### `Rename`
 
-Renomeia uma widget existente e ajusta automaticamente o `manifest.json`.
+Renames an existing widget and automatically updates the `manifest.json`.
 
-**Uso:**
+**Usage:**
 
 ```bash
 expforge Rename [options] <NewWidgetName> <WidgetPath>
 ```
 
-**Argumentos:**
+**Arguments:**
 
-| Argumento       | Descrição                                  | Obrigatório |
-| :-------------- | :----------------------------------------- | :---------- |
-| `NewWidgetName` | Novo nome da widget (será solicitado se não for fornecido) | Não         |
-| `WidgetPath`    | Caminho da pasta da widget (será solicitado se não for fornecido) | Não         |
+| Argument        | Description                                          | Required |
+| :-------------- | :--------------------------------------------------- | :------- |
+| `NewWidgetName` | New name for the widget (prompted if not provided)   | No       |
+| `WidgetPath`    | Path to the widget folder (prompted if not provided) | No       |
 
-**Opções:**
+**Options:**
 
-| Opção        | Descrição              |
-| :----------- | :--------------------- |
-| `-?|-h|--help` | Mostra informações de ajuda. |
+| Option | Description |         |                        |
+| :----- | :---------- | ------- | ---------------------- |
+| `-?    | -h          | --help` | Shows help information |
 
-**Exemplo:**
-
-Para renomear uma widget localizada em `./widgets/OldWidgetName` para `NewWidgetName`:
+**Example:**
 
 ```bash
 expforge Rename NewWidgetName ./widgets/OldWidgetName
@@ -142,14 +136,13 @@ expforge Rename NewWidgetName ./widgets/OldWidgetName
 
 ---
 
-## 🔗 Links Úteis
+## 🔗 Useful Links
 
-*   [Repositório no GitHub](https://github.com/celinhodaltro/experience-widget)
-*   [Pacote no NPM](https://www.npmjs.com/package/expforge)
+* [GitHub Repository](https://github.com/celinhodaltro/experience-widget)
+* [NPM Package](https://www.npmjs.com/package/expforge)
 
 ---
 
-## 📞 Contato
+## 📞 Contact
 
-Para dúvidas, sugestões ou contribuições, por favor, utilize o sistema de issues do [repositório GitHub](https://github.com/celinhodaltro/experience-widget).
-
+For questions, suggestions, or contributions, please use the [GitHub issues](https://github.com/celinhodaltro/experience-widget) system.
