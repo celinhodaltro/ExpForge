@@ -1,14 +1,14 @@
 # Experience Widget CLI
 
-Uma CLI em **.NET 9.0**, construída seguindo os princípios de **Clean Architecture**, criada para auxiliar desenvolvedores de **widgets para Experience Builder**.  
+A **.NET 9.0** CLI, built following **Clean Architecture** principles, designed to assist developers in creating **Experience Builder widgets**.
 
-Este projeto é **open source** e tem como objetivo simplificar a criação e manutenção de widgets, reduzindo trabalho manual e padronizando processos.
+This project is **open source** and aims to simplify widget creation and maintenance, reducing manual work and standardizing processes.
 
 ---
 
-## 📦 Publicação
+## 📦 Publishing
 
-Para gerar os binários e preparar o pacote NPM:
+To generate binaries and prepare the NPM package:
 
 ```bash
 dotnet publish -c Release -p:GenerateNpm=true
@@ -16,21 +16,16 @@ dotnet publish -c Release -p:GenerateNpm=true
 
 ---
 
-## 📥 Instalação via NPM
+## 📥 Installation via NPM
 
-Você também pode baixar diretamente no [npm](https://www.npmjs.com/package/expforge):
+You can also download it directly from [npm](https://www.npmjs.com/package/expforge):
 
-
-
-📥 Instalação via NPM
-
-Você também pode baixar diretamente no npm
-:
 ```bash
 npm install -g expforge
 ```
 
-Após instalar, basta rodar:
+After installing, just run:
 
 ```bash
 expforge --help
+```
