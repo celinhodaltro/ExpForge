@@ -1,70 +1,77 @@
-# Contribuindo com o expforge
+# Contributing to ExpForge
 
-Obrigado por querer contribuir com o **expforge**! 🎉  
-Esse projeto é open source e qualquer contribuição é bem-vinda, desde correções simples até novas funcionalidades.  
+Thank you for wanting to contribute to **ExpForge**! 🎉
+This project is open source, and any contribution is welcome, from simple fixes to new features.
 
 ---
 
-## Como contribuir
+## How to Contribute
 
-1. **Faça um fork** do repositório para a sua conta.  
-2. **Clone o fork** para sua máquina local:  
+1. **Fork** the repository to your account.
+2. **Clone the fork** to your local machine:
+
    ```bash
-   git clone https://github.com/seu-usuario/expforge.git
+   git clone https://github.com/your-username/expforge.git
    ```
-3. Crie uma **branch** para a sua alteração:  
+3. Create a **branch** for your changes:
+
    ```bash
-   git checkout -b minha-feature
+   git checkout -b my-feature
    ```
-4. Instale as dependências e rode os testes:  
+4. Install dependencies and run tests:
+
    ```bash
    npm install
    npm test
    ```
-5. Faça suas alterações e **commits** seguindo boas práticas (mensagens curtas e claras).  
-6. Envie sua branch para o fork:  
+5. Make your changes and **commits** following best practices (short and clear messages).
+6. Push your branch to your fork:
+
    ```bash
-   git push origin minha-feature
+   git push origin my-feature
    ```
-7. Abra um **Pull Request (PR)** no repositório principal, explicando o que foi feito.  
+7. Open a **Pull Request (PR)** in the main repository, explaining what you have done.
 
 ---
 
-## Padrões de código e commits
+## Code and Commit Standards
 
-- Utilize mensagens de commit no formato:
-  - `feat: descrição da nova funcionalidade`
-  - `fix: correção de bug`
-  - `docs: ajustes na documentação`
-  - `chore: alterações de configuração`
-- Sempre rode os testes antes de abrir o PR.  
+* Use commit messages in the format:
 
----
-
-## Revisão de Pull Requests
-
-- Todos os PRs serão revisados.  
-- O PR pode ser **aprovado ou negado** conforme as diretrizes do projeto.  
-- Feedbacks serão dados quando necessário para ajustes.  
+  * `feat: description of the new feature`
+  * `fix: bug fix`
+  * `docs: documentation updates`
+  * `chore: configuration changes`
+* Always run tests before opening the PR.
 
 ---
 
-## Reportando problemas
+## Pull Request Review
 
-Se encontrar algum bug ou tiver sugestões:
-1. Verifique se já existe uma *issue* aberta.  
-2. Se não existir, crie uma nova *issue* com:
-   - Descrição clara do problema ou sugestão  
-   - Passos para reproduzir (se for bug)  
-   - Prints, logs ou exemplos, se possível  
+* All PRs will be reviewed.
+* The PR may be **approved or rejected** according to project guidelines.
+* Feedback will be given when adjustments are needed.
 
 ---
 
-## Código de conduta
+## Reporting Issues
 
-- Seja respeitoso com todos os colaboradores.  
-- Discussões são bem-vindas, ataques pessoais não.  
+If you encounter a bug or have suggestions:
+
+1. Check if an *issue* already exists.
+2. If not, create a new *issue* with:
+
+   * A clear description of the problem or suggestion
+   * Steps to reproduce (if it's a bug)
+   * Screenshots, logs, or examples, if possible
 
 ---
 
-✨ Obrigado por contribuir com o **expforge**!  
+## Code of Conduct
+
+* Be respectful to all contributors.
+* Discussions are welcome; personal attacks are not.
+
+---
+
+✨ Thank you for contributing to **ExpForge**!
