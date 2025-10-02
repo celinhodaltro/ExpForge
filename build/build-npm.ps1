@@ -45,7 +45,6 @@ foreach ($r in $runtimes) {
         -r $r `
         --self-contained true `
         -p:PublishSingleFile=true `
-        -p:GenerateNpm=true `
         -o $publishDir
 }
 
