@@ -2,6 +2,7 @@
 using ExpForge.Infrastructure.Providers;
 using ExpForge.Application.Services;
 using ExpForge.Application.Services.Enums;
+using static ExpForge.Application.Services.Enums.Template;
 
 namespace ExpForge.Tests
 {
