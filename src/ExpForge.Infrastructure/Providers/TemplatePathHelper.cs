@@ -6,7 +6,7 @@ namespace ExpForge.Infrastructure.Providers
     {
         public string GetTemplatesPath()
         {
-            var publishPath = Path.Combine(AppContext.BaseDirectory, "..", "templates");
+            var publishPath = Path.Combine(AppContext.BaseDirectory, "..", "..", "templates");
 
             var solutionRoot = Path.GetFullPath(
                 Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..")
