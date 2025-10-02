@@ -14,6 +14,8 @@ on:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    env:
+      PACKAGE_PATH: ./build/ExpForge.NpmPackage/package
 
     steps:
       - name: Download NPM package artifacts
@@ -49,26 +51,26 @@ jobs:
 
       - name: Build package
         if: env.publish == 'true'
-        working-directory: ./build/npm-package
+        working-directory: ${{ env.PACKAGE_PATH }}
         run: npm run build --if-present
 
       - name: Publish to npm
         if: env.publish == 'true'
-        working-directory: ./build/npm-package
+        working-directory: ${{ env.PACKAGE_PATH }}
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Rename package.json to GitHub Packages
         if: env.publish == 'true'
-        working-directory: ./build/npm-package
+        working-directory: ${{ env.PACKAGE_PATH }}
         run: |
           jq '.name = "@celinhodaltro/expforge"' package.json > package.tmp.json
           mv package.tmp.json package.json
 
       - name: Configure npm for GitHub Packages
         if: env.publish == 'true'
-        working-directory: ./build/npm-package
+        working-directory: ${{ env.PACKAGE_PATH }}
         run: |
           echo "@celinhodaltro:registry=https://npm.pkg.github.com" > .npmrc
           echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> .npmrc
@@ -77,7 +79,7 @@ jobs:
 
       - name: Publish to GitHub Packages
         if: env.publish == 'true'
-        working-directory: ./build/npm-package
+        working-directory: ${{ env.PACKAGE_PATH }}
         run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN }}
