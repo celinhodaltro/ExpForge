@@ -1,7 +1,7 @@
 # Caminhos
 $Root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Project = "$Root\..\src\ExpForge.Presentation\ExpForge.Presentation.csproj"
-$NpmRoot = "$Root\npm-package"
+$NpmRoot = "$Root\ExpForge.NpmPackage\package"
 $Dist = "$NpmRoot\dist"
 
 # Limpa dist, mantendo launch.js
@@ -25,11 +25,7 @@ if (-not $version) {
 
 Write-Host "Versão do CLI: $version"
 
-# Copia templates
-Write-Host "Copiando templates..."
-Copy-Item "$NpmRoot\templates" "$Dist\templates" -Recurse -Force
-
-# Atualiza package.json na raiz do npm-package
+# Atualiza package.json na raiz do ExpForge.NpmPackage
 $packageJsonPath = "$NpmRoot\package.json"
 $jsonText = Get-Content $packageJsonPath -Raw
 $jsonText = $jsonText -replace '"version":\s*".*"', "`"version`": `"$version`""

@@ -14,15 +14,21 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpForge.Tests", "tests\ExpForge.Tests\ExpForge.Tests.csproj", "{B8B2435D-94C3-058D-ED1F-920B4F20E409}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{380A7511-A354-6D7A-0CC0-8FA1F1BA7B6C}"
+	ProjectSection(SolutionItems) = preProject
+		build\build-npm.ps1 = build\build-npm.ps1
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpForge.Infrastructure", "src\ExpForge.Infrastructure\ExpForge.Infrastructure.csproj", "{BAB970E0-7D7A-4182-B3D7-2E0D3852716D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "npm-package", "npm-package", "{A373B641-2ADB-4D65-BBDC-BE4CAD14DF51}"
-	ProjectSection(SolutionItems) = preProject
-		build\npm-package\README.md = build\npm-package\README.md
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExpForge.NpmPackage", "build\ExpForge.NpmPackage\ExpForge.NpmPackage.csproj", "{9DE18FCC-C8E1-432C-9638-4009ACDCA53E}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dist", "dist", "{CFF43D08-E68B-491E-A106-0913A6365AAF}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "git", "git", "{EE787DBB-DE80-4D5C-8C14-2B4B2D23267B}"
+	ProjectSection(SolutionItems) = preProject
+		CONTRIBUTING.md = CONTRIBUTING.md
+		LICENSE = LICENSE
+		README.md = README.md
+		SECURITY.md = SECURITY.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -46,6 +52,10 @@ Global
 		{BAB970E0-7D7A-4182-B3D7-2E0D3852716D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BAB970E0-7D7A-4182-B3D7-2E0D3852716D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BAB970E0-7D7A-4182-B3D7-2E0D3852716D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DE18FCC-C8E1-432C-9638-4009ACDCA53E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DE18FCC-C8E1-432C-9638-4009ACDCA53E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DE18FCC-C8E1-432C-9638-4009ACDCA53E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DE18FCC-C8E1-432C-9638-4009ACDCA53E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -55,8 +65,7 @@ Global
 		{735105F9-C090-83CA-C3F3-F4B4AE03ED84} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{B8B2435D-94C3-058D-ED1F-920B4F20E409} = {CE0C1778-727D-4A5C-B893-971312C5BAF2}
 		{BAB970E0-7D7A-4182-B3D7-2E0D3852716D} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
-		{A373B641-2ADB-4D65-BBDC-BE4CAD14DF51} = {380A7511-A354-6D7A-0CC0-8FA1F1BA7B6C}
-		{CFF43D08-E68B-491E-A106-0913A6365AAF} = {A373B641-2ADB-4D65-BBDC-BE4CAD14DF51}
+		{9DE18FCC-C8E1-432C-9638-4009ACDCA53E} = {380A7511-A354-6D7A-0CC0-8FA1F1BA7B6C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {04ED5D81-A28D-4E8B-A2CB-45ACB439DB9A}
