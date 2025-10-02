@@ -363,9 +363,8 @@ MigrationBackup/
 FodyWeavers.xsd
 
 # Output Exe
-/build/ExpForge.NpmPackage/dist/linux-x64/*
-/build/ExpForge.NpmPackage/dist/osx-x64/*
-/build/ExpForge.NpmPackage/dist/win-x64/*
-
+/build/ExpForge.NpmPackage/dist/linux-x64/
+/build/ExpForge.NpmPackage/dist/osx-x64/
+/build/ExpForge.NpmPackage/dist/win-x64/
 
 
