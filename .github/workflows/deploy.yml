@@ -15,7 +15,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     env:
-      PACKAGE_PATH: /build/ExpForge.NpmPackage/package
+      PACKAGE_PATH: ./build/ExpForge.NpmPackage/package
 
     steps:
       - name: Download NPM package artifacts
