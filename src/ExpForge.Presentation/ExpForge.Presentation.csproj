@@ -7,14 +7,7 @@
     <ToolCommandName>expforge</ToolCommandName>
     <Version>1.0.17</Version>
     <Authors>João Marcelo Daltro Marques</Authors>
-
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="npm-package\**" />
-    <EmbeddedResource Remove="npm-package\**" />
-    <None Remove="npm-package\**" />
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ExpForge.Application\ExpForge.Application.csproj" />
