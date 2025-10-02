@@ -25,10 +25,6 @@ if (-not $version) {
 
 Write-Host "Versão do CLI: $version"
 
-# Copia templates
-Write-Host "Copiando templates..."
-Copy-Item "$NpmRoot\templates" "$Dist\templates" -Recurse -Force
-
 # Atualiza package.json na raiz do ExpForge.NpmPackage
 $packageJsonPath = "$NpmRoot\package.json"
 $jsonText = Get-Content $packageJsonPath -Raw
