@@ -1,7 +1,7 @@
 # Caminhos
 $Root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $Project = "$Root\..\src\ExpForge.Presentation\ExpForge.Presentation.csproj"
-$NpmRoot = "$Root\ExpForge.NpmPackage"
+$NpmRoot = "$Root\ExpForge.NpmPackage\package"
 $Dist = "$NpmRoot\dist"
 
 # Limpa dist, mantendo launch.js
