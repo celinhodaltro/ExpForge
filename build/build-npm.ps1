@@ -45,9 +45,9 @@ foreach ($r in $runtimes) {
         -r $r `
         --self-contained true `
         -p:PublishSingleFile=true `
-        -p:SkipNpmBuild=true `
+        -p:GenerateNpm=true `
         -o $publishDir
 }
 
-Write-Host "npm-package/dist gerado com sucesso!"
+Write-Host "$NpmRoot gerado com sucesso!"
 exit 0
