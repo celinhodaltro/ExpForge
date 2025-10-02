@@ -21,8 +21,8 @@ jobs:
       - name: Download NPM package artifacts
         uses: actions/download-artifact@v4
         with:
-          name: npm-package
-          path: ./build/npm-package
+          name: package
+          path: ${{ env.PACKAGE_PATH }}
 
       - name: Setup Node.js and authenticate NPM
         uses: actions/setup-node@v4
@@ -33,7 +33,7 @@ jobs:
 
       - name: Check version difference
         id: version-check
-        working-directory: ./build/npm-package
+        working-directory: ${{ env.PACKAGE_PATH }}
         run: |
           CURRENT_VERSION=$(node -p "require('./package.json').version")
           echo "Current package.json version: $CURRENT_VERSION"
