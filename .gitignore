@@ -361,8 +361,10 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
-/build/ExpForge.NpmPackage/dist/linux-x64
-/build/ExpForge.NpmPackage/dist/osx-x64
-/build/ExpForge.NpmPackage/dist/win-x64
+
+# Output Exe
+/build/ExpForge.NpmPackage/dist/linux-x64/
+/build/ExpForge.NpmPackage/dist/osx-x64/
+/build/ExpForge.NpmPackage/dist/win-x64/
 
 
