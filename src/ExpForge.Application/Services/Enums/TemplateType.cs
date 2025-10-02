@@ -1,7 +1,24 @@
 ﻿namespace ExpForge.Application.Services.Enums;
 
-public enum TemplateType
+public static class Template
 {
-    Widget,
-    Component
+    public enum TemplateType
+    {
+        Widget,
+        Component,
+        Net_GeoProcess
+    }
+
+    public static string ConvertTypeToFolderName(TemplateType templateType)
+    {
+        return templateType switch
+        {
+            TemplateType.Component => "components",
+            TemplateType.Widget => "custom-widgets",
+            TemplateType.Net_GeoProcess => "net-geoprocess",
+            _ => throw new ArgumentOutOfRangeException(nameof(templateType), templateType, null),
+        };
+        ;
+    }
+
 }
