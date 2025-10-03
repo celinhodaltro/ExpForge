@@ -1,6 +1,4 @@
-﻿using ExpForge.Application.Services.Enums;
-using static ExpForge.Application.Services.Enums.Template;
-
+﻿using ExpForge.Domain.Enums;
 namespace ExpForge.Application.Interfaces.Services
 {
     /// <summary>
