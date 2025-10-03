@@ -40,7 +40,7 @@ namespace ExpForge.Application.Behaviors
                 }
             }
 
-            return await next(); 
+            return await next(cancellationToken); 
         }
     }
 }
