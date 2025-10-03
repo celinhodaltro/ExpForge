@@ -1,7 +1,7 @@
 ﻿using ExpForge.Application.Interfaces.Services;
 using ExpForge.Domain.Enums;
 
-namespace ExpForge.Application.Services
+namespace ExpForge.Infrastructure.Services
 {
     public class TemplateTagReplacerService : ITemplateTagReplacerService
     {
