@@ -1,12 +1,20 @@
 ﻿using ExpForge.Application.Interfaces.Services;
-using ExpForge.Application.Services.Enums;
-using ExpForge.CLI.Services;
-using static ExpForge.Application.Services.Enums.Template;
+using ExpForge.Domain.Enums;
+using ExpForge.Domain.Extensions;
+using ExpForge.Infrastructure.Services;
 
 namespace ExpForge.Application.Services
 {
     public class TemplateGeneratorService : ITemplateGeneratorService
     {
+        private readonly ITerminalMessageService _terminalMessageService;
+
+        // Injeção via construtor
+        public TemplateGeneratorService(ITerminalMessageService terminalMessageService)
+        {
+            _terminalMessageService = terminalMessageService;
+        }
+
         public bool Generate(
             string name,
             string templatePath,
@@ -21,20 +29,19 @@ namespace ExpForge.Application.Services
 
             if (!Directory.Exists(templatePath))
             {
-                TerminalMessageService.WriteLine(
+                _terminalMessageService.WriteLine(
                     $"Error: The templates root path '{templatePath}' does not exist.",
                     MessageStatus.Error
                 );
                 return false;
             }
 
-            // 🔥 usa o tipo para resolver a pasta correta
-            var typeFolder = Template.ConvertTypeToFolderName(type);
+            var typeFolder = type.ConvertTypeToFolderName();
             var typePath = Path.Combine(templatePath, typeFolder);
 
             if (!Directory.Exists(typePath))
             {
-                TerminalMessageService.WriteLine(
+                _terminalMessageService.WriteLine(
                     $"Error: The template type '{typeFolder}' does not exist in {templatePath}.",
                     MessageStatus.Error
                 );
@@ -45,7 +52,7 @@ namespace ExpForge.Application.Services
 
             if (!Directory.Exists(templateSelectedPath))
             {
-                TerminalMessageService.WriteLine(
+                _terminalMessageService.WriteLine(
                     $"Error: The template '{templateName}' does not exist in {typePath}.",
                     MessageStatus.Error
                 );
@@ -57,7 +64,7 @@ namespace ExpForge.Application.Services
 
             if (Directory.Exists(outputPath))
             {
-                TerminalMessageService.WriteLine(
+                _terminalMessageService.WriteLine(
                     $"Error: {type} '{name}' already exists at '{outputPath}'.",
                     MessageStatus.Error
                 );
@@ -75,7 +82,7 @@ namespace ExpForge.Application.Services
             var templateCopier = new TemplateCopierService(tags);
             templateCopier.Copy(templateSelectedPath, outputPath);
 
-            TerminalMessageService.WriteLine(
+            _terminalMessageService.WriteLine(
                 $"{type} '{name}' generated successfully at '{outputPath}'.",
                 MessageStatus.Success
             );

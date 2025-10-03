@@ -1,4 +1,4 @@
-﻿using ExpForge.Application.Services.Enums;
+﻿using ExpForge.Domain.Enums;
 
 namespace ExpForge.Application.Services
 {

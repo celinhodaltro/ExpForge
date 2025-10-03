@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ExpForge.Application\ExpForge.Application.csproj" />
+    <ProjectReference Include="..\ExpForge.Domain\ExpForge.Domain.csproj" />
   </ItemGroup>
 
 </Project>

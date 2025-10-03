@@ -1,11 +1,18 @@
 ﻿using ExpForge.Application.Interfaces.Services;
-using ExpForge.CLI.Services;
+using ExpForge.Infrastructure.Services;
 using System.Text.Json;
 
 namespace ExpForgeCli.Services
 {
     public class RenameWidgetService : IRenameWidgetService
     {
+        private readonly ITerminalMessageService _terminalMessageService;
+
+        public RenameWidgetService(ITerminalMessageService terminalMessageService)
+        {
+            _terminalMessageService = terminalMessageService;
+        }
+
         public bool Rename(string currentWidgetPath, string newWidgetName)
         {
             currentWidgetPath = Path.Combine(Directory.GetCurrentDirectory(), currentWidgetPath);
@@ -26,13 +33,19 @@ namespace ExpForgeCli.Services
                 }
                 catch (Exception ex)
                 {
-                    TerminalMessageService.WriteLine($"Error updating manifest.json: {ex.Message}", MessageStatus.Error);
+                    _terminalMessageService.WriteLine(
+                        $"Error updating manifest.json: {ex.Message}",
+                        MessageStatus.Error
+                    );
                     return false;
                 }
             }
             else
             {
-                TerminalMessageService.WriteLine($"Warning: 'manifest.json' not found in '{currentWidgetPath}'.", MessageStatus.Warning);
+                _terminalMessageService.WriteLine(
+                    $"Warning: 'manifest.json' not found in '{currentWidgetPath}'.",
+                    MessageStatus.Warning
+                );
             }
 
             try
@@ -42,7 +55,10 @@ namespace ExpForgeCli.Services
 
                 if (Directory.Exists(newPath))
                 {
-                    TerminalMessageService.WriteLine($"Error: A folder named '{newWidgetName}' already exists.", MessageStatus.Error);
+                    _terminalMessageService.WriteLine(
+                        $"Error: A folder named '{newWidgetName}' already exists.",
+                        MessageStatus.Error
+                    );
                     return false;
                 }
                 Directory.Move(currentWidgetPath, newPath);
@@ -50,7 +66,10 @@ namespace ExpForgeCli.Services
             }
             catch (Exception ex)
             {
-                TerminalMessageService.WriteLine($"Error renaming widget folder: {ex.Message}", MessageStatus.Error);
+                _terminalMessageService.WriteLine(
+                    $"Error renaming widget folder: {ex.Message}",
+                    MessageStatus.Error
+                );
                 return false;
             }
         }
