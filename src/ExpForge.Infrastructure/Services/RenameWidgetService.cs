@@ -2,7 +2,7 @@
 using ExpForge.Domain.Enums;
 using System.Text.Json;
 
-namespace ExpForgeCli.Services
+namespace ExpForge.Infrastructure.Services
 {
     public class RenameWidgetService : IRenameWidgetService
     {
