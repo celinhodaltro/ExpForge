@@ -1,4 +1,5 @@
 ﻿
+using ExpForge.Domain.Enums;
 using ExpForge.Infrastructure.Services;
 using FluentValidation;
 using MediatR;

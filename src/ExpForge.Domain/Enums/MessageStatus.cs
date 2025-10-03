@@ -1,4 +1,6 @@
-﻿public enum MessageStatus
+﻿namespace ExpForge.Domain.Enums;
+
+public enum MessageStatus
 {
     Default,
     Success,
