@@ -9,22 +9,13 @@ public class TerminalMessageService : ITerminalMessageService
     {
         var originalColor = Console.ForegroundColor;
 
-        switch (status)
+        Console.ForegroundColor = status switch
         {
-            case MessageStatus.Success:
-                Console.ForegroundColor = ConsoleColor.Green;
-                break;
-            case MessageStatus.Warning:
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                break;
-            case MessageStatus.Error:
-                Console.ForegroundColor = ConsoleColor.Red;
-                break;
-            default:
-                Console.ForegroundColor = originalColor;
-                break;
-        }
-
+            MessageStatus.Success => ConsoleColor.Green,
+            MessageStatus.Warning => ConsoleColor.Yellow,
+            MessageStatus.Error => ConsoleColor.Red,
+            _ => originalColor,
+        };
         Console.Write(message);
         Console.ForegroundColor = originalColor;
     }
