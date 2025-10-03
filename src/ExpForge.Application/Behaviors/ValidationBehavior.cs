@@ -1,4 +1,6 @@
-﻿using ExpForge.CLI.Services;
+﻿
+using ExpForge.Application.Interfaces.Services;
+using ExpForge.Domain.Enums;
 using FluentValidation;
 using MediatR;
 
@@ -8,10 +10,11 @@ namespace ExpForge.Application.Behaviors
         where TRequest : IRequest<TResponse>
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
-
-        public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
+        private readonly ITerminalMessageService _terminalMessageService;
+        public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators, ITerminalMessageService terminalMessageService)
         {
             _validators = validators;
+            _terminalMessageService = terminalMessageService;
         }
 
         public async Task<TResponse> Handle(
@@ -32,12 +35,12 @@ namespace ExpForge.Application.Behaviors
 
                 if (failures.Count != 0)
                 {
-                    TerminalMessageService.WriteLine("Validation Errors:");
-                    TerminalMessageService.WriteLines(failures, MessageStatus.Error);
+                    _terminalMessageService.WriteLine("Validation Errors:");
+                    _terminalMessageService.WriteLines(failures, MessageStatus.Error);
                 }
             }
 
-            return await next(); 
+            return await next(cancellationToken); 
         }
     }
 }

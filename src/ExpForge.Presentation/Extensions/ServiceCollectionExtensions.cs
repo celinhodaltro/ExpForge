@@ -1,8 +1,9 @@
 ﻿using ExpForge.Application.Behaviors;
 using ExpForge.Application.Commands.Widget;
-using ExpForge.Application.Services;
-using ExpForge.Application.Services.IServices;
+using ExpForge.Application.Interfaces.Providers;
+using ExpForge.Application.Interfaces.Services;
 using ExpForge.Infrastructure.Providers;
+using ExpForge.Infrastructure.Services;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +27,7 @@ public static class ServiceCollectionExtensions
         // Providers e services
         services.AddScoped<ITemplatePathProvider, TemplatePathProvider>();
         services.AddScoped<ITemplateGeneratorService, TemplateGeneratorService>();
+        services.AddScoped<ITerminalMessageService, TerminalMessageService>();
 
         // MediatR
         services.AddMediatR(cfg =>

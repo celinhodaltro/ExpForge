@@ -1,27 +1,28 @@
 ﻿using ExpForge.Application.Commands.Widget;
-using ExpForge.Application.Services.IServices;
-using ExpForge.CLI.Services;
+using ExpForge.Application.Interfaces.Services;
+using ExpForge.Domain.Enums;
 using MediatR;
-using static ExpForge.Application.Services.Enums.Template;
 
 namespace ExpForge.Application.Handlers.Widget
 {
     public class NewWidgetHandler : IRequestHandler<NewWidgetCommand, bool>
     {
 
-        public NewWidgetHandler(ITemplateGeneratorService service)
+        public NewWidgetHandler(ITemplateGeneratorService templateGeneratorService, ITerminalMessageService terminalMessageService)
         {
-            _service = service;
+            _templateGeneratorService = templateGeneratorService;
+            _terminalMessageService = terminalMessageService;
         }
 
-        public readonly ITemplateGeneratorService _service;
+        public readonly ITemplateGeneratorService _templateGeneratorService;
+        public readonly ITerminalMessageService _terminalMessageService;
 
         public Task<bool> Handle(NewWidgetCommand request, CancellationToken cancellationToken)
         {
 
-            if (_service.Generate(request.WidgetName, request.TemplatePath, request.TemplateName, TemplateType.Widget))
+            if (_templateGeneratorService.Generate(request.WidgetName, request.TemplatePath, request.TemplateName, TemplateType.Widget))
             {
-                TerminalMessageService.WriteLine($"Widget '{request.WidgetName}' created successfully!", MessageStatus.Success);
+                _terminalMessageService.WriteLine($"Widget '{request.WidgetName}' created successfully!", MessageStatus.Success);
                 return Task.FromResult(true);
             }
 

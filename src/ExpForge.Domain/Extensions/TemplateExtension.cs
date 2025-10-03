@@ -1,15 +1,10 @@
-﻿namespace ExpForge.Application.Services.Enums;
+﻿using ExpForge.Domain.Enums;
 
-public static class Template
+namespace ExpForge.Domain.Extensions;
+
+public static class TemplateExtension
 {
-    public enum TemplateType
-    {
-        Widget,
-        Component,
-        Net_GeoProcess
-    }
-
-    public static string ConvertTypeToFolderName(TemplateType templateType)
+    public static string ConvertTypeToFolderName(this TemplateType templateType)
     {
         return templateType switch
         {

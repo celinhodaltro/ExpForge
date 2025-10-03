@@ -1,4 +1,4 @@
-﻿namespace ExpForge.Application.Services.Enums;
+﻿namespace ExpForge.Domain.Enums;
 public enum TemplateTag
 {
     NAME,

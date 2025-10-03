@@ -1,4 +1,6 @@
-﻿using ExpForge.CLI.Services;
+﻿using ExpForge.Application.Interfaces.Services;
+using ExpForge.Domain.Enums;
+using ExpForge.Infrastructure.Services;
 using ExpForge.Presentation.Actions;
 using ExpForge.Presentation.Extensions;
 using McMaster.Extensions.CommandLineUtils;
@@ -12,7 +14,10 @@ class Program
         var services = new ServiceCollection()
             .AddLoggingConfiguration()
             .AddApplicationServices()
+            .AddSingleton<ITerminalMessageService, TerminalMessageService>() // registrar o serviço
             .BuildServiceProvider();
+
+        var terminalService = services.GetRequiredService<ITerminalMessageService>();
 
         var app = new CommandLineApplication<MainAction>();
         app.Conventions
@@ -25,7 +30,10 @@ class Program
         }
         catch (UnrecognizedCommandParsingException)
         {
-            TerminalMessageService.WriteLine($"Error: Unrecognized command or argument:", MessageStatus.Error);
+            terminalService.WriteLine(
+                $"Error: Unrecognized command or argument:",
+                MessageStatus.Error
+            );
             return 1;
         }
     }

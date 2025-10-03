@@ -1,28 +1,28 @@
 ﻿using ExpForge.Application.Commands.Component;
-using ExpForge.Application.Commands.Widget;
-using ExpForge.Application.Services.IServices;
-using ExpForge.CLI.Services;
+using ExpForge.Application.Interfaces.Services;
+using ExpForge.Domain.Enums;
 using MediatR;
-using static ExpForge.Application.Services.Enums.Template;
 
 namespace ExpForge.Application.Handlers.Component
 {
     public class NewComponentHandler : IRequestHandler<NewComponentCommand, bool>
     {
 
-        public NewComponentHandler(ITemplateGeneratorService service)
+        public NewComponentHandler(ITemplateGeneratorService templateGeneratorService, ITerminalMessageService terminalMessageService)
         {
-            _service = service;
+            _templateGeneratorService = templateGeneratorService;
+            _terminalMessageService = terminalMessageService;
         }
 
-        public readonly ITemplateGeneratorService _service;
+        public readonly ITemplateGeneratorService _templateGeneratorService;
+        public readonly ITerminalMessageService _terminalMessageService;
 
         public Task<bool> Handle(NewComponentCommand request, CancellationToken cancellationToken)
         {
 
-            if (_service.Generate(request.ComponentName, request.TemplatePath, "component", TemplateType.Component))
+            if (_templateGeneratorService.Generate(request.ComponentName, request.TemplatePath, "component", TemplateType.Component))
             {
-                TerminalMessageService.WriteLine($"Component '{request.ComponentName}' created successfully!", MessageStatus.Success);
+                _terminalMessageService.WriteLine($"Component '{request.ComponentName}' created successfully!", MessageStatus.Success);
                 return Task.FromResult(true);
             }
 

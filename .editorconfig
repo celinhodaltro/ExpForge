@@ -1,0 +1,38 @@
+# EditorConfig para C# - Clean Architecture
+root = true
+
+# Define estilo global
+[*.{cs,vb}]
+charset = utf-8
+indent_style = space
+indent_size = 4
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+####################################
+# Regras de estilo e análise C#
+####################################
+
+# Regras de nomes
+dotnet_naming_rule.interface_should_start_with_i.severity = suggestion
+dotnet_naming_rule.interface_should_start_with_i.symbols = interfaces
+dotnet_naming_rule.interface_should_start_with_i.style = prefix_i
+
+dotnet_naming_symbols.interfaces.applicable_kinds = interface
+dotnet_naming_style.prefix_i.required_prefix = I
+
+# Desativa warnings do IDE que incomodam
+dotnet_diagnostic.IDE0130.severity = none       # Construtor primário
+
+# Qualidade de código
+dotnet_analyzer_diagnostic.category-Performance.severity = warning
+dotnet_analyzer_diagnostic.category-Style.severity = suggestion
+dotnet_analyzer_diagnostic.category-Naming.severity = suggestion
+
+####################################
+# C# files in test projects
+####################################
+[*.Tests/*.cs]
+dotnet_diagnostic.IDE0059.severity = none       # Ignora unused local vars nos testes
+dotnet_diagnostic.CA1707.severity = none       # Ignora _ nas funcoes de teste

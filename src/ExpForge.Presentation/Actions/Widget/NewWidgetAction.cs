@@ -1,8 +1,10 @@
 ﻿using ExpForge.Application.Commands.Widget;
-using ExpForge.Application.Services.IServices;
+using ExpForge.Application.Interfaces.Providers;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
+using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -94,8 +96,7 @@ public class NewWidgetAction
             errorMessageIfEmpty: "❌ Template name cannot be empty."
         );
     }
-
-    private string PromptTemplateSelection(List<string> templates, CommandLineApplication app)
+    private static string PromptTemplateSelection(List<string> templates, CommandLineApplication app)
     {
         app.Out.WriteLine("Choose a template:");
         for (int i = 0; i < templates.Count; i++)
@@ -104,12 +105,22 @@ public class NewWidgetAction
         }
 
         int choice = -1;
-        while (choice < 1 || choice > templates.Count)
+        while (true)
         {
             var input = Prompt.GetString("Enter the number of the template:");
-            int.TryParse(input, out choice);
+
+            if (int.TryParse(input, out choice) && choice >= 1 && choice <= templates.Count)
+            {
+                break;
+            }
+
+            var originalColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Red;
+            app.Out.WriteLine("Invalid choice. Please enter a valid number.");
+            Console.ForegroundColor = originalColor;
         }
 
         return templates[choice - 1];
     }
+
 }

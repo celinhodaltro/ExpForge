@@ -1,6 +1,6 @@
-﻿using ExpForge.Application.Services.Enums;
+﻿using ExpForge.Domain.Enums;
 
-namespace ExpForge.Application.Services
+namespace ExpForge.Infrastructure.Services
 {
     public class TemplateCopierService
     {
@@ -22,10 +22,8 @@ namespace ExpForge.Application.Services
             if (!Directory.Exists(sourcePath))
                 throw new DirectoryNotFoundException($"A pasta de origem '{sourcePath}' não existe.");
 
-            // Cria a pasta de destino se não existir
             Directory.CreateDirectory(destinationPath);
 
-            // Copia arquivos na raiz da pasta
             foreach (var file in Directory.GetFiles(sourcePath))
             {
                 var fileName = Path.GetFileName(file).Replace(".template", "");
