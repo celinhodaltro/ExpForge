@@ -1,8 +1,7 @@
-﻿using ExpForgeCli.Services;
+﻿
+using ExpForge.Domain.Enums;
 using ExpForge.Infrastructure.Providers;
-using ExpForge.Application.Services;
-using ExpForge.Application.Services.Enums;
-using static ExpForge.Application.Services.Enums.Template;
+using ExpForge.Infrastructure.Services;
 
 namespace ExpForge.Tests
 {
@@ -28,7 +27,8 @@ namespace ExpForge.Tests
         public void Generate_WhenCalledWithEmptyTemplate_CreatesExpectedWidgetStructure()
         {
             // Arrange
-            var generator = new TemplateGeneratorService();
+            var terminalMessageService = new TerminalMessageService();
+            var generator = new TemplateGeneratorService(terminalMessageService);
 
             // Act
             generator.Generate(_widgetName, templatePath: _templatesPath, templateName: "empty", outputRoot: _tempRoot, type: TemplateType.Widget);
