@@ -1,7 +1,7 @@
 ﻿using ExpForge.Application.Services.Enums;
 using static ExpForge.Application.Services.Enums.Template;
 
-namespace ExpForge.Application.Services.IServices
+namespace ExpForge.Application.Interfaces.Services
 {
     /// <summary>
     /// Interface para gerar widgets do ArcGIS Experience Builder.

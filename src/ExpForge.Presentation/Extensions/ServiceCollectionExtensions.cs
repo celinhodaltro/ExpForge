@@ -1,7 +1,8 @@
 ﻿using ExpForge.Application.Behaviors;
 using ExpForge.Application.Commands.Widget;
+using ExpForge.Application.Interfaces.Providers;
+using ExpForge.Application.Interfaces.Services;
 using ExpForge.Application.Services;
-using ExpForge.Application.Services.IServices;
 using ExpForge.Infrastructure.Providers;
 using FluentValidation;
 using MediatR;

@@ -1,5 +1,5 @@
-﻿using ExpForge.Application.Services.Enums;
-using ExpForge.Application.Services.IServices;
+﻿using ExpForge.Application.Interfaces.Services;
+using ExpForge.Application.Services.Enums;
 
 namespace ExpForge.Application.Services
 {

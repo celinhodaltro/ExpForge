@@ -1,5 +1,5 @@
 ﻿using ExpForge.Application.Commands.Widget;
-using ExpForge.Application.Services.IServices;
+using ExpForge.Application.Interfaces.Providers;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
 using System.Collections.Generic;

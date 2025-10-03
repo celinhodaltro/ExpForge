@@ -1,5 +1,5 @@
 ﻿using ExpForge.Application.Commands.Widget;
-using ExpForge.Application.Services.IServices;
+using ExpForge.Application.Interfaces.Services;
 using ExpForge.CLI.Services;
 using MediatR;
 using static ExpForge.Application.Services.Enums.Template;

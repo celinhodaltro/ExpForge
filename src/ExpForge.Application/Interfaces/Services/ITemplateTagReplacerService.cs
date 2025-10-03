@@ -1,4 +1,4 @@
-﻿namespace ExpForge.Application.Services.IServices
+﻿namespace ExpForge.Application.Interfaces.Services
 {
     public interface ITemplateTagReplacerService
     {

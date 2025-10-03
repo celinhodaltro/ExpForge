@@ -1,4 +1,4 @@
-﻿namespace ExpForge.Application.Services.IServices
+﻿namespace ExpForge.Application.Interfaces.Providers
 {
     public interface ITemplatePathProvider
     {
