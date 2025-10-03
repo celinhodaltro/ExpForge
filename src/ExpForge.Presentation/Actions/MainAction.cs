@@ -26,7 +26,7 @@ public class MainAction
         return 0;
     }
 
-    public string GetVersion()
+    public static string GetVersion()
     {
         var version = Assembly.GetExecutingAssembly().GetName().Version?.ToString() ?? "...";
         return $"expforge (version): {version}";

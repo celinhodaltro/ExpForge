@@ -2,7 +2,7 @@
 using ExpForge.Domain.Enums;
 using ExpForge.Domain.Extensions;
 
-namespace ExpForge.Application.Services
+namespace ExpForge.Infrastructure.Services
 {
     public class TemplateGeneratorService : ITemplateGeneratorService
     {
