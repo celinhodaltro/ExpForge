@@ -1,4 +1,4 @@
-﻿using ExpForge.CLI.Services;
+﻿using ExpForge.Infrastructure.Services;
 using ExpForge.Presentation.Actions.Components;
 using ExpForge.Presentation.Actions.Widget;
 using McMaster.Extensions.CommandLineUtils;
@@ -12,9 +12,16 @@ namespace ExpForge.Presentation.Actions;
 [Subcommand(typeof(NewComponentAction))]
 public class MainAction
 {
+    private readonly ITerminalMessageService _terminalMessageService;
+
+    public MainAction(ITerminalMessageService terminalMessageService)
+    {
+        _terminalMessageService = terminalMessageService;
+    }
+
     public int OnExecute()
     {
-        TerminalMessageService.WriteLine("Use --help to see the available commands", MessageStatus.Warning);
+        _terminalMessageService.WriteLine("Use --help to see the available commands", MessageStatus.Warning);
         return 0;
     }
 
