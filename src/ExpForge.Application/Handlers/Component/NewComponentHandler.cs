@@ -1,7 +1,6 @@
 ﻿using ExpForge.Application.Commands.Component;
 using ExpForge.Application.Interfaces.Services;
 using ExpForge.Domain.Enums;
-using ExpForge.Infrastructure.Services;
 using MediatR;
 
 namespace ExpForge.Application.Handlers.Component

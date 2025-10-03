@@ -1,6 +1,6 @@
 ﻿using ExpForge.Domain.Enums;
 
-namespace ExpForge.Infrastructure.Services
+namespace ExpForge.Application.Interfaces.Services
 {
     public interface ITerminalMessageService
     {
