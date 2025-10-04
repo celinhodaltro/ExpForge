@@ -1,0 +1,246 @@
+@page "/"
+@using ExpForge.BlazorDemo.Application.Interfaces
+@using ExpForge.BlazorDemo.Domain.Interfaces
+@inject IWidgetService WidgetService
+@inject ITemplateRepository TemplateRepository
+@inject IExpForgeService ExpForgeService
+@inject NavigationManager Navigation
+@rendermode InteractiveServer
+
+<PageTitle>ExpForge Demo - Blazor Integration</PageTitle>
+
+<div class="hero-section bg-primary text-white py-5 mb-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-4 fw-bold mb-3">
+                    <i class="bi bi-gear-fill"></i>
+                    ExpForge Demo
+                </h1>
+                <p class="lead mb-4">
+                    Demonstração da integração do ExpForge CLI com Blazor Server seguindo os princípios da Clean Architecture.
+                    Crie, gerencie e versione widgets e componentes de forma modular e eficiente.
+                </p>
+                <div class="d-flex gap-3">
+                    <button class="btn btn-light btn-lg" @onclick="NavigateToWidgets">
+                        <i class="bi bi-puzzle"></i>
+                        Gerenciar Widgets
+                    </button>
+                    <button class="btn btn-outline-light btn-lg" @onclick="NavigateToTemplates">
+                        <i class="bi bi-file-earmark-code"></i>
+                        Ver Templates
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-4 text-center">
+                <i class="bi bi-diagram-3 display-1"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row mb-5">
+        <div class="col-12">
+            <h2 class="h3 mb-4">
+                <i class="bi bi-speedometer2"></i>
+                Dashboard
+            </h2>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-md-3 mb-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="bi bi-puzzle text-primary display-4 mb-3"></i>
+                    <h5 class="card-title">@widgetCount</h5>
+                    <p class="card-text text-muted">Widgets Criados</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="bi bi-file-earmark-code text-success display-4 mb-3"></i>
+                    <h5 class="card-title">@templateCount</h5>
+                    <p class="card-text text-muted">Templates Disponíveis</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="bi bi-check-circle text-info display-4 mb-3"></i>
+                    <h5 class="card-title">@activeWidgetCount</h5>
+                    <p class="card-text text-muted">Widgets Ativos</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card text-center h-100">
+                <div class="card-body">
+                    <i class="bi bi-gear text-warning display-4 mb-3"></i>
+                    <h5 class="card-title">@expForgeVersion</h5>
+                    <p class="card-text text-muted">Versão ExpForge</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mb-5">
+        <div class="col-lg-8">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-info-circle"></i>
+                        Sobre o ExpForge
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p>
+                        O <strong>ExpForge</strong> é uma ferramenta CLI desenvolvida em .NET 9.0 que segue os princípios da Clean Architecture.
+                        Foi projetada para auxiliar desenvolvedores na criação de widgets para Experience Builder, simplificando o processo
+                        de desenvolvimento e padronizando as práticas.
+                    </p>
+                    <h6>Principais Características:</h6>
+                    <ul>
+                        <li><strong>Clean Architecture:</strong> Separação clara de responsabilidades</li>
+                        <li><strong>Templates Modulares:</strong> Suporte a múltiplos tipos de componentes</li>
+                        <li><strong>Versionamento:</strong> Controle de versões dos widgets criados</li>
+                        <li><strong>Configuração Flexível:</strong> Parâmetros personalizáveis por template</li>
+                        <li><strong>Integração Blazor:</strong> Interface web para gerenciamento</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-rocket"></i>
+                        Ações Rápidas
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" @onclick="NavigateToWidgets">
+                            <i class="bi bi-plus-circle"></i>
+                            Criar Novo Widget
+                        </button>
+                        <button class="btn btn-outline-secondary" @onclick="NavigateToTemplates">
+                            <i class="bi bi-eye"></i>
+                            Explorar Templates
+                        </button>
+                        <button class="btn btn-outline-info" @onclick="ShowDocumentation">
+                            <i class="bi bi-book"></i>
+                            Ver Documentação
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">
+                        <i class="bi bi-layers"></i>
+                        Arquitetura do Projeto
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-3 mb-3">
+                            <div class="p-3 border rounded">
+                                <i class="bi bi-globe text-primary display-6 mb-2"></i>
+                                <h6>Presentation</h6>
+                                <small class="text-muted">Blazor Web UI</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="p-3 border rounded">
+                                <i class="bi bi-cpu text-success display-6 mb-2"></i>
+                                <h6>Application</h6>
+                                <small class="text-muted">Business Logic</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="p-3 border rounded">
+                                <i class="bi bi-database text-warning display-6 mb-2"></i>
+                                <h6>Infrastructure</h6>
+                                <small class="text-muted">Data & Services</small>
+                            </div>
+                        </div>
+                        <div class="col-md-3 mb-3">
+                            <div class="p-3 border rounded">
+                                <i class="bi bi-box text-info display-6 mb-2"></i>
+                                <h6>Domain</h6>
+                                <small class="text-muted">Core Entities</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private int widgetCount = 0;
+    private int templateCount = 0;
+    private int activeWidgetCount = 0;
+    private string expForgeVersion = "Carregando...";
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadDashboardData();
+    }
+
+    private async Task LoadDashboardData()
+    {
+        try
+        {
+            // Carregar estatísticas dos widgets
+            var widgets = await WidgetService.GetAllAsync();
+            widgetCount = widgets.Count();
+            activeWidgetCount = widgets.Count(w => w.IsActive);
+
+            // Carregar estatísticas dos templates
+            var templates = await TemplateRepository.GetAllAsync();
+            templateCount = templates.Count();
+
+            // Obter versão do ExpForge
+            try
+            {
+                expForgeVersion = await ExpForgeService.GetVersionAsync();
+            }
+            catch
+            {
+                expForgeVersion = "N/A";
+            }
+        }
+        catch (Exception)
+        {
+            // Em caso de erro, manter valores padrão
+        }
+    }
+
+    private void NavigateToWidgets()
+    {
+        Navigation.NavigateTo("/widgets");
+    }
+
+    private void NavigateToTemplates()
+    {
+        Navigation.NavigateTo("/templates");
+    }
+
+    private void ShowDocumentation()
+    {
+        // TODO: Implementar navegação para documentação
+        Navigation.NavigateTo("/documentation");
+    }
+}

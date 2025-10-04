@@ -1,10 +1,14 @@
 using ExpForge.BlazorDemo.Web.Components;
+using ExpForge.BlazorDemo.Web.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+// Add application services
+builder.Services.AddApplicationServices();
 
 var app = builder.Build();
 

@@ -1,0 +1,250 @@
+@page "/templates"
+@using ExpForge.BlazorDemo.Application.DTOs
+@using ExpForge.BlazorDemo.Domain.Interfaces
+@using ExpForge.BlazorDemo.Domain.Enums
+@inject ITemplateRepository TemplateRepository
+@inject IJSRuntime JSRuntime
+@rendermode InteractiveServer
+
+<PageTitle>Templates - ExpForge Demo</PageTitle>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h2">
+                    <i class="bi bi-file-earmark-code"></i>
+                    Templates Disponíveis
+                </h1>
+                <div class="btn-group">
+                    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        <i class="bi bi-funnel"></i>
+                        Filtrar por Tipo
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#" @onclick="() => FilterByType(null)">Todos</a></li>
+                        @foreach (var type in Enum.GetValues<TemplateType>())
+                        {
+                            <li><a class="dropdown-item" href="#" @onclick="() => FilterByType(type)">@GetTypeDisplayName(type)</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+
+            @if (isLoading)
+            {
+                <div class="text-center">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Carregando...</span>
+                    </div>
+                </div>
+            }
+            else if (filteredTemplates.Any())
+            {
+                <div class="row">
+                    @foreach (var template in filteredTemplates)
+                    {
+                        <div class="col-md-6 col-lg-4 mb-4">
+                            <div class="card h-100">
+                                <div class="card-header">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <h5 class="card-title mb-0">@template.Name</h5>
+                                        <span class="badge @GetTypeBadgeClass(template.Type)">
+                                            @GetTypeDisplayName(template.Type)
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">@template.Description</p>
+                                    <div class="mb-2">
+                                        <small class="text-muted">
+                                            <i class="bi bi-tag"></i>
+                                            Versão: @template.Version
+                                        </small>
+                                    </div>
+                                    <div class="mb-2">
+                                        <small class="text-muted">
+                                            <i class="bi bi-calendar"></i>
+                                            Criado: @template.CreatedAt.ToString("dd/MM/yyyy")
+                                        </small>
+                                    </div>
+                                    @if (template.Parameters.Any())
+                                    {
+                                        <div class="mb-3">
+                                            <small class="text-muted">
+                                                <i class="bi bi-gear"></i>
+                                                @template.Parameters.Count parâmetro(s) configurável(is)
+                                            </small>
+                                        </div>
+                                    }
+                                </div>
+                                <div class="card-footer">
+                                    <div class="btn-group w-100" role="group">
+                                        <button class="btn btn-outline-primary btn-sm" @onclick="() => ViewTemplate(template.Id)">
+                                            <i class="bi bi-eye"></i>
+                                            Ver Código
+                                        </button>
+                                        <button class="btn btn-primary btn-sm" @onclick="() => UseTemplate(template.Id)">
+                                            <i class="bi bi-plus-circle"></i>
+                                            Usar Template
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="text-center py-5">
+                    <i class="bi bi-file-earmark-code display-1 text-muted"></i>
+                    <h3 class="text-muted">Nenhum template encontrado</h3>
+                    <p class="text-muted">
+                        @if (selectedType.HasValue)
+                        {
+                            <text>Nenhum template do tipo "@GetTypeDisplayName(selectedType.Value)" foi encontrado.</text>
+                        }
+                        else
+                        {
+                            <text>Nenhum template está disponível no momento.</text>
+                        }
+                    </p>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Modal para visualizar código do template -->
+<div class="modal fade" id="templateModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">@selectedTemplate?.Name</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                @if (selectedTemplate != null)
+                {
+                    <div class="mb-3">
+                        <strong>Descrição:</strong> @selectedTemplate.Description
+                    </div>
+                    <div class="mb-3">
+                        <strong>Tipo:</strong> @GetTypeDisplayName(selectedTemplate.Type)
+                    </div>
+                    @if (selectedTemplate.Parameters.Any())
+                    {
+                        <div class="mb-3">
+                            <strong>Parâmetros:</strong>
+                            <ul class="list-unstyled ms-3">
+                                @foreach (var param in selectedTemplate.Parameters)
+                                {
+                                    <li><code>@param.Key</code>: @param.Value</li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                    <div class="mb-3">
+                        <strong>Código do Template:</strong>
+                        <pre class="bg-light p-3 rounded"><code>@selectedTemplate.Content</code></pre>
+                    </div>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" @onclick="() => UseTemplate(selectedTemplate?.Id ?? Guid.Empty)">
+                    <i class="bi bi-plus-circle"></i>
+                    Usar Este Template
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private List<ExpForge.BlazorDemo.Domain.Entities.Template> templates = new();
+    private List<ExpForge.BlazorDemo.Domain.Entities.Template> filteredTemplates = new();
+    private ExpForge.BlazorDemo.Domain.Entities.Template? selectedTemplate;
+    private TemplateType? selectedType;
+    private bool isLoading = true;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTemplates();
+    }
+
+    private async Task LoadTemplates()
+    {
+        isLoading = true;
+        try
+        {
+            var result = await TemplateRepository.GetAllAsync();
+            templates = result.ToList();
+            filteredTemplates = templates;
+        }
+        catch (Exception ex)
+        {
+            await JSRuntime.InvokeVoidAsync("alert", $"Erro ao carregar templates: {ex.Message}");
+        }
+        finally
+        {
+            isLoading = false;
+        }
+    }
+
+    private async Task FilterByType(TemplateType? type)
+    {
+        selectedType = type;
+        if (type.HasValue)
+        {
+            filteredTemplates = templates.Where(t => t.Type == type.Value).ToList();
+        }
+        else
+        {
+            filteredTemplates = templates;
+        }
+        StateHasChanged();
+    }
+
+    private async Task ViewTemplate(Guid templateId)
+    {
+        selectedTemplate = templates.FirstOrDefault(t => t.Id == templateId);
+        if (selectedTemplate != null)
+        {
+            await JSRuntime.InvokeVoidAsync("bootstrap.Modal.getOrCreateInstance", "#templateModal").InvokeVoidAsync("show");
+        }
+    }
+
+    private async Task UseTemplate(Guid templateId)
+    {
+        // TODO: Redirecionar para página de criação de widget com template selecionado
+        await JSRuntime.InvokeVoidAsync("alert", $"Redirecionando para criação de widget com template: {templateId}");
+    }
+
+    private string GetTypeDisplayName(TemplateType type)
+    {
+        return type switch
+        {
+            TemplateType.BlazorComponent => "Componente Blazor",
+            TemplateType.JavaScriptWidget => "Widget JavaScript",
+            TemplateType.ReactComponent => "Componente React",
+            TemplateType.VueComponent => "Componente Vue",
+            TemplateType.GenericHtml => "HTML Genérico",
+            _ => type.ToString()
+        };
+    }
+
+    private string GetTypeBadgeClass(TemplateType type)
+    {
+        return type switch
+        {
+            TemplateType.BlazorComponent => "bg-primary",
+            TemplateType.JavaScriptWidget => "bg-warning",
+            TemplateType.ReactComponent => "bg-info",
+            TemplateType.VueComponent => "bg-success",
+            TemplateType.GenericHtml => "bg-secondary",
+            _ => "bg-dark"
+        };
+    }
+}
