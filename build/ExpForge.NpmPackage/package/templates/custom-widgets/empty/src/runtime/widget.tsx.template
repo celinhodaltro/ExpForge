@@ -22,7 +22,7 @@ export default class Widget extends React.PureComponent<AllWidgetProps<any>, Sta
   render() {
     return (
       <div>
-        <h3>{{WIDGET_NAME}}</h3>
+        <h3>{{WIDGETNAME}}</h3>
         <JimuMapViewComponent
           useMapWidgetId={this.props.useMapWidgetIds?.[0]}
           onActiveViewChange={this.onActiveViewChange}
