@@ -1,4 +1,4 @@
-﻿using ExpForge.Application.Commands.Component;
+using ExpForge.Application.Commands.Component;
 using ExpForge.Application.Interfaces.Services;
 using ExpForge.Domain.Enums;
 using MediatR;
@@ -20,7 +20,7 @@ namespace ExpForge.Application.Handlers.Component
         public Task<bool> Handle(NewComponentCommand request, CancellationToken cancellationToken)
         {
 
-            if (_templateGeneratorService.Generate(request.ComponentName, request.TemplatePath, "component", TemplateType.Component))
+            if (_templateGeneratorService.Generate(request.ComponentName, request.TemplatePath, "empty", TemplateType.Component))
             {
                 _terminalMessageService.WriteLine($"Component '{request.ComponentName}' created successfully!", MessageStatus.Success);
                 return Task.FromResult(true);
