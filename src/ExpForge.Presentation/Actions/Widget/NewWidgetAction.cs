@@ -1,5 +1,7 @@
-﻿using ExpForge.Application.Commands.Widget;
+using ExpForge.Application.Commands.Widget;
 using ExpForge.Application.Interfaces.Providers;
+using ExpForge.Domain.Enums;
+using ExpForge.Domain.Extensions;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
 using System;
@@ -81,7 +83,9 @@ public class NewWidgetAction
                     return null;
                 }
 
-                var templates = Directory.GetDirectories(TemplatePath)
+                var widgetTemplatePath = Path.Combine(TemplatePath, TemplateType.Widget.ConvertTypeToFolderName());
+
+                var templates = Directory.GetDirectories(widgetTemplatePath)
                                          .Select(Path.GetFileName)
                                          .ToList();
 
