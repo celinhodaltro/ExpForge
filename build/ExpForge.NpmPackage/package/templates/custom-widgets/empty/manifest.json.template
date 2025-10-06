@@ -1,6 +1,6 @@
 ﻿{
-  "name": "{{WIDGET_NAME}}",
-  "label": "{{WIDGET_NAME}}",
+  "name": "{{WIDGETNAME}}",
+  "label": "{{WIDGETNAME}}",
   "platform": "EXB",
   "version": "1.0.0",
   "author": "{{AUTHOR}}"
