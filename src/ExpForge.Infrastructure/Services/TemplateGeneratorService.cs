@@ -1,6 +1,7 @@
 using ExpForge.Application.Interfaces.Services;
 using ExpForge.Domain.Enums;
 using ExpForge.Domain.Extensions;
+using MediatR;
 
 namespace ExpForge.Infrastructure.Services
 {
@@ -91,6 +92,12 @@ namespace ExpForge.Infrastructure.Services
                 );
                 return false;
             }
+
+            if (tags is null)
+            {
+                tags = new Dictionary<TemplateTag, string>();
+            }
+
 
             var templateCopier = new TemplateCopierService(tags);
             templateCopier.Copy(templateSelectedPath, outputPath);
