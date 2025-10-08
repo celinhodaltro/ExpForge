@@ -1,33 +1,31 @@
 using System.IO;
 
-namespace ExpForge.Domain.Extensions;
-public static class FileExtension
+namespace ExpForge.Domain.Extensions
 {
-    public static void FlattenFolder(string rootPath)
+    public static class FileExtension
     {
-        if (!Directory.Exists(rootPath))
-            return;
-
-        foreach (var subDir in Directory.GetDirectories(rootPath, "*", SearchOption.AllDirectories))
+        public static void FlattenFolder(string rootPath)
         {
-            foreach (var file in Directory.GetFiles(subDir))
-            {
-                var fileName = Path.GetFileName(file);
-                var destFile = Path.Combine(rootPath, fileName);
+            if (!Directory.Exists(rootPath))
+                return;
 
-                int counter = 1;
-                while (File.Exists(destFile))
+            foreach (var subDir in Directory.GetDirectories(rootPath, "*", SearchOption.AllDirectories))
+            {
+                foreach (var file in Directory.GetFiles(subDir))
                 {
-                    var nameWithoutExt = Path.GetFileNameWithoutExtension(fileName);
-                    var ext = Path.GetExtension(fileName);
-                    destFile = Path.Combine(rootPath, $"{nameWithoutExt}_{counter}{ext}");
-                    counter++;
+                    var fileName = Path.GetFileName(file);
+                    var destFile = Path.Combine(rootPath, fileName);
+
+                    if (File.Exists(destFile))
+                    {
+                        File.Delete(destFile);
+                    }
+
+                    File.Move(file, destFile);
                 }
 
-                File.Move(file, destFile);
+                Directory.Delete(subDir, true);
             }
-
-            Directory.Delete(subDir, true); 
         }
     }
 }

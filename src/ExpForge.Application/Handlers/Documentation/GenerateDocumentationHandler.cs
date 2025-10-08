@@ -36,33 +36,8 @@ namespace ExpForge.Application.Handlers.Component
                 var outputName = cmd.Title.Replace(" ", "_");
 
                 // Monta uma tabela HTML simples com os parâmetros
-                var parametersTable = string.Join("",
-                    cmd.Parameters?.Any() == true
-                        ? new[]
-                        {
-                            @"
-          <MudText Typo=""Typo.h6"" Class=""mt-3"">Parameters:</MudText>
-          
-          <MudTable Dense=""true"" Hover=""true"">
-              <HeaderContent>
-                  <MudTh>Name</MudTh>
-                  <MudTh>Type</MudTh>
-                  <MudTh>Description</MudTh>
-              </HeaderContent>
-              <RowTemplate> 
-                  " + string.Join("\n", cmd.Parameters.Select(p =>
-                      $"\n" +
-                      $"                  <MudTr>\n" +
-                      $"                    <MudTd>{p.Name}</MudTd>\n" +
-                      $"                    <MudTd>{p.Type}</MudTd>\n" +
-                      $"                    <MudTd>{p.Description}</MudTd>\n" +
-                      $"                  </MudTr>"
-                  )) + @"
-              </RowTemplate>
-          </MudTable>"
-                        }
-                        : Array.Empty<string>()
-                );
+                var parametersTable = DocumentationExtensions.ToHtmlTable(cmd.Parameters);
+
 
                 var tags = new Dictionary<TemplateTag, string>
                 {
