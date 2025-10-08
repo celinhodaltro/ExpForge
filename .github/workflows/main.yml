@@ -136,7 +136,7 @@ jobs:
   # =========================
   generate-docs:
     runs-on: ubuntu-latest
-    needs: deploy
+    needs: build
     if: github.event_name == 'push'
     steps:
       - name: Checkout Documentation repository
