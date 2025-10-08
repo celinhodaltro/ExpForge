@@ -1,4 +1,4 @@
-﻿{
+{
   "name": "expforge",
   "version": "1.0.17",
   "bin": {
@@ -9,7 +9,7 @@
     "templates/"
   ],
   "scripts": {
-    "postinstall": "npx chmod +x ./bin/linux-x64/expforge ./bin/osx-*/expforge || echo 'Windows, skipping chmod'"
+    "postinstall": "npx chmod +x ./dist/linux-x64/ExpForge.Presentation ./dist/osx-*/ExpForge.Presentation || echo 'Windows, skipping chmod'"
   },
   "os": [
     "darwin",
