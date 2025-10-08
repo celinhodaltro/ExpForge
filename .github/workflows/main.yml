@@ -172,15 +172,18 @@ jobs:
           git add src/ExpForge.Documentation.Presentation/Pages/Docs/Commands
           git commit -m "Update commands documentation from release $GITHUB_SHA" || echo "No changes to commit"
       
-          # Garante que main existe localmente
-          git fetch origin main:main
+          # Garante que a branch principal existe localmente (substitua master pelo nome correto)
+          git fetch origin master:master
       
           # Push da branch
           git push origin update-commands-$GITHUB_SHA
       
           # Cria PR
           gh pr create \
-              --title "Update commands documentation" \
-              --body "Automatically generated documentation update from ExpForge" \
-              --base main \
-              --head update-commands-$GITHUB_SHA
+            --title "Update commands documentation" \
+            --body "Automatically generated documentation update from ExpForge" \
+            --base master \
+            --head update-commands-$GITHUB_SHA
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+
