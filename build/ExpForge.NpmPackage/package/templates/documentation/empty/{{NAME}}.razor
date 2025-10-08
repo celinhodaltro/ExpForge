@@ -1,29 +1,40 @@
-﻿@using MudBlazor
-@using System.Collections.Generic
+﻿@page "/Docs/Commands/{{NAME}}/"
 
-<MudContainer MaxWidth="MaxWidth.Large" Class="pa-4">
-    <MudText Typo="Typo.h4" Align="Align.Center">
-        {{NAME}} - CLI Command Documentation
+<MudContainer MaxWidth="MaxWidth.Large" Class="pa-6">
+
+    <!-- Título do comando -->
+    <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-2">
+        {{NAME}}
     </MudText>
-    <MudDivider Class="my-4" />
+    <MudDivider Class="mb-4" />
 
-    <MudText Typo="Typo.subtitle2" Color="Color.Secondary">
-        Author: {{AUTHOR}}
-    </MudText>
-    <MudText Typo="Typo.subtitle2" Color="Color.Secondary">
-        Date: {{DATE}}
-    </MudText>
+    <!-- Autor e data -->
+    <MudStack Direction="Row" Justify="SpaceBetween" AlignItems="Center" Class="mb-4">
+        <MudText Typo="Typo.subtitle2" Color="Color.Secondary">
+            Author: {{AUTHOR}}
+        </MudText>
+        <MudText Typo="Typo.subtitle2" Color="Color.Secondary">
+            Date: {{DATE}}
+        </MudText>
+    </MudStack>
 
-    <MudPaper Elevation="3" Class="pa-4 mt-4">
-        <MudText Typo="Typo.h6">Command Title:</MudText>
-        <MudText Typo="Typo.body1">{{WIDGETNAME}}</MudText>
+    <!-- Card do comando -->
+    <MudPaper Elevation="3" Class="pa-6">
 
-        <MudText Typo="Typo.h6" Class="mt-3">Description:</MudText>
-        <MudText Typo="Typo.body2">
+        <!-- Título do widget -->
+        <MudText Typo="Typo.h6" Class="mb-1">Command Title</MudText>
+        <MudText Typo="Typo.body1" Class="mb-3">
+            {{WIDGETNAME}}
+        </MudText>
+
+        <!-- Descrição -->
+        <MudText Typo="Typo.h6" Class="mb-1">Description</MudText>
+        <MudText Typo="Typo.body2" Class="mb-4" Style="white-space: pre-line;">
             {{DESCRIPTION}}
         </MudText>
 
+        <!-- Parâmetros -->
         {{PARAMETERS}}
-
+        
     </MudPaper>
 </MudContainer>

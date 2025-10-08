@@ -30,7 +30,8 @@ public class GenerateDocumentationAction
         var assembly = Assembly.GetExecutingAssembly();
 
         var commands = assembly.GetTypes()
-            .Where(t => t.GetCustomAttribute<CommandAttribute>() != null)
+            .Where(t => t.GetCustomAttribute<CommandAttribute>() != null
+                        && t.Name != "ExpForgeAction") 
             .Select(t =>
             {
                 var attr = t.GetCustomAttribute<CommandAttribute>();
@@ -54,6 +55,8 @@ public class GenerateDocumentationAction
                 return new GenerateDocumentationCommand.CommandInfo(title, description, parameters);
             })
             .ToList();
+
+
 
         _terminalMessageService.WriteLine($"{commands.Count} comandos encontrados.");
         await _mediator.Send(new GenerateDocumentationCommand(commands));
