@@ -5,7 +5,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>expforge</ToolCommandName>
-    <Version>1.0.26-rc4</Version>
+    <Version>1.0.27-rc1</Version>
     <Authors>João Marcelo Daltro Marques</Authors>
   </PropertyGroup>
 
@@ -13,6 +13,7 @@
     <ProjectReference Include="..\ExpForge.Application\ExpForge.Application.csproj" />
     <ProjectReference Include="..\ExpForge.Infrastructure\ExpForge.Infrastructure.csproj" />
   </ItemGroup>
+  
   
   <Target Name="PostPublishBuildNpm" AfterTargets="Publish" Condition="'$(GenerateNpm)' == 'true'">
     <!-- Windows -->
