@@ -4,7 +4,7 @@
     <OutputType>Exe</OutputType>
     <TargetFramework>net9.0</TargetFramework>
     <PackAsTool>true</PackAsTool>
-    <ToolCommandName>expforge</ToolCommandName>
+    <ToolCommandName>ExpForge</ToolCommandName>
     <Version>1.0.20</Version>
     <Authors>João Marcelo Daltro Marques</Authors>
   </PropertyGroup>
@@ -16,12 +16,10 @@
   
   <Target Name="PostPublishBuildNpm" AfterTargets="Publish" Condition="'$(GenerateNpm)' == 'true'">
     <!-- Windows -->
-    <Exec Condition="'$(OS)' == 'Windows_NT'"
-          Command="powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command &quot;&amp; '$(MSBuildThisFileDirectory)..\..\build\build-npm.ps1'&quot;" />
+    <Exec Condition="'$(OS)' == 'Windows_NT'" Command="powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command &quot;&amp; '$(MSBuildThisFileDirectory)..\..\build\build-npm.ps1'&quot;" />
 
     <!-- Linux / macOS -->
-    <Exec Condition="'$(OS)' != 'Windows_NT'"
-          Command="pwsh -NoProfile -NonInteractive -File $(MSBuildThisFileDirectory)/../../build/build-npm.ps1" />
+    <Exec Condition="'$(OS)' != 'Windows_NT'" Command="pwsh -NoProfile -NonInteractive -File $(MSBuildThisFileDirectory)/../../build/build-npm.ps1" />
   </Target>
 
 

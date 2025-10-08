@@ -1,4 +1,4 @@
-﻿using ExpForge.Application.Interfaces.Services;
+using ExpForge.Application.Interfaces.Services;
 using ExpForge.Domain.Enums;
 using ExpForge.Presentation.Actions.Components;
 using ExpForge.Presentation.Actions.Widget;
@@ -7,10 +7,11 @@ using System.Reflection;
 
 namespace ExpForge.Presentation.Actions;
 
-[Command(Name = "expforge", Description = "CLI Experience Widget Builder")]
+[Command(Name = "ExpForge", Description = "CLI Experience Widget Builder")]
 [VersionOptionFromMember("--version", MemberName = nameof(GetVersion))]
 [Subcommand(typeof(NewWidgetAction), typeof(RenameWidgetAction))]
 [Subcommand(typeof(NewComponentAction))]
+[Subcommand(typeof(GenerateDocumentationAction))]
 public class MainAction
 {
     private readonly ITerminalMessageService _terminalMessageService;

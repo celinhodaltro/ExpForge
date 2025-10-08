@@ -1,9 +1,10 @@
-﻿namespace ExpForge.Domain.Enums;
+namespace ExpForge.Domain.Enums;
 
 public enum TemplateType
 {
     Widget,
     Component,
-    Net_GeoProcess
+    Net_GeoProcess,
+    ComandDocumentation_InBlazor
 }
 
