@@ -147,10 +147,10 @@ jobs:
               path: ExpForgeDocumentation
 
       - name: Install ExpForge
-        run: npm install -g ExpForge
+        run: npm install -g expforge
 
       - name: Run Generate-Documentation
-        run: ExpForge Generate-Documentation 
+        run: expforge Generate-Documentation 
 
       - name: Copy generated commands to Docs
         run: |
