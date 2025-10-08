@@ -142,9 +142,9 @@ jobs:
       - name: Checkout Documentation repository
         uses: actions/checkout@v4
         with:
-          repository: celinhodaltro/ExpForge.Documentation
-          token: ${{ secrets.GH_TOKEN }}
-          path: ExpForgeDocumentation
+              repository: celinhodaltro/ExpForge.Documentation
+              token: ${{ secrets.GH_TOKEN }}
+              path: ExpForgeDocumentation
 
       - name: Install ExpForge
         run: npm install -g ExpForge
@@ -158,13 +158,21 @@ jobs:
           rm -rf $DEST/*
           cp -r ./CommandsTemp/* $DEST
 
-      - name: Commit and push changes
+      - name: Commit changes
         run: |
-          cd ExpForgeDocumentation
-          git config user.name "github-actions"
-          git config user.email "github-actions@github.com"
-          git add src/ExpForge.Documentation.Presentation/Pages/Docs/Commands
-          git commit -m "Update commands documentation from release $GITHUB_SHA" || echo "No changes to commit"
-          git push
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+            cd ExpForgeDocumentation
+            git config user.name "github-actions"
+            git config user.email "github-actions@github.com"
+            git checkout -b update-commands-$GITHUB_SHA
+            git add src/ExpForge.Documentation.Presentation/Pages/Docs/Commands
+            git commit -m "Update commands documentation from release $GITHUB_SHA" || echo "No changes to commit"
+            git push origin update-commands-$GITHUB_SHA
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v5
+        with:
+            token: ${{ secrets.GH_TOKEN }}
+            branch: update-commands-${{ github.sha }}
+            base: main
+            title: "Update commands documentation"
+            body: "Automatically generated documentation update from ExpForge"
