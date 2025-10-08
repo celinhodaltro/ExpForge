@@ -146,18 +146,11 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           path: ExpForgeDocumentation
 
-      - name: Setup .NET
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '9.0.x'
-
-      - name: Restore ExpForge solution
-        run: dotnet restore
+      - name: Install ExpForge
+        run: npm install -g ExpForge
 
       - name: Run Generate-Documentation
-        run: |
-          dotnet tool restore
-          dotnet ExpForge.dll Generate-Documentation --output ./CommandsTemp
+        run: ExpForge Generate-Documentation --output ./CommandsTemp
 
       - name: Copy generated commands to Docs
         run: |
