@@ -9,7 +9,7 @@
     <MudDivider Class="mb-4" />
 
     <!-- Autor e data -->
-    <MudStack Direction="Row" Justify="SpaceBetween" AlignItems="Center" Class="mb-4">
+    <MudStack Direction="Row" Justify="Justify.SpaceBetween" AlignItems="AlignItems.Center" Class="mb-4">
         <MudText Typo="Typo.subtitle2" Color="Color.Secondary">
             Author: {{AUTHOR}}
         </MudText>
