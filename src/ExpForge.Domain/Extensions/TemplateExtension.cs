@@ -11,7 +11,7 @@ public static class TemplateExtension
             TemplateType.Component => "components",
             TemplateType.Widget => "custom-widgets",
             TemplateType.Net_GeoProcess => "net-geoprocess",
-            TemplateType.ComandDocumentation_InBlazor => "Documentation",
+            TemplateType.ComandDocumentation_InBlazor => "documentation",
             _ => throw new ArgumentOutOfRangeException(nameof(templateType), templateType, null),
         };
         ;

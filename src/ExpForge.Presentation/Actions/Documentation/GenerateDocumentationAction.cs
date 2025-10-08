@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace ExpForge.Presentation.Actions;
 
-[Command(Name = "Generate-Documentation", Description = "Gera documentação Blazor automaticamente via MediatR")]
+[Command(Name = "Generate-Documentation", Description = "Gera documentação em Blazor (Output: Commands)")]
 public class GenerateDocumentationAction
 {
     private readonly IMediator _mediator;
