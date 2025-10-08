@@ -1,0 +1,29 @@
+﻿@using MudBlazor
+@using System.Collections.Generic
+
+<MudContainer MaxWidth="MaxWidth.Large" Class="pa-4">
+    <MudText Typo="Typo.h4" Align="Align.Center">
+        {{NAME}} - CLI Command Documentation
+    </MudText>
+    <MudDivider Class="my-4" />
+
+    <MudText Typo="Typo.subtitle2" Color="Color.Secondary">
+        Author: {{AUTHOR}}
+    </MudText>
+    <MudText Typo="Typo.subtitle2" Color="Color.Secondary">
+        Date: {{DATE}}
+    </MudText>
+
+    <MudPaper Elevation="3" Class="pa-4 mt-4">
+        <MudText Typo="Typo.h6">Command Title:</MudText>
+        <MudText Typo="Typo.body1">{{WIDGETNAME}}</MudText>
+
+        <MudText Typo="Typo.h6" Class="mt-3">Description:</MudText>
+        <MudText Typo="Typo.body2">
+            {{DESCRIPTION}}
+        </MudText>
+
+        {{PARAMETERS}}
+
+    </MudPaper>
+</MudContainer>

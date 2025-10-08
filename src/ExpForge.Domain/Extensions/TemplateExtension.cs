@@ -1,4 +1,4 @@
-﻿using ExpForge.Domain.Enums;
+using ExpForge.Domain.Enums;
 
 namespace ExpForge.Domain.Extensions;
 
@@ -11,6 +11,7 @@ public static class TemplateExtension
             TemplateType.Component => "components",
             TemplateType.Widget => "custom-widgets",
             TemplateType.Net_GeoProcess => "net-geoprocess",
+            TemplateType.ComandDocumentation_InBlazor => "Documentation",
             _ => throw new ArgumentOutOfRangeException(nameof(templateType), templateType, null),
         };
         ;

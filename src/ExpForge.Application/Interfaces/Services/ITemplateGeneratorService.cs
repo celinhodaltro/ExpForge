@@ -1,4 +1,4 @@
-﻿using ExpForge.Domain.Enums;
+using ExpForge.Domain.Enums;
 namespace ExpForge.Application.Interfaces.Services
 {
     /// <summary>
@@ -15,6 +15,7 @@ namespace ExpForge.Application.Interfaces.Services
                     string templatePath,
                     string templateName,
                     TemplateType type,
+                    Dictionary<TemplateTag, string>? tags,
                     string? outputRoot = null);
     }
 }

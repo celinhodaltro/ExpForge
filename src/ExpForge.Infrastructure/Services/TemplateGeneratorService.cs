@@ -1,4 +1,4 @@
-﻿using ExpForge.Application.Interfaces.Services;
+using ExpForge.Application.Interfaces.Services;
 using ExpForge.Domain.Enums;
 using ExpForge.Domain.Extensions;
 
@@ -14,17 +14,24 @@ namespace ExpForge.Infrastructure.Services
             _terminalMessageService = terminalMessageService;
         }
 
+        /// <summary>
+        /// Gera arquivos a partir de templates Blazor ou outros tipos definidos.
+        /// </summary>
+        /// <param name="name">Nome do template de saída</param>
+        /// <param name="templatePath">Caminho raiz dos templates</param>
+        /// <param name="templateName">Nome do template a ser usado</param>
+        /// <param name="type">Tipo do template (enum TemplateType)</param>
+        /// <param name="outputRoot">Diretório raiz de saída (opcional)</param>
+        /// <returns>Retorna true se o template foi gerado com sucesso</returns>
         public bool Generate(
             string name,
             string templatePath,
             string templateName,
             TemplateType type,
+            Dictionary<TemplateTag, string>? tags = null,
             string? outputRoot = null)
         {
-            if (string.IsNullOrWhiteSpace(templateName))
-            {
-                templateName = "empty";
-            }
+            templateName ??= "empty";
 
             if (!Directory.Exists(templatePath))
             {
@@ -70,13 +77,6 @@ namespace ExpForge.Infrastructure.Services
                 return false;
             }
 
-            var tags = new Dictionary<TemplateTag, string>
-            {
-                { TemplateTag.NAME, name },
-                { TemplateTag.WIDGETNAME, name },
-                { TemplateTag.AUTHOR, "Your Organization/Name" },
-                { TemplateTag.DATE, DateTime.UtcNow.ToString("yyyy-MM-dd") }
-            };
 
             var templateCopier = new TemplateCopierService(tags);
             templateCopier.Copy(templateSelectedPath, outputPath);
