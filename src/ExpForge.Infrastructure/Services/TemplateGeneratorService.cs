@@ -21,7 +21,9 @@ namespace ExpForge.Infrastructure.Services
         /// <param name="templatePath">Caminho raiz dos templates</param>
         /// <param name="templateName">Nome do template a ser usado</param>
         /// <param name="type">Tipo do template (enum TemplateType)</param>
+        /// <param name="tags">Dicionário de tags para substituição</param>
         /// <param name="outputRoot">Diretório raiz de saída (opcional)</param>
+        /// <param name="useUnifiedFolder">Se verdadeiro, gera tudo dentro de uma pasta única</param>
         /// <returns>Retorna true se o template foi gerado com sucesso</returns>
         public bool Generate(
             string name,
@@ -29,7 +31,8 @@ namespace ExpForge.Infrastructure.Services
             string templateName,
             TemplateType type,
             Dictionary<TemplateTag, string>? tags = null,
-            string? outputRoot = null)
+            string? outputRoot = null,
+            bool useUnifiedFolder = false)
         {
             templateName ??= "empty";
 
@@ -66,6 +69,18 @@ namespace ExpForge.Infrastructure.Services
             }
 
             outputRoot ??= Directory.GetCurrentDirectory();
+
+            if (useUnifiedFolder)
+            {
+                if(type == TemplateType.ComandDocumentation_InBlazor)
+                    outputRoot = Path.Combine(outputRoot, "Commands");
+                else
+                    outputRoot = Path.Combine(outputRoot, typeFolder + "s");
+
+                if (!Directory.Exists(outputRoot))
+                    Directory.CreateDirectory(outputRoot);
+            }
+
             var outputPath = Path.Combine(outputRoot, name);
 
             if (Directory.Exists(outputPath))
@@ -77,14 +92,9 @@ namespace ExpForge.Infrastructure.Services
                 return false;
             }
 
-
             var templateCopier = new TemplateCopierService(tags);
             templateCopier.Copy(templateSelectedPath, outputPath);
 
-            _terminalMessageService.WriteLine(
-                $"{type} '{name}' generated successfully at '{outputPath}'.",
-                MessageStatus.Success
-            );
 
             return true;
         }

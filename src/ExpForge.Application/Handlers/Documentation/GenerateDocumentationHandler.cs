@@ -2,6 +2,7 @@ using ExpForge.Application.Commands.Component;
 using ExpForge.Application.Interfaces.Providers;
 using ExpForge.Application.Interfaces.Services;
 using ExpForge.Domain.Enums;
+using ExpForge.Domain.Extensions;
 using MediatR;
 
 namespace ExpForge.Application.Handlers.Component
@@ -73,20 +74,28 @@ namespace ExpForge.Application.Handlers.Component
                     { TemplateTag.PARAMETERS, parametersTable }
                 };
 
-                _templateGeneratorService.Generate(
+                if(_templateGeneratorService.Generate(
                     outputName,
                     templateRoot,
                     templateName,
                     templateType,
-                    tags
-                );
+                    tags,
+                    useUnifiedFolder: true
+                ))
+                {
+                    _terminalMessageService.WriteLine(
+                        $"Documentation for '{cmd.Title}' generated!",
+                        MessageStatus.Success
+                    );
+                }
+                else
+                {
+                    return Task.CompletedTask;
+                }
 
-                _terminalMessageService.WriteLine(
-                    $"Documentation for '{cmd.Title}' generated!",
-                    MessageStatus.Success
-                );
             }
-
+            string commandsPath = Path.Combine(Directory.GetCurrentDirectory(), "Commands");
+            FileExtension.FlattenFolder(commandsPath);
             return Task.CompletedTask;
         }
 

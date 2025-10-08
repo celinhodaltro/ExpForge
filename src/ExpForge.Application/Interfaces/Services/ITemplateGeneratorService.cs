@@ -16,6 +16,7 @@ namespace ExpForge.Application.Interfaces.Services
                     string templateName,
                     TemplateType type,
                     Dictionary<TemplateTag, string>? tags,
-                    string? outputRoot = null);
+                    string? outputRoot = null,
+                    bool useUnifiedFolder = false);
     }
 }
