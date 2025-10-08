@@ -179,3 +179,4 @@ jobs:
             base: main
             title: "Update commands documentation"
             body: "Automatically generated documentation update from ExpForge"
+            working-directory: ExpForgeDocumentation
