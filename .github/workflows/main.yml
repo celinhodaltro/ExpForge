@@ -150,13 +150,13 @@ jobs:
         run: npm install -g ExpForge
 
       - name: Run Generate-Documentation
-        run: ExpForge Generate-Documentation --output ./CommandsTemp
+        run: ExpForge Generate-Documentation 
 
       - name: Copy generated commands to Docs
         run: |
           DEST=ExpForgeDocumentation/src/ExpForge.Documentation.Presentation/Pages/Docs/Commands
           rm -rf $DEST/*
-          cp -r ./CommandsTemp/* $DEST
+          cp -r ./Commands/* $DEST
 
       - name: Commit changes
         run: |
