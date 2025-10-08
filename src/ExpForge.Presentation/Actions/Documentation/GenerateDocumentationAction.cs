@@ -31,7 +31,7 @@ public class GenerateDocumentationAction
 
         var commands = assembly.GetTypes()
             .Where(t => t.GetCustomAttribute<CommandAttribute>() != null
-                        && t.Name != "ExpForge") 
+                        && t.Name != "MainAction") 
             .Select(t =>
             {
                 var attr = t.GetCustomAttribute<CommandAttribute>();
