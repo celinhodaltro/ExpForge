@@ -14,6 +14,7 @@
     <ProjectReference Include="..\ExpForge.Infrastructure\ExpForge.Infrastructure.csproj" />
   </ItemGroup>
   
+  
   <Target Name="PostPublishBuildNpm" AfterTargets="Publish" Condition="'$(GenerateNpm)' == 'true'">
     <!-- Windows -->
     <Exec Condition="'$(OS)' == 'Windows_NT'" Command="powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command &quot;&amp; '$(MSBuildThisFileDirectory)..\..\build\build-npm.ps1'&quot;" />
