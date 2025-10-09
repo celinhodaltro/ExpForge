@@ -46,7 +46,7 @@ namespace ExpForge.Application.Handlers.Component
                     { TemplateTag.DATE, DateTime.UtcNow.ToString("yyyy-MM-dd") },
                     { TemplateTag.DESCRIPTION, cmd.Description },
                     { TemplateTag.WIDGETNAME, cmd.Title },
-                    { TemplateTag.PARAMETERS, parametersTable }
+                    { TemplateTag.PARAMETERS_TABLE, parametersTable }
                 };
 
                 if(_templateGeneratorService.Generate(
