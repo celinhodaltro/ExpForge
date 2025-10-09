@@ -70,7 +70,7 @@ namespace ExpForge.Application.Handlers.Component
 
             }
             string commandsPath = Path.Combine(Directory.GetCurrentDirectory(), "Commands");
-            FileExtension.FlattenFolder(commandsPath);
+            FileExtension.OrganizeByLastNameSegment(commandsPath);
             return Task.CompletedTask;
         }
 
