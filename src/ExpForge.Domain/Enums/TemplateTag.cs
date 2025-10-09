@@ -12,5 +12,5 @@ public enum TemplateTag
     DESCRIPTION,
 
     // Parameters
-    PARAMETERS
+    PARAMETERS_TABLE
 }
