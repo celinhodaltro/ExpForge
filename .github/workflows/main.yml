@@ -187,24 +187,29 @@ jobs:
           # =========================
           PUBLISHED_VERSION=$(npm view expforge version || echo "0.0.0")
           git checkout -b documentation-integration-$PUBLISHED_VERSION
-
+          
+          # Apaga todos os arquivos dentro de Commands
+          rm -rf src/ExpForge.Documentation.Presentation/Pages/Docs/Commands/*
+          
+          # Adiciona os arquivos atualizados
           git add src/ExpForge.Documentation.Presentation/Pages/Docs/Commands
           git add "$CSPROJ_PATH"
-
+          
           git commit -m "Update commands documentation and bump patch version to $NEW_VERSION [skip ci]" || echo "No changes to commit"
-
+          
           # Garante que a branch principal existe localmente
           git fetch origin master:master
-
+          
           # Push da branch
           git push origin documentation-integration-$PUBLISHED_VERSION
-
+          
           # Cria PR
           gh pr create \
             --title "Update commands documentation" \
             --body "Automatically generated documentation update from ExpForge" \
             --base master \
             --head documentation-integration-$PUBLISHED_VERSION
+
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
 
