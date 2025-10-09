@@ -158,8 +158,8 @@ jobs:
       - name: Copy generated commands to Docs
         run: |
           DEST=ExpForgeDocumentation/src/ExpForge.Documentation.Presentation/Pages/Docs/Commands
-          rm -rf $DEST/*
-          cp -r ./Commands/* $DEST
+          mkdir -p $DEST
+          cp -r ./Commands/. $DEST
 
       - name: Create Pull Request and Increment Version
         run: |
