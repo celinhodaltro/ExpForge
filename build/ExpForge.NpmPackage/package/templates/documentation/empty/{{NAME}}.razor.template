@@ -10,8 +10,6 @@
         <MudText Typo="Typo.h6" Class="mb-1">Command Title</MudText>
         <MudChip Text="blue" Color="Color.Info" Value="@Color.Info">{{NAME}}</MudChip>
 
-
-
         <!-- Descrição -->
         <MudText Typo="Typo.h6" Class="mb-1">Description</MudText>
         <MudTextField T="string"
@@ -21,7 +19,6 @@
                       Variant="Variant.Outlined"
                       Class="mb-4"
                       Style="white-space: pre-line;" /> 
-
 
         <!-- Parâmetros -->
         {{PARAMETERS_TABLE}}
