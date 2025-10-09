@@ -161,27 +161,44 @@ jobs:
           rm -rf $DEST/*
           cp -r ./Commands/* $DEST
 
-      - name: Create Pull Request
+      - name: Create Pull Request and Increment Version
         run: |
           cd ExpForgeDocumentation
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
 
+          # =========================
+          # 1️⃣ Incrementa patch do csproj
+          # =========================
+          CSPROJ_PATH=src/ExpForge.Documentation.Presentation/ExpForge.Documentation.Presentation.csproj
+
+          VERSION=$(grep -oPm1 "(?<=<Version>)[^<]+" "$CSPROJ_PATH")
+          echo "Current version: $VERSION"
+
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
+          PATCH=$((PATCH + 1))
+          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+          echo "New version: $NEW_VERSION"
+
+          sed -i "s#<Version>$VERSION</Version>#<Version>$NEW_VERSION</Version>#g" "$CSPROJ_PATH"
+
+          # =========================
+          # 2️⃣ Cria branch e adiciona arquivos
+          # =========================
           PUBLISHED_VERSION=$(npm view expforge version || echo "0.0.0")
-
-          # Cria a branch e faz commit
           git checkout -b documentation-integration-$PUBLISHED_VERSION
+
           git add src/ExpForge.Documentation.Presentation/Pages/Docs/Commands
+          git add "$CSPROJ_PATH"
 
+          git commit -m "Update commands documentation and bump patch version to $NEW_VERSION [skip ci]" || echo "No changes to commit"
 
-          git commit -m "Update commands documentation from release $GITHUB_SHA" || echo "No changes to commit"
-      
-          # Garante que a branch principal existe localmente (substitua master pelo nome correto)
+          # Garante que a branch principal existe localmente
           git fetch origin master:master
-      
+
           # Push da branch
           git push origin documentation-integration-$PUBLISHED_VERSION
-      
+
           # Cria PR
           gh pr create \
             --title "Update commands documentation" \

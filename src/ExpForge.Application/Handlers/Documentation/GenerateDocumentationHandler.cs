@@ -34,8 +34,6 @@ namespace ExpForge.Application.Handlers.Component
             foreach (var cmd in request.Commands)
             {
                 var outputName = cmd.Title.Replace(" ", "_");
-
-                // Monta uma tabela HTML simples com os parâmetros
                 var parametersTable = DocumentationExtensions.ToHtmlTable(cmd.Parameters);
 
 
