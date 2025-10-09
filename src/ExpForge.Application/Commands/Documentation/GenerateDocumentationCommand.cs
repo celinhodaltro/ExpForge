@@ -23,9 +23,9 @@ public static class DocumentationExtensions
 <table class=""custom-table"" style=""width:100%; border-collapse: collapse; font-family: Arial, sans-serif; font-size:14px; text-align:center;"">
     <thead>
         <tr style=""background-color:#1976d2; color:white;"">
-            <th style=""padding:10px; border-bottom:2px solid #115293;"">Name</th>
-            <th style=""padding:10px; border-bottom:2px solid #115293;"">Type</th>
-            <th style=""padding:10px; border-bottom:2px solid #115293;"">Description</th>
+            <th style=""padding:10px; border-bottom:2px solid #115293; text-align:center;"">Name</th>
+            <th style=""padding:10px; border-bottom:2px solid #115293; text-align:center;"">Type</th>
+            <th style=""padding:10px; border-bottom:2px solid #115293; text-align:center;"">Description</th>
         </tr>
     </thead>
     <tbody>
