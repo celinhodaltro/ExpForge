@@ -1,4 +1,4 @@
-﻿@page "/Docs/Commands/Generate-Documentation/"
+﻿@page "/Docs/Commands/{{NAME}}/"
 
 <MudContainer MaxWidth="MaxWidth.Large" Class="pa-6">
 
