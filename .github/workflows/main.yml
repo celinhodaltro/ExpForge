@@ -188,9 +188,6 @@ jobs:
           PUBLISHED_VERSION=$(npm view expforge version || echo "0.0.0")
           git checkout -b documentation-integration-$PUBLISHED_VERSION
           
-          # Apaga todos os arquivos dentro de Commands
-          rm -rf src/ExpForge.Documentation.Presentation/Pages/Docs/Commands/*
-          
           # Adiciona os arquivos atualizados
           git add src/ExpForge.Documentation.Presentation/Pages/Docs/Commands
           git add "$CSPROJ_PATH"
