@@ -19,8 +19,8 @@ public class TerminalMessageService : ITerminalMessageService
 
         // Prefixa a mensagem com data e hora em segundos
         var timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
-        Console.Write($"[{timestamp}] {message}");
 
+        Console.Write($"[{timestamp}] {message}");
         Console.ForegroundColor = originalColor;
     }
 
