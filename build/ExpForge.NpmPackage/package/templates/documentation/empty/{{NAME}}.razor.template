@@ -1,72 +1,67 @@
 ﻿@page "/Docs/Commands/{{NAME}}/"
 
-<MudContainer MaxWidth="MaxWidth.Medium" Class="py-8 px-6">
+<MudContainer MaxWidth="MaxWidth.Large" Class="pa-6">
 
-    <!-- Cabeçalho -->
-    <MudPaper Elevation="1" Class="p-6 mb-6 text-center rounded-2xl" Style="background: linear-gradient(135deg, #1976d2, #2196f3); color: white;">
-        <MudText Typo="Typo.h4" Class="font-bold mb-2">{{NAME}}</MudText>
-        <MudText Typo="Typo.subtitle2">Author: <span class="font-semibold text-yellow-200">Your Organization/Name</span></MudText>
-        <MudText Typo="Typo.subtitle2">Date: <span class="font-semibold text-yellow-200">{{DATE}}</span></MudText>
-    </MudPaper>
+    <!-- Título do comando -->
+    <MudText Typo="Typo.h3" Align="Align.Center" Class="mb-2">
+        {{NAME}}
+    </MudText>
+    <MudDivider Class="mb-4" />
 
-    <!-- Corpo -->
-    <MudPaper Elevation="2" Class="p-6 rounded-2xl">
-        <MudGrid>
-            <MudItem xs="12" sm="6">
-                <MudText Typo="Typo.subtitle1" Class="font-semibold text-gray-700">Command Title</MudText>
-                <MudText Typo="Typo.body1" Class="mb-4">{{WIDGETNAME}}</MudText>
-            </MudItem>
+    <!-- Card do comando -->
+    <MudPaper Elevation="3" Class="pa-6">
 
-            <MudItem xs="12" sm="6">
-                <MudText Typo="Typo.subtitle1" Class="font-semibold text-gray-700">Description</MudText>
-                <MudText Typo="Typo.body2" Class="mb-4">{{DESCRIPTION}}</MudText>
-            </MudItem>
-        </MudGrid>
+        <!-- Título do widget -->
+        <MudText Typo="Typo.h6" Class="mb-1">Command Title</MudText>
+        <MudText Typo="Typo.body1" Class="mb-3">
+            {{WIDGETNAME}}
+        </MudText>
 
-        <MudDivider Class="my-4" />
+        <!-- Descrição -->
+        <MudText Typo="Typo.h6" Class="mb-1">Description</MudText>
+        <MudText Typo="Typo.body2" Class="mb-4" Style="white-space: pre-line;">
+            {{DESCRIPTION}}
+        </MudText>
 
-        <MudText Typo="Typo.subtitle1" Class="font-semibold mb-2">Parameters</MudText>
-
-
+        <!-- Parâmetros -->
         {{PARAMETERS_TABLE}}
-
+        
     </MudPaper>
 </MudContainer>
 
+
 <style>
-    .custom-table {
-        width: 100%;
-        border-collapse: collapse;
-        font-family: "Roboto", sans-serif;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-        border-radius: 12px;
-        overflow: hidden;
-    }
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: "Roboto", sans-serif;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
 
-        .custom-table thead {
-            background-color: #1976d2;
-            color: white;
-            text-align: left;
-        }
+.custom-table thead {
+    background-color: #1976d2; /* azul MudBlazor */
+    color: white;
+    text-align: left;
+}
 
-        .custom-table th, .custom-table td {
-            padding: 10px 14px;
-            border-bottom: 1px solid #e0e0e0;
-        }
+.custom-table th, .custom-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
 
-        .custom-table tbody tr:nth-child(even) {
-            background-color: #f5f5f5;
-        }
+.custom-table tbody tr:nth-child(even) {
+    background-color: #f5f5f5;
+}
 
-        .custom-table tbody tr:hover {
-            background-color: #e3f2fd;
-        }
+.custom-table tbody tr:hover {
+    background-color: #e3f2fd; /* efeito hover leve */
+}
 
-    .text-gray-700 {
-        color: #424242;
-    }
+.custom-table th {
+    font-weight: 500;
+}
 
-    .text-yellow-200 {
-        color: #fff59d;
-    }
+.custom-table td {
+    vertical-align: top;
+}
 </style>
