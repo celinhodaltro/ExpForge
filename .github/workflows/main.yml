@@ -56,7 +56,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build-and-test
-    if: github.event_name == 'push' && needs.build-and-test.outputs.package-artifact-path != ''
+    if: github.event_name == 'push'
+    outputs:
+      publish: ${{ steps.version-check.outputs.publish }}
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v4
@@ -80,22 +82,26 @@ jobs:
           echo "Current version: $CURRENT_VERSION"
           echo "Published version: $PUBLISHED_VERSION"
           if [ "$CURRENT_VERSION" = "$PUBLISHED_VERSION" ]; then
-            echo "publish=false" >> $GITHUB_ENV
+            echo "publish=false"
           else
-            echo "publish=true" >> $GITHUB_ENV
+            echo "publish=true"
           fi
+        # Define como output do step
+        outputs:
+          publish: ${{ steps.version-check.outputs.publish }}
 
       - name: Build NPM package
-        if: ${{ env.publish == 'true' }}
+        if: steps.version-check.outputs.publish == 'true'
         working-directory: ${{ env.PACKAGE_PATH }}
         run: npm run build --if-present
 
       - name: Publish to NPM
-        if: ${{ env.publish == 'true' }}
+        if: steps.version-check.outputs.publish == 'true'
         working-directory: ${{ env.PACKAGE_PATH }}
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
 
   # =========================
   # 3️⃣ Generate Documentation
