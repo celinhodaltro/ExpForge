@@ -13,7 +13,12 @@ using System.Threading.Tasks;
 
 namespace ExpForge.Presentation.Actions.Widget;
 
-[Command(Name = "New-Widget", Description = "Create Widget")]
+[Command(
+    Name = "New-Widget",
+    Description = "Generates a new widget from one of the available templates. " +
+                  "Supports both direct and interactive selection of the widget name and template. " +
+                  "Useful for building reusable UI or functional elements while keeping consistency across the system."
+)]
 public class NewWidgetAction
 {
     private readonly IMediator _mediator;
