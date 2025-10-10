@@ -77,14 +77,16 @@ jobs:
           id: version-check
           working-directory: ${{ env.PACKAGE_PATH }}
           run: |
-            CURRENT_VERSION=$(node -p "require('./package.json').version")
-            PUBLISHED_VERSION=$(npm view expforge version || echo "0.0.0")
-            echo "Current version: $CURRENT_VERSION"
-            echo "Published version: $PUBLISHED_VERSION"
-            if [ "$CURRENT_VERSION" = "$PUBLISHED_VERSION" ]; then
-              echo "publish=false" >> $GITHUB_OUTPUT
-            else
-              echo "publish=true" >> $GITHUB_OUTPUT
+                CURRENT_VERSION=$(node -p "require('./package.json').version")
+                PUBLISHED_VERSION=$(npm view expforge version || echo "0.0.0")
+                echo "Current version: $CURRENT_VERSION"
+                echo "Published version: $PUBLISHED_VERSION"
+                if [ "$CURRENT_VERSION" = "$PUBLISHED_VERSION" ]; then
+                  echo "publish=false" >> $GITHUB_OUTPUT
+                else
+                  echo "publish=true" >> $GITHUB_OUTPUT
+                fi
+
 
         - name: Build NPM package
           if: steps.version-check.outputs.publish == 'true'
