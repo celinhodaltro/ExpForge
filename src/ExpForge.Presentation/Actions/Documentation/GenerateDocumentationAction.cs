@@ -11,7 +11,12 @@ using System.Threading.Tasks;
 
 namespace ExpForge.Presentation.Actions;
 
-[Command(Name = "Generate-Documentation", Description = "Gera documentação em Blazor (Output: Commands)")]
+[Command(
+    Name = "Generate-Documentation",
+    Description = "Automatically scans all CLI actions and generates corresponding Blazor documentation. " +
+                  "Extracts command metadata, parameters, and descriptions via reflection, " +
+                  "then builds an interactive documentation interface under the 'Commands' module."
+)]
 public class GenerateDocumentationAction
 {
     private readonly IMediator _mediator;

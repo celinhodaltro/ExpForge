@@ -1,4 +1,4 @@
-﻿using ExpForge.Application.Commands;
+using ExpForge.Application.Commands;
 using ExpForge.Application.Commands.Widget;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
@@ -8,7 +8,12 @@ using System.Threading.Tasks;
 
 namespace ExpForge.Presentation.Actions.Widget;
 
-[Command(Name = "Rename-Widget", Description = "Rename Widget")]
+[Command(
+    Name = "Rename-Widget",
+    Description = "Renames an existing widget and updates its name and references accordingly. " +
+                  "Accepts the new widget name and path as arguments, with interactive prompts if omitted. " +
+                  "Great for reorganizing widgets while preserving project integrity."
+)]
 public class RenameWidgetAction
 {
     private readonly IMediator _mediator;
