@@ -57,7 +57,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: build-and-test
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && needs.build-and-test.outputs.package-artifact-path != '' # só executa se houver artefato
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v4
@@ -97,38 +97,6 @@ jobs:
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Rename package.json for GitHub Packages
-        if: env.publish == 'true'
-        working-directory: ${{ env.PACKAGE_PATH }}
-        run: |
-          jq '.name = "@celinhodaltro/expforge"' package.json > package.tmp.json
-          mv package.tmp.json package.json
-
-      - name: Configure npm for GitHub Packages
-        if: env.publish == 'true'
-        working-directory: ${{ env.PACKAGE_PATH }}
-        run: |
-          echo "@celinhodaltro:registry=https://npm.pkg.github.com" > .npmrc
-          echo "//npm.pkg.github.com/:_authToken=${{ secrets.GH_TOKEN }}" >> .npmrc
-
-      - name: Publish to GitHub Packages
-        if: env.publish == 'true'
-        working-directory: ${{ env.PACKAGE_PATH }}
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GH_TOKEN }}
-
-      - name: Create GitHub Release
-        if: env.publish == 'true'
-        uses: actions/create-release@v1
-        with:
-          tag_name: v${{ github.sha }}
-          release_name: Release v${{ github.sha }}
-          draft: false
-          prerelease: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
 
   # =========================
