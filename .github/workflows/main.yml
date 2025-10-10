@@ -50,14 +50,13 @@ jobs:
           name: package
           path: ${{ env.PACKAGE_PATH }}
 
-
   # =========================
   # 2️⃣ Deploy NPM / GitHub Packages
   # =========================
   deploy:
     runs-on: ubuntu-latest
     needs: build-and-test
-    if: github.event_name == 'push' && needs.build-and-test.outputs.package-artifact-path != '' # só executa se houver artefato
+    if: github.event_name == 'push' && needs.build-and-test.outputs.package-artifact-path != ''
     steps:
       - name: Download artifacts
         uses: actions/download-artifact@v4
@@ -87,17 +86,16 @@ jobs:
           fi
 
       - name: Build NPM package
-        if: env.publish == 'true'
+        if: ${{ env.publish == 'true' }}
         working-directory: ${{ env.PACKAGE_PATH }}
         run: npm run build --if-present
 
       - name: Publish to NPM
-        if: env.publish == 'true'
+        if: ${{ env.publish == 'true' }}
         working-directory: ${{ env.PACKAGE_PATH }}
         run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
 
   # =========================
   # 3️⃣ Generate Documentation
@@ -105,14 +103,14 @@ jobs:
   generate-docs:
     runs-on: ubuntu-latest
     needs: deploy
-    if: github.event_name == 'push'
+    if: github.event_name == 'push' && ${{ needs.deploy.outputs.publish == 'true' }}
     steps:
       - name: Checkout Documentation repository
         uses: actions/checkout@v4
         with:
-              repository: celinhodaltro/ExpForge.Documentation
-              token: ${{ secrets.GH_TOKEN }}
-              path: ExpForgeDocumentation
+          repository: celinhodaltro/ExpForge.Documentation
+          token: ${{ secrets.GH_TOKEN }}
+          path: ExpForgeDocumentation
 
       - name: Install ExpForge
         run: npm install -g expforge
@@ -153,28 +151,22 @@ jobs:
           # =========================
           # 2️⃣ Cria branch e adiciona arquivos
           # =========================
-          PUBLISHED_VERSION=$(npm view expforge version || echo "0.0.0")
-          git checkout -b documentation-integration-$PUBLISHED_VERSION
-          
+          git checkout -b documentation-integration-$NEW_VERSION
+
           # Adiciona os arquivos atualizados
           git add src/ExpForge.Documentation.Presentation/Pages/Docs/Commands
           git add "$CSPROJ_PATH"
-          
+
           git commit -m "Update commands documentation and bump patch version to $NEW_VERSION [skip ci]" || echo "No changes to commit"
-          
-          # Garante que a branch principal existe localmente
-          git fetch origin master:master
-          
+
           # Push da branch
-          git push origin documentation-integration-$PUBLISHED_VERSION
-          
+          git push origin documentation-integration-$NEW_VERSION
+
           # Cria PR
           gh pr create \
             --title "Update commands documentation" \
             --body "Automatically generated documentation update from ExpForge" \
             --base master \
-            --head documentation-integration-$PUBLISHED_VERSION
-
+            --head documentation-integration-$NEW_VERSION
         env:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
-
