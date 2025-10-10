@@ -126,8 +126,8 @@ jobs:
       - name: Copy generated commands to Docs
         run: |
           DEST=ExpForgeDocumentation/src/ExpForge.Documentation.Presentation/Pages/Docs/Commands
-          rm -rf $DEST/*
-          cp -r ./Commands/* $DEST
+          mkdir -p $DEST
+          cp -r ./Commands/. $DEST
 
       - name: Create Pull Request and Increment Version
         run: |
@@ -155,9 +155,6 @@ jobs:
           # =========================
           PUBLISHED_VERSION=$(npm view expforge version || echo "0.0.0")
           git checkout -b documentation-integration-$PUBLISHED_VERSION
-          
-          # Apaga todos os arquivos dentro de Commands
-          rm -rf src/ExpForge.Documentation.Presentation/Pages/Docs/Commands/*
           
           # Adiciona os arquivos atualizados
           git add src/ExpForge.Documentation.Presentation/Pages/Docs/Commands
