@@ -1,6 +1,6 @@
 ﻿{
-  "name": "{{WIDGET_NAME}}",
-  "label": "{{WIDGET_NAME}}",
+  "name": "{{WIDGETNAME}}",
+  "label": "{{WIDGETNAME}}",
   "type": "widget",
   "version": "1.0.0",
   "exbVersion": "1.0.0",
