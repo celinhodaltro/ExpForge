@@ -6,7 +6,6 @@ using McMaster.Extensions.CommandLineUtils;
 using MediatR;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -100,11 +99,19 @@ public class NewWidgetAction
                     return null;
                 }
 
+                // ✅ Se só houver um template, usa ele automaticamente
+                if (templates.Count == 1)
+                {
+                    app.Out.WriteLine($"✔ Only one template found: '{templates[0]}' — using it automatically.");
+                    return templates[0];
+                }
+
                 return PromptTemplateSelection(templates, app);
             },
             errorMessageIfEmpty: "❌ Template name cannot be empty."
         );
     }
+
     private static string PromptTemplateSelection(List<string> templates, CommandLineApplication app)
     {
         app.Out.WriteLine("Choose a template:");
@@ -131,5 +138,4 @@ public class NewWidgetAction
 
         return templates[choice - 1];
     }
-
 }
