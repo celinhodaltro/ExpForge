@@ -1,7 +1,19 @@
 ﻿{
   "name": "{{WIDGET_NAME}}",
   "label": "{{WIDGET_NAME}}",
-  "platform": "EXB",
+  "type": "widget",
   "version": "1.0.0",
-  "author": "{{AUTHOR}}"
+  "exbVersion": "1.0.0",
+  "author": "{{AUTHOR}}",
+  "description": "Widget Descriptio .",
+  "copyright": "",
+  "license": "http://www.apache.org/licenses/LICENSE-2.0",
+  "properties": {},
+  "translatedLocales": [
+    "en"
+  ],
+  "defaultSize": {
+    "width": 800,
+    "height": 500
+  }
 }
