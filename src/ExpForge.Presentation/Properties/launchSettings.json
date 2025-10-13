@@ -2,7 +2,7 @@
   "profiles": {
     "ExpForge.CLI": {
       "commandName": "Project",
-      "commandLineArgs": "Generate-Documentation\r\n"
+      "commandLineArgs": "New-Widget\r\n"
     }
   }
 }
