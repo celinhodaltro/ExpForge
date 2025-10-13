@@ -1,4 +1,4 @@
-﻿using ExpForge.Domain.Enums;
+using ExpForge.Domain.Enums;
 namespace ExpForge.Application.Interfaces.Services
 {
     /// <summary>
@@ -15,6 +15,8 @@ namespace ExpForge.Application.Interfaces.Services
                     string templatePath,
                     string templateName,
                     TemplateType type,
-                    string? outputRoot = null);
+                    Dictionary<TemplateTag, string>? tags,
+                    string? outputRoot = null,
+                    bool useUnifiedFolder = false);
     }
 }

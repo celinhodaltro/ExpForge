@@ -5,7 +5,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>expforge</ToolCommandName>
-    <Version>1.0.18</Version>
+    <Version>1.1.4</Version>
     <Authors>João Marcelo Daltro Marques</Authors>
   </PropertyGroup>
 
@@ -14,16 +14,14 @@
     <ProjectReference Include="..\ExpForge.Infrastructure\ExpForge.Infrastructure.csproj" />
   </ItemGroup>
   
+  
   <Target Name="PostPublishBuildNpm" AfterTargets="Publish" Condition="'$(GenerateNpm)' == 'true'">
     <!-- Windows -->
-    <Exec Condition="'$(OS)' == 'Windows_NT'"
-          Command="powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command &quot;&amp; '$(MSBuildThisFileDirectory)..\..\build\build-npm.ps1'&quot;" />
+    <Exec Condition="'$(OS)' == 'Windows_NT'" Command="powershell -NoProfile -NonInteractive -ExecutionPolicy Bypass -Command &quot;&amp; '$(MSBuildThisFileDirectory)..\..\build\build-npm.ps1'&quot;" />
 
     <!-- Linux / macOS -->
-    <Exec Condition="'$(OS)' != 'Windows_NT'"
-          Command="pwsh -NoProfile -NonInteractive -File $(MSBuildThisFileDirectory)/../../build/build-npm.ps1" />
+    <Exec Condition="'$(OS)' != 'Windows_NT'" Command="pwsh -NoProfile -NonInteractive -File $(MSBuildThisFileDirectory)/../../build/build-npm.ps1" />
   </Target>
-
 
   <ItemGroup>
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />

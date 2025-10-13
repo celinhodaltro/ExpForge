@@ -1,4 +1,4 @@
-﻿using ExpForge.Application.Interfaces.Services;
+using ExpForge.Application.Interfaces.Services;
 using ExpForge.Domain.Enums;
 
 namespace ExpForge.Infrastructure.Services;
@@ -16,16 +16,20 @@ public class TerminalMessageService : ITerminalMessageService
             MessageStatus.Error => ConsoleColor.Red,
             _ => originalColor,
         };
-        Console.Write(message);
+
+        // Prefixa a mensagem com data e hora em segundos
+        var timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+
+        Console.Write($"[{timestamp}] {message}");
         Console.ForegroundColor = originalColor;
     }
 
-    public  void WriteLine(string message, MessageStatus status = MessageStatus.Default)
+    public void WriteLine(string message, MessageStatus status = MessageStatus.Default)
     {
         Write(message + Environment.NewLine, status);
     }
 
-    public  void WriteLines(IEnumerable<string> messages, MessageStatus status = MessageStatus.Default)
+    public void WriteLines(IEnumerable<string> messages, MessageStatus status = MessageStatus.Default)
     {
         foreach (var message in messages)
         {

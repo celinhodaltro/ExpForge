@@ -1,5 +1,7 @@
-﻿using ExpForge.Application.Commands.Widget;
+using ExpForge.Application.Commands.Widget;
 using ExpForge.Application.Interfaces.Providers;
+using ExpForge.Domain.Enums;
+using ExpForge.Domain.Extensions;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
 using System;
@@ -11,7 +13,12 @@ using System.Threading.Tasks;
 
 namespace ExpForge.Presentation.Actions.Widget;
 
-[Command(Name = "New-Widget", Description = "Create Widget")]
+[Command(
+    Name = "New-Widget",
+    Description = "Generates a new widget from one of the available templates. " +
+                  "Supports both direct and interactive selection of the widget name and template. " +
+                  "Useful for building reusable UI or functional elements while keeping consistency across the system."
+)]
 public class NewWidgetAction
 {
     private readonly IMediator _mediator;
@@ -81,7 +88,9 @@ public class NewWidgetAction
                     return null;
                 }
 
-                var templates = Directory.GetDirectories(TemplatePath)
+                var widgetTemplatePath = Path.Combine(TemplatePath, TemplateType.Widget.ConvertTypeToFolderName());
+
+                var templates = Directory.GetDirectories(widgetTemplatePath)
                                          .Select(Path.GetFileName)
                                          .ToList();
 

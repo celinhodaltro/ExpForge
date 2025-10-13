@@ -1,20 +1,24 @@
-name: Release Pipeline
+﻿name: Release Pipeline
 
 on:
   pull_request:
-    branches:
-      - master
+    branches: [master]
   push:
-    branches:
-      - master
+    branches: [master]
+
+env:
+  PACKAGE_PATH: ./build/ExpForge.NpmPackage/package
 
 jobs:
+  # =========================
+  # 1️⃣ Build e Test
+  # =========================
   build-and-test:
     runs-on: ubuntu-latest
-    env:
-      PACKAGE_PATH: ./build/ExpForge.NpmPackage/package
+    outputs:
+      package-artifact-path: ${{ steps.upload-artifact.outputs.path }}
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Setup .NET
@@ -28,29 +32,146 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Build
+      - name: Build project
         run: dotnet build --no-restore --configuration Release
 
-      - name: Test
+      - name: Run tests
         run: dotnet test tests/ExpForge.Tests/ExpForge.Tests.csproj --configuration Debug
 
-      - name: Publish NPM package artifacts
+      - name: Publish NPM artifacts
         if: github.event_name == 'push'
         run: dotnet publish -c Release -p:GenerateNpm=true
 
-      - name: Upload NPM package artifacts
+      - name: Upload artifacts
         if: github.event_name == 'push'
         uses: actions/upload-artifact@v4
+        id: upload-artifact
         with:
           name: package
-          path: ${{ env.PACKAGE_PATH }} 
+          path: ${{ env.PACKAGE_PATH }}
 
+  # =========================
+  # 2️⃣ Deploy NPM / GitHub Packages
+  # =========================
   deploy:
-    if: github.event_name == 'push'
-    needs: build-and-test
-    uses: ./.github/workflows/deploy.yml
-    with:
-      version: ${{ github.sha }}
-    secrets:
-      NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-      GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      runs-on: ubuntu-latest
+      needs: build-and-test
+      if: github.event_name == 'push'
+      outputs:
+        publish: ${{ steps.version-check.outputs.publish }}
+      steps:
+        - name: Download artifacts
+          uses: actions/download-artifact@v4
+          with:
+            name: package
+            path: ${{ env.PACKAGE_PATH }}
+
+        - name: Setup Node.js & authenticate NPM
+          uses: actions/setup-node@v4
+          with:
+            node-version: '20'
+            registry-url: 'https://registry.npmjs.org'
+            always-auth: true
+
+        - name: Check version difference
+          id: version-check
+          working-directory: ${{ env.PACKAGE_PATH }}
+          run: |
+                CURRENT_VERSION=$(node -p "require('./package.json').version")
+                PUBLISHED_VERSION=$(npm view expforge version || echo "0.0.0")
+                echo "Current version: $CURRENT_VERSION"
+                echo "Published version: $PUBLISHED_VERSION"
+                if [ "$CURRENT_VERSION" = "$PUBLISHED_VERSION" ]; then
+                  echo "publish=false" >> $GITHUB_OUTPUT
+                else
+                  echo "publish=true" >> $GITHUB_OUTPUT
+                fi
+
+
+        - name: Build NPM package
+          if: steps.version-check.outputs.publish == 'true'
+          working-directory: ${{ env.PACKAGE_PATH }}
+          run: npm run build --if-present
+
+        - name: Publish to NPM
+          if: steps.version-check.outputs.publish == 'true'
+          working-directory: ${{ env.PACKAGE_PATH }}
+          run: npm publish --access public
+          env:
+            NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+
+
+  # =========================
+  # 3️⃣ Generate Documentation
+  # =========================
+  generate-docs:
+    runs-on: ubuntu-latest
+    needs: deploy
+    if: needs.deploy.outputs.publish == 'true' && github.event_name == 'push'
+    steps:
+      - name: Checkout Documentation repository
+        uses: actions/checkout@v4
+        with:
+          repository: celinhodaltro/ExpForge.Documentation
+          token: ${{ secrets.GH_TOKEN }}
+          path: ExpForgeDocumentation
+
+      - name: Install ExpForge
+        run: npm install -g expforge
+
+      - name: Make ExpForge executable
+        run: chmod +x /usr/local/lib/node_modules/expforge/dist/linux-x64/ExpForge.Presentation
+
+      - name: Run Generate-Documentation
+        run: expforge Generate-Documentation 
+
+      - name: Copy generated commands to Docs
+        run: |
+          DEST=ExpForgeDocumentation/src/ExpForge.Documentation.Presentation/Pages/Docs/Commands
+          mkdir -p $DEST
+          cp -r ./Commands/. $DEST
+
+      - name: Create Pull Request and Increment Version
+        run: |
+          cd ExpForgeDocumentation
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+
+          # =========================
+          # 1️⃣ Incrementa patch do csproj
+          # =========================
+          CSPROJ_PATH=src/ExpForge.Documentation.Presentation/ExpForge.Documentation.Presentation.csproj
+
+          VERSION=$(grep -oPm1 "(?<=<Version>)[^<]+" "$CSPROJ_PATH")
+          echo "Current version: $VERSION"
+
+          IFS='.' read -r MAJOR MINOR PATCH <<< "$VERSION"
+          PATCH=$((PATCH + 1))
+          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+          echo "New version: $NEW_VERSION"
+
+          sed -i "s#<Version>$VERSION</Version>#<Version>$NEW_VERSION</Version>#g" "$CSPROJ_PATH"
+
+          # =========================
+          # 2️⃣ Cria branch e adiciona arquivos
+          # =========================
+          git checkout -b documentation-integration-$NEW_VERSION
+
+          # Adiciona os arquivos atualizados
+          git add src/ExpForge.Documentation.Presentation/Pages/Docs/Commands
+          git add "$CSPROJ_PATH"
+
+          git commit -m "Update commands documentation and bump patch version to $NEW_VERSION [skip ci]" || echo "No changes to commit"
+
+          # Push da branch
+          git push origin documentation-integration-$NEW_VERSION
+
+          # Cria PR
+          gh pr create \
+            --title "Update commands documentation" \
+            --body "Automatically generated documentation update from ExpForge" \
+            --base master \
+            --head documentation-integration-$NEW_VERSION
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}

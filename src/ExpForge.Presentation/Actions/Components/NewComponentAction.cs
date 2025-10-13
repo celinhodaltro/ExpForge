@@ -1,4 +1,4 @@
-﻿using ExpForge.Application.Commands.Component;
+using ExpForge.Application.Commands.Component;
 using ExpForge.Application.Interfaces.Providers;
 using McMaster.Extensions.CommandLineUtils;
 using MediatR;
@@ -7,7 +7,13 @@ using System.Threading.Tasks;
 
 namespace ExpForge.Presentation.Actions.Components;
 
-[Command(Name = "New-Component", Description = "Create Component")]
+[Command(
+    Name = "New-Component",
+    Description = "Creates a new component based on an existing template. " +
+                  "Allows you to specify the component name and automatically uses the configured template path. " +
+                  "Ideal for quickly scaffolding standardized components that follow the framework’s structure and conventions."
+)]
+
 public class NewComponentAction
 {
     private readonly IMediator _mediator;
